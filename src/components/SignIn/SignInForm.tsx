@@ -6,8 +6,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-    name: yup.string().required('Name is a required field'),
-    email: yup.string().email().required('Email is a required field'),
+    password: yup
+    .string()
+    .required('Bạn chưa nhập mật khẩu')
+    .matches(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,16}$/,
+        'Mật khẩu phải chứa 8-16 kí từ bao gồm chữ in hoa, chữ thường, số và kí tự đặc biệt'
+    )
+    ,
+    email: yup
+    .string()
+    .required('Bạn chưa nhập Email')
+    .email('Email không hợp lệ')
 });
 
 
@@ -17,16 +27,9 @@ const SignInForm = () => {
         handleSubmit,
         reset,
         formState: { errors },
-        setError,
     } = useForm({ resolver: yupResolver(schema) });
     const [isSuccessful, setIsSuccessful] = useState(false)
-
-    useEffect(() => {
-        setError("email", {
-          type: "manual",
-          message: "Email không hợp lệ",
-        })
-    }, [setError])
+    
 
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -41,7 +44,6 @@ const SignInForm = () => {
     }, [])
 
     const onLoginSubmit = (data : any) => {
-
         const dataRequestBody = { ...data }
         fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/contact_new`, {
             method: 'POST', // or 'PUT'
@@ -78,13 +80,13 @@ const SignInForm = () => {
                     delay="1"
                 />
                 <InputBox
-                    register={register("name")}
-                    error={errors.name}
+                    register={register("password")}
+                    error={errors.password}
                     title="Mật khẩu"
                     placeholder="Mật khẩu"
                     setInputValue={setPassword}
                     required={true}
-                    name="name"
+                    name="password"
                 />
                 
             </div>
