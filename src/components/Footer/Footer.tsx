@@ -51,17 +51,17 @@ const contact = {
 
 const Footer = () => {
     return (
-        <footer className="relative w-full primary-gradient py-12">
+        <footer className="flex justify-center relative w-full primary-gradient py-12 px-5 lg:px-[1.875rem]">
             <div className="absolute bottom-0 right-0 w-fit h-fit">
                 <Image src={Banner} width={0} height={0} alt="logo" className="w-[763px] h-[407px]"/>
             </div>
-            <div className="flex flex-col lg:flex-row w-full max-w-[1320px] mx-auto">
-                <div className="flex flex-col flex-1">
-                    <div>
+            <div className="flex flex-col lg:flex-row lg:justify-between w-full max-w-[1320px] mx-auto">
+                <div className="flex flex-col flex-1 items-start mb-4 lg:mb-0 max-w-[330px] w-full mr-10">
+                    <div className="flex flex-col">
                         <div className="flex shrink-0">
                             <Image src={Logo} width={0} height={0} alt="logo" className="w-[132.5px] h-[50px]"/>
                         </div>
-                        <p className="text-base text-white">Ít nhưng mà chất</p>
+                        <p className="text-base text-white whitespace-nowrap">Ít nhưng mà chất</p>
                     </div>
                 </div>
 

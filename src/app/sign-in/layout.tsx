@@ -4,7 +4,7 @@ export default function SignInLayout({
     children: React.ReactNode
   }) {
     return (
-      <main className="w-full h-fit bg-white px-[1.875rem] mt-[5.5rem] ">
+      <main className="w-full h-fit bg-white px-5 lg:px-[1.875rem] mt-[5.5rem] ">
         {children}
       </main>
     )

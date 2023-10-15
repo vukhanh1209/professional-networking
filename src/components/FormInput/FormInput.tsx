@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import requiredIcon from 'public/images/sign-in/requireIcon.svg'
 import ImageLegacy from 'next/legacy/image';
 
-const InputBox = ({title, placeholder, setInputValue, error, register, name, delay, required} : any) => {
+const FormInput = ({title, placeholder, setInputValue, error, register, name, delay, required} : any) => {
     const delayClassName = delay ? `delay-${delay}` : '';
     const [value, setValue] = useState("");
     const handleChangeInput = (e : any) => {
@@ -38,11 +38,9 @@ const InputBox = ({title, placeholder, setInputValue, error, register, name, del
                     <ImageLegacy src={requiredIcon}/>
                 </div>
             </div>
-           
-            {error &&
-            <p className="absolute left-0 bottom-[-24px] text-xs text-[#FF3D54] first-letter:uppercase">{error.message}</p>}
+            <p className={`${error ? "opacity-1" : "opacity-0"} text-xs text-[#FF3D54] first-letter:uppercase min-h-[16px] my-1`}>{error?.message}</p>
         </div>
     )
 }
 
-export default InputBox;
+export default FormInput;
