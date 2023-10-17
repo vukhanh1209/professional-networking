@@ -16,7 +16,7 @@ export default function SignIn() {
         <div className="mx-auto max-w-[1340px]">
             <div className="flex flex-col w-full pt-[0.875rem] pb-[6.25rem]">
                 <div className="flex items-center w-full my-6">
-                    <h1 className="text-black text-xl font-bold">Chào mừng bạn đến với</h1>
+                    <h1 className="text-primary-black text-xl font-bold">Chào mừng bạn đến với</h1>
                     <div className="flex shrink-0 px-1 lg:px-2">
                         <Image src={Logo} width={0} height={0} alt="logo" className="w-20 h-[1.875rem]"/>
                     </div>

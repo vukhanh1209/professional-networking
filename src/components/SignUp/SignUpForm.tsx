@@ -1,5 +1,5 @@
 "use client"
-import InputBox from "../FormInput/FormInput";
+import InputBox from "../common/FormInput/FormInput";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

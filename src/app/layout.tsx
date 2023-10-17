@@ -1,9 +1,9 @@
-import Header from '@/components/Header'
+import Header from '@/components/common/Header'
 import './globals.css'
 import 'style/index.scss'
 import type { Metadata } from 'next'
 import { Lexend } from 'next/font/google'
-import Footer from '@/components/Footer'
+import Footer from '@/components/common/Footer'
 
 const lexend =Lexend({ subsets: ['vietnamese'] })
 
