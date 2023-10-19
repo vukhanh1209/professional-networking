@@ -22,16 +22,18 @@ const CityOption = () => {
     }
     return (
         <div className="group relative h-14">
-              <div className="h-full bg-white flex items-center md:justify-between gap-x-2 py-[6px] px-4 rounded-lg border border-dropdown-border group-hover:border-[#FF533A] min-w-[240px]">
+              <div className="h-full bg-white flex items-center md:justify-between gap-x-2 py-[6px] px-4 rounded-lg border border-dropdown-border group-hover:border-[#FF533A] min-w-[280px]">
                 <div className="flex item-center shrink-0">
                   <Image src={LocationPin} width={18} height={18} className=""/>
                 </div>
-                <span className="text-primary-black text-left text-lg whitespace-nowrap group-hover:text-primary-red">
-                  {cityItems.get(currentKey)}
-                </span>
-                <div className="group-hover:rotate-180 transition-all hidden dark:flex items-center w-6 h-6 shrink-0">
-                  <div className="flex item-center shrink-0">
-                    <Image src={ArrowUp} />
+                <div className="flex items-center justify-between w-full">
+                  <span className="text-primary-black text-left text-lg whitespace-nowrap group-hover:text-primary-red">
+                    {cityItems.get(currentKey)}
+                  </span>
+                  <div className="group-hover:rotate-180 transition-all hidden dark:flex items-center w-6 h-6 shrink-0">
+                    <div className="flex item-center shrink-0">
+                      <Image src={ArrowUp} />
+                    </div>
                   </div>
                 </div>
               </div>

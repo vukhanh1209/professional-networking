@@ -61,8 +61,11 @@ const SearchForm = () => {
             <button
                 disabled={value == ""}
                 type="button"
-                className={`${value == "" && "invisible"} mx-4 flex items-center`}
-                onClick={onRemoveSearchText}
+                className={`${value == "" && "invisible"} ml-4 flex items-center`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onRemoveSearchText()
+                }}
               >
                 <Image src={CloseIcon} alt="close" className="w-5 h-auto" />
             </button>

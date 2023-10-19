@@ -22,13 +22,13 @@ const features = [
 const Feature = () => {
     return (
         <section className="flex flex-col items-center w-full bg-white px-5 py-20 text-primary-black">
-            <h1 className="text-3xl font-bold text-center">Công cụ tốt nhất cho hành trang ứng tuyển của bạn</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-center">Công cụ tốt nhất cho hành trang ứng tuyển của bạn</h1>
             <p className="text-base pt-4 text-center">Khẳng định bản thân qua hồ sơ "chất" với công cụ và kiến thức bổ ích từ ITviec.</p>
             <div className="flex flex-col md:flex-row gap-14 text-primary-black mt-[60px]">
                 {features.map((feature : any, index : number) => (
                 <div key={index} className="flex flex-col items-center max-w-[440px] bg-white rounded-3xl px-8 py-6 drop-shadow-2xl">
                     <Image src={feature.img} width={160} height={160} alt="job finding"/>
-                    <h2 className="mt-5 mb-4 text-2xl font-bold">{feature.title}</h2>
+                    <h2 className="mt-5 mb-4 text-xl md:text-2xl font-bold">{feature.title}</h2>
                     <p className="text-base text-center">{feature.des}</p>
                     <button 
 

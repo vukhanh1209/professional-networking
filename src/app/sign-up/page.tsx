@@ -3,7 +3,7 @@ import Logo from "public/images/sign-in/logo.png"
 import GoogleIcon from "public/images/sign-in/google.svg"
 import Link from "next/link";
 import Robot from "public/images/sign-up/robot.png"
-import SignUpForm from "@/components/SignUp/SignUpForm";
+import SignUpForm from "@/components/SignUpPage/SignUpForm";
 
 export default function SignUp() {
     return (

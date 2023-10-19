@@ -1,1 +1,71 @@
 @import "./background.scss";
+
+:root {
+    --i-blue: #0d6efd;
+    --i-indigo: #6610f2;
+    --i-purple: #6f42c1;
+    --i-pink: #d63384;
+    --i-red: #dc3545;
+    --i-orange: #fd7e14;
+    --i-yellow: #ffc107;
+    --i-green: #198754;
+    --i-teal: #20c997;
+    --i-cyan: #0dcaf0;
+    --i-white: #fff;
+    --i-gray: #6c757d;
+    --i-gray-dark: #343a40;
+    --i-gray-100: #f8f9fa;
+    --i-gray-200: #e9ecef;
+    --i-gray-300: #dee2e6;
+    --i-gray-400: #ced4da;
+    --i-gray-500: #adb5bd;
+    --i-gray-600: #6c757d;
+    --i-gray-700: #495057;
+    --i-gray-800: #343a40;
+    --i-gray-900: #212529;
+    --i-primary: #0d6efd;
+    --i-secondary: #6c757d;
+    --i-success: #198754;
+    --i-info: #0dcaf0;
+    --i-warning: #ffc107;
+    --i-danger: #dc3545;
+    --i-light: #f8f9fa;
+    --i-dark: #212529;
+}
+
+.job-card--selected {
+    background-color: #fff4e9 ;
+}
+.job-card--selected::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    margin: 8px 0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: #ed1b2f;
+}
+
+.job-card--selected::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    bottom: calc(50% - 8px);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #ed1b2f;
+}
+
+.job-label::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #ed1b2f;
+}

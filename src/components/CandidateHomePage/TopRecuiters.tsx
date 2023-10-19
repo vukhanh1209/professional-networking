@@ -39,22 +39,22 @@ const TopRecruiters = () => {
     }
     return (
         <section className="flex flex-col items-center w-full bg-light-grey py-20 px-5 md:px-[30px] text-primary-black ">
-            <h1 className="text-3xl font-bold pb-4 text-center">Nhà Tuyển Dụng Hàng Đầu</h1>
+            <h1 className="text-2xl md:text-3xl font-bold pb-4 text-center">Nhà Tuyển Dụng Hàng Đầu</h1>
             <div className="flex flex-col md:flex-row md:mx-[60px] pt-20">
                 {topRecruiters.map((recruiter : any, index : number) => (
                     <div 
                         key={index}
                         onClick={handleClickTopRecruiter}
-                        className="min-h-[390px] mb-20 flex flex-col md:mx-3 items-center  w-full h-full bg-white rounded-lg border border-light-grey px-4 drop-shadow-sm"
+                        className="h-[390px] mb-20 flex flex-col md:mx-3 items-center  w-full bg-white rounded-lg border border-light-grey px-4 drop-shadow-sm"
                     >
                         <div className="bg-white w-40 h-40 rounded-lg border border-light-grey -translate-y-12">
                             <Image src={recruiter.img} width={160} height={160} alt={recruiter.name} className="w-full h-full"/>
                         </div>
-                        <div className="flex flex-col items-center justify-between">
-                            <div className="flex flex-col items-center">
-                                <h2 className="mt-5 text-lg font-bold">{recruiter.name}</h2>
+                        <div className="flex flex-col items-center justify-between h-full">
+                            <div className="flex flex-col items-center -translate-y-12">
+                                <h2 className="mt-5 text-lg font-bold text-center">{recruiter.name}</h2>
                                 <p className="text-base text-dark-grey text-center mt-3">{recruiter.location}</p>
-                                <div className="flex flex-wrap justify-center gap-3 mt-6">
+                                <div className="flex flex-wrap justify-center gap-3 mt-6 max-h-[84px] overflow-hidden">
                                     {recruiter.key_skils.map((skill : string, skillIndex: number) => (
                                     <div 
                                         key={skillIndex} 

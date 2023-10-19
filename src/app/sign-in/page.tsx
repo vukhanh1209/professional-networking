@@ -2,7 +2,7 @@ import Image from "next/image";
 import Logo from "public/images/sign-in/logo.png"
 import GoogleIcon from "public/images/sign-in/google.svg"
 import CheckIcon from "public/images/sign-in/check.svg"
-import SignInForm from "@/components/SignIn/SignInForm";
+import SignInForm from "@/components/SignInPage/SignInForm";
 import Link from "next/link";
 const specialFeatures = [
     "Xem trước mức lương để có thể lợi thế khi thoả thuận lương",

@@ -1,4 +1,4 @@
-import { Feature, TopRecruiters } from '@/components/CandidateHome'
+import { Feature, TopRecruiters } from '@/components/CandidateHomePage'
 import { SearchSection } from '@/components/Search'
 
 export default function Home() {

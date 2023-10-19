@@ -1,10 +1,10 @@
-export default function HomeLayout({
+export default function SearchLayout({
     children, // will be a page or nested layout
   }: {
     children: React.ReactNode
   }) {
     return (
-      <main className="w-full h-fit primary-gradient px-5 lg:px-[1.875rem] mt-[5.5rem] ">
+      <main className="w-full h-fit bg-light-grey mt-[5.5rem] ">
         {children}
       </main>
     )
