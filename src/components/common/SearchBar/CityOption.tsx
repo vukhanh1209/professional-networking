@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/legacy/image";
-import DropDown from "../common/Dropdown";
+import DropDown from "../Dropdown";
 import ArrowUp from 'public/images/arrow-up.svg'
 import { useState } from "react";
 import LocationPin from 'public/images/location-pin.svg'

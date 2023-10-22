@@ -28,7 +28,7 @@ interface JobCardProps {
 const JobCard = ({isSelected} : JobCardProps) => {
 
     return (
-        <div className={`${isSelected && "job-card--selected"} relative mb-4 rounded-lg border border-primary-red w-full h-fit`}>
+        <section className={`${isSelected && "job-card--selected"} relative mb-4 rounded-lg border border-primary-red w-full h-fit`}>
             <div className="flex flex-col px-3 py-2 w-full ">
                 <div className="flex flex-col pb-3 gap-3 border-b border-dashed border-silver-grey">
                     <div className="flex items-end justify-between w-full">
@@ -94,7 +94,7 @@ const JobCard = ({isSelected} : JobCardProps) => {
                 </ul>
                 
             </div>
-        </div>
+        </section>
     )
 }
 

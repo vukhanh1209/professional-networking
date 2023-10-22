@@ -1,4 +1,4 @@
-import SearchForm from './SearchForm'
+import SearchForm from '../../common/SearchBar/SearchForm'
 
 const suggestionKeys = ["Java", "ReactJS", ".NET", "Tester", "PHP", "Business Analyst", "NodeJS", "Mangager"]
 
