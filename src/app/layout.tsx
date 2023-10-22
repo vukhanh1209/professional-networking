@@ -4,6 +4,7 @@ import 'style/index.scss'
 import type { Metadata } from 'next'
 import { Lexend } from 'next/font/google'
 import Footer from '@/components/common/Footer'
+import ToastMessage from '@/components/common/AlertMessage/ToastMessage'
 
 const lexend =Lexend({ subsets: ['vietnamese'] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <Header/>
         {children}
         <Footer/>
+        <ToastMessage />
       </body>
     </html>
   )

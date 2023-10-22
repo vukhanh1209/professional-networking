@@ -74,7 +74,7 @@ const SearchForm = () => {
               type="submit"
               className="hover:bg-[#c2222] md:min-w-[240px] flex items-center justify-center py-3 px-6 w-fit md:rounded-l-lg rounded-r-lg bg-[#ed1b2f] transition-all duration-100 ">
               <div className="inline w-5 h-5 shrink-0 md:mr-2">
-                <Image src={SearchIcon} className="w-5 h-5"/>
+                <Image src={SearchIcon} alt="search" className="w-5 h-5"/>
               </div>
               <span className="hidden md:inline text-lg font-medium text-white whitespace-nowrap">Tìm kiếm</span>
           </button>

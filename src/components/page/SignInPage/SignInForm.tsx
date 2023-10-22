@@ -28,20 +28,7 @@ const SignInForm = () => {
         reset,
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
-    const [isSuccessful, setIsSuccessful] = useState(false)
-    
 
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-
-    const enoughField = useMemo(() => password && email, [password, email, isSuccessful]);
-
-
-    const notifySuccessfull = useCallback(() => {
-        setIsSuccessful(true);
-        setPassword("");
-        setEmail("");
-    }, [])
 
     const onLoginSubmit = (data : any) => {
         const dataRequestBody = { ...data }
@@ -56,7 +43,6 @@ const SignInForm = () => {
 
                 if (!dataRes.error_code) {
                     reset();
-                    notifySuccessfull()
                 }
 
             })
@@ -76,7 +62,6 @@ const SignInForm = () => {
                     placeholder="Địa chỉ Email"
                     name="email"
                     required={true}
-                    setInputValue={setEmail}
                     delay="1"
                 />
                 <InputBox
@@ -84,16 +69,14 @@ const SignInForm = () => {
                     error={errors.password}
                     title="Mật khẩu"
                     placeholder="Mật khẩu"
-                    setInputValue={setPassword}
                     required={true}
                     name="password"
                 />
                 
             </div>
             <button 
-                disabled={!enoughField}
                 type="submit"
-                className={`${!enoughField ? "cursor-default opacity-50" : "hover:bg-[#c82222]"} flex items-center justify-center py-3 px-6 w-full rounded-lg  bg-[#ed1b2f] transition-all duration-100 text-base font-semibold text-white mb-4`}>
+                className={`hover:bg-[#c82222] flex items-center justify-center py-3 px-6 w-full rounded-lg  bg-[#ed1b2f] transition-all duration-100 text-base font-semibold text-white mb-4`}>
                 Đăng nhập bằng Email
             </button>
         </form>

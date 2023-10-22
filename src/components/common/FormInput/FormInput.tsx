@@ -18,7 +18,7 @@ const FormInput = ({title, placeholder, setInputValue, error, register, name, de
                 clearTimeout(inputTimeout)
             }
         }
-    }, [value])
+    }, [setInputValue, value])
 
     return (
         <div className={`relative flex flex-col animate-duration-1500 ContactFadeInRight ${delayClassName}`}>
