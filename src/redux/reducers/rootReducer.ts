@@ -4,7 +4,7 @@ import modalNFT from "./modalNFTSlice";
 
 
 const rootReducer = combineReducers({
-  alert,
+  // alert,
   modalNFT,
 });
 

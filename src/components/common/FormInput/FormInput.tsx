@@ -21,7 +21,7 @@ const FormInput = ({title, placeholder, setInputValue, error, register, name, de
     }, [setInputValue, value])
 
     return (
-        <div className={`relative flex flex-col animate-duration-1500 ContactFadeInRight ${delayClassName}`}>
+        <div className={`relative flex flex-col animate-duration-1500 ContactFadeInRight ${delayClassName} w-full`}>
             <h5 className="text-sm font-medium text-[#121212] mb-2">
                 {title}
                 {required && <span className="text-[#ed1b2f] ml-1">*</span>}

@@ -1,3 +1,14 @@
 .primary-gradient {
     background: linear-gradient(277.42deg, #54151C 0%, #121212 43.92%);
 }
+
+.application-bg::before {
+    content: "";
+    width: 120vw;
+    position: absolute;
+    left: -12%;
+    top: 0;
+    height: 400px;
+    background: linear-gradient(270.08deg, #54151C 7.4%, #121212 54.81%);
+    border-radius: 0 0 70% 50%;
+}

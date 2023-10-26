@@ -5,6 +5,8 @@ import type { Metadata } from 'next'
 import { Lexend } from 'next/font/google'
 import Footer from '@/components/common/Footer'
 import ToastMessage from '@/components/common/AlertMessage/ToastMessage'
+import { StoreProvider } from '@/redux/StoreProvider'
+
 
 const lexend =Lexend({ subsets: ['vietnamese'] })
 
@@ -19,13 +21,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="vi">
-      <body className={lexend.className}>
-        <Header/>
-        {children}
-        <Footer/>
-        <ToastMessage />
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="vi">
+        <body className={lexend.className}>
+          {/* <Header/> */}
+          {children}
+          {/* <Footer/> */}
+          <ToastMessage />
+        </body>
+      </html>
+    </StoreProvider>
   )
 }

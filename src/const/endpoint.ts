@@ -1,3 +1,16 @@
+
+export const PREFIX = "/api"
+/**
+ * * Authenticate
+ */
+export const AUTH_SERVICE = "/auth"
+export const REGISTER = "/register"
+export const SIGN_IN = "/sign-in"
+export const REFRESH_TOKEN = "/refresh-token"
+export const VERIFY_ACCOUNT = "/verify-account"
+export const REGENERATE_OTP = "/regenerate-otp"
+
+
 /**
  * * BASE
  */
@@ -7,7 +20,7 @@ const ROUTER_COLLECTION = "nft";
  * * Upload
  * https://rinz.atlassian.net/wiki/spaces/IN/pages/330530844/User+Storage#2.-Development%3A
  */
-export const PREFIX = "iapi";
+// export const PREFIX = "iapi";
 export const UPLOAD_ENDPOINT = "uploader";
 // export const UPLOAD_IMAGE_ENDPOINT = `${UPLOAD_ENDPOINT}/${PREFIX}/image`
 export const UPLOAD_IMAGE_ENDPOINT = "/upload/collection";
