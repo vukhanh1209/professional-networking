@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/legacy/image";
 import Link from "next/link";
 
@@ -7,7 +8,6 @@ import RemoteIcon from '@/images/search/remote.svg'
 import LocationPin from '@/images/location-pin.svg'
 import HeartIcon from '@/images/search/heart.svg'
 import TimeIcon from '@/images/search/time.svg'
-import Redirect from '@/images/search/redirect.svg'
 
 import ImageWrapper from "../../common/ImageWrapper";
 import { useRouter } from "next/navigation";
@@ -53,13 +53,7 @@ const reasonsForWorking = [
     "Snacks, drinks"
 ]
 
-const companyProfile = {
-    type: "Product",
-    size: "51-150",
-    country: "Japan",
-    working_day: "Thứ 2 - Thứ 6",
-    ot_policy: "Thêm lương OT"
-}
+
 
 const JobDetailCard = () => {
     const router = useRouter()
@@ -68,17 +62,14 @@ const JobDetailCard = () => {
         router.push("/application")
     }
 
-    
-
     return (
-        <article className="hidden lg:flex lg:col-span-7">
-            <div className="sticky top-[90px] flex flex-col gap-3 py-6 bg-white rounded-lg w-full h-fit">
-                <div className="px-6 ">
+        <article className="flex flex-col gap-3 pt-6 lg:py-6 bg-white lg:rounded-lg w-full h-fit drop-shadow-md text-primary-black">
+                <div className="px-5 md:px-6 ">
                     <div className="flex flex-col w-full  border-b border-silver-grey pb-2">
                         <div className="flex items-center gap-3">
-                            <div className="flex items-center justify-center px-2 bg-white w-fit aspect-square rounded-lg border border-silver-grey">
+                            {/* <div className="flex items-center justify-center px-2 bg-white w-fit aspect-square rounded-lg border border-silver-grey">
                                 <ImageWrapper src={jobData.companyAvatar} width={100} alt=""/>
-                            </div>
+                            </div> */}
                             <div className="flex flex-col gap-2 w-full">
                                 <h1 className="text-2xl font-bold">{jobData.title}</h1>
                                 <div className="text-base text-rich-grey">
@@ -104,9 +95,9 @@ const JobDetailCard = () => {
                     </div>
                 </div>
 
-                <div className="overflow-y-auto max-h-[500px] pb-40 ">
-                    <div className="px-6">
-                        <div className="flex flex-col w-full py-6 border-b gap-2 border-dashed border-silver-grey">
+                <div className="lg:overflow-y-auto lg:max-h-[500px] ">
+                    <div className="px-6 divide-y divide-dashed border-silver-grey">
+                        <div className="flex flex-col w-full py-6 gap-2 ">
                             <div className="flex items-center text-sm text-rich-grey">
                                 <div className="flex items-center shrink-0">
                                     <Image src={LocationPin} className="w-4 h-4" alt="location"/>
@@ -141,63 +132,28 @@ const JobDetailCard = () => {
                             </div>
                         </div>
 
-                        <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
+                        <div className="py-6 gap-2 ">
                             <h2 className="text-xl font-bold mb-4">{`${topReasons.length} Lý do để gia nhập công ty`}</h2>
                             {renderList(topReasons)}
                         </div>
 
-                        <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
+                        <div className="py-6 gap-2 ">
                             <h2 className="text-xl font-bold mb-4">Mô tả công việc</h2>
                             {renderList(jobDescription)}        
                         </div>
 
-                        <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
+                        <div className="py-6 gap-2 ">
                             <h2 className="text-xl font-bold mb-4">Yêu cầu công việc</h2>
                             {renderList(requirements)}
                         </div>
 
-                        <div className="py-6 border-b gap-2 border-silver-grey">
+                        <div className="py-6 gap-2 ">
                             <h2 className="text-xl font-bold mb-4">Tại sao bạn sẽ yêu thích làm việc tại đây</h2>
                             {renderList(reasonsForWorking)}
                         </div>
-
-                        <div className="flex flex-col w-full py-6">
-                            <div className="flex justify-between items-center">
-                                <h2 className="text-xl font-bold mb-4">{jobData.companyName}</h2>
-                                <Link href="/" className="flex gap-1 items-center text-hyperlink text-base font-medium">
-                                    Xem công ty
-                                    <Image src={Redirect} width={16} height={16} alt="redirect"/>
-                                </Link>
-                            </div>
-                            <div className="grid grid-cols-3 w-full gap-y-4">
-                                <div className="flex flex-col col-span-1 pr-4">
-                                    <h5 className="text-sm text-dark-grey">Mô hình công ty</h5>
-                                    <span className="text-base text-primary-black">{companyProfile.type}</span>
-                                </div>
-                                <div className="flex flex-col col-span-1 pr-4">
-                                    <h5 className="text-sm text-dark-grey">Quy mô công ty</h5>
-                                    <span className="text-base text-primary-black">{companyProfile.size}</span>
-                                </div>
-                                <div className="flex flex-col col-span-1 pr-4">
-                                    <h5 className="text-sm text-dark-grey">Quốc gia</h5>
-                                    <span className="text-base text-primary-black">{companyProfile.country}</span>
-                                </div>
-                                <div className="flex flex-col col-span-1 pr-4">
-                                    <h5 className="text-sm text-dark-grey">Thời gian làm việc</h5>
-                                    <span className="text-base text-primary-black">{companyProfile.working_day}</span>
-                                </div>
-                                <div className="flex flex-col col-span-1 pr-4">
-                                    <h5 className="text-sm text-dark-grey">Làm việc ngoài giờ</h5>
-                                    <span className="text-base text-primary-black">{companyProfile.ot_policy}</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-                
-            </div>
-        </article>
+            </article>
     )
 }
 
