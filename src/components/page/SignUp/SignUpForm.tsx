@@ -44,7 +44,8 @@ const SignUpForm = () => {
         if(data) {
             const res = await dispatch(authRegister(data))
             console.log("Log ~ file: SignUpForm.tsx:43 ~ onSubmit ~ res:", res)
-            if(res.meta.requestStatus == "fulfilled") router.push(`/account/otp?username=${data.username}`)
+            // if(res.meta.requestStatus == "fulfilled") router.push(`/account/otp?username=${data.username}`)
+           
         }
         
         // fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/contact_new`, {

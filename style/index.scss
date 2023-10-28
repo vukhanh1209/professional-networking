@@ -34,8 +34,13 @@
 }
 
 .job-card--selected {
-    background-color: #fff4e9 ;
+    border: 1px solid #ed1b2f;
 }
+
+.job-card--super-hot {
+    background-color: #fff4e9;
+}
+
 .job-card--selected::before {
     content: "";
     position: absolute;
@@ -68,4 +73,20 @@
     height: 0;
     border-left: 8px solid transparent;
     border-top: 8px solid #ed1b2f;
+}
+
+.tab {
+    border-bottom: 3px solid;
+    border-color: transparent;
+}
+
+.tab:hover {
+    opacity: 1;
+    border-color: #414042;
+}
+
+.tab--active {
+    opacity: 1;
+    color: #ed1b2f!important;
+    border-color: #ed1b2f!important;
 }

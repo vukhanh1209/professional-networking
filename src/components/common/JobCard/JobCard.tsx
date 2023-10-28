@@ -23,17 +23,18 @@ const jobData = {
 
 interface JobCardProps {
     isSelected : boolean;
+    isSuperHot?: boolean;
 }
 
-const JobCard = ({isSelected} : JobCardProps) => {
+const JobCard = ({isSelected, isSuperHot} : JobCardProps) => {
 
     return (
-        <section className={`${isSelected && "job-card--selected"} relative mb-4 rounded-lg border border-primary-red w-full h-fit`}>
+        <section className={`${isSelected && "job-card--selected"} ${isSuperHot && "job-card--super-hot"} bg-white relative mb-4 rounded-lg w-full h-fit `}>
             <div className="flex flex-col px-3 py-2 w-full ">
                 <div className="flex flex-col pb-3 gap-3 border-b border-dashed border-silver-grey">
                     <div className="flex items-end justify-between w-full">
                         <span className="text-sm font-medium text-dark-grey">Đăng {jobData.postedDate} ngày trước</span>
-                        {jobData.hot_level === 2 && 
+                        {isSuperHot && 
                             <div className="flex items-center rounded-l-md bg-primary-red px-3 py-1 translate-x-3 job-label">
                                 <div className="flex items-center shrink-0 w-4 h-[15px]">
                                     <Image src={SuperHot} className="w-4 h-[15px]" alt="fire"/>

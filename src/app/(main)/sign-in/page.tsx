@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "public/images/sign-in/logo.png"
+import Logo from "@/images/sign-in/logo.png"
 import GoogleIcon from "public/images/sign-in/google.svg"
 import CheckIcon from "public/images/sign-in/check.svg"
 import SignInForm from "@/components/page/SignIn/SignInForm";
@@ -15,15 +15,15 @@ export default function SignIn() {
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-[1340px]">
-                <div className="flex flex-col w-full pt-[0.875rem] pb-[6.25rem]">
+                <div className="flex flex-col w-full pt-[0.875rem] pb-[6.25rem] px-5">
                     <div className="flex items-center w-full my-6">
                         <h1 className="text-primary-black text-xl font-bold">Chào mừng bạn đến với</h1>
                         <div className="flex shrink-0 px-1 lg:px-2">
                             <Image src={Logo} width={0} height={0} alt="logo" className="w-20 h-[1.875rem]"/>
                         </div>
                     </div>
-                    <div className="flex flex-wrap justify-between ">
-                        <section className="flex flex-col max-w-[536px] ">
+                    <div className="flex flex-col items-center md:flex-row md:justify-between md:items-start">
+                        <section className="flex flex-col max-w-[536px] mb-6 md:mb-0  mr-5">
                             <div className="text-[#414042] text-sm text-medium mb-6">
                                 Bằng việc đăng nhập, bạn đồng ý với các 
                                 <a href="" target="_blank" className="text-[#0e2eed]"> Điều khoản dịch vụ </a>
@@ -46,9 +46,11 @@ export default function SignIn() {
 
                             
                             <SignInForm/>
+                            <Link href="/account" className="text-[#0e2eed] text-center mb-2"> Quên mật khẩu?</Link>
+
                             <div className="text-center text-[#121212] mb-4 lg:mb-0">
                                 Bạn chưa có tài khoản?
-                                <Link href="/sign-up" target="_blank" className="text-[#0e2eed]"> Đăng ký ngay</Link>
+                                <Link href="/sign-up" className="text-[#0e2eed]"> Đăng ký ngay</Link>
                             </div>
                         </section>
 

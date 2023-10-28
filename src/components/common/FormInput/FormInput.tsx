@@ -1,14 +1,29 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import requiredIcon from 'public/images/sign-in/requireIcon.svg'
 import ImageLegacy from 'next/legacy/image';
+import LockedEye from "@/images/locked-eye.svg"
+import Eye from "@/images/eye.svg"
+
 
 const FormInput = ({title, placeholder, setInputValue, error, register, name, delay, required} : any) => {
     const delayClassName = delay ? `delay-${delay}` : '';
     const [value, setValue] = useState("");
-    const handleChangeInput = (e : any) => {
+    const [showPassword, setShowPassword] = useState(false);
+    console.log("Log ~ file: FormInput.tsx:13 ~ FormInput ~ showPassword:", showPassword)
+    const isPasswordInput = useMemo(() => name === "password", [name]) 
+
+    const handleChangeInput = useCallback((e : any) => {
         setValue(String(e.target.value))
-    }
+    }, [])
+
+    const handleClickShowPassword = useCallback((e: any) => {
+        e.preventDefault()
+        console.log("Click")
+        setShowPassword(!showPassword)
+    }, [showPassword])
+
+
     useEffect(() => {
         if(setInputValue) {
             const inputTimeout = setTimeout(() => {
@@ -29,11 +44,19 @@ const FormInput = ({title, placeholder, setInputValue, error, register, name, de
             <div className="relative flex items-center h-fit">
                 <input 
                     {...register}
+                    type={isPasswordInput && !showPassword ? "password" : "text"}
                     onChange={(e) => handleChangeInput(e)}
                     className={`${error ? 'border-[#ed1b2f]' : 'border-[#dedede]'} text-sm w-full rounded-lg bg-transparent outline-none text-[#121212] placeholder:text-[#656881] py-3 px-4 border`}
                     placeholder={placeholder}
                     name={name || ""}
                 />
+                {isPasswordInput &&
+                    <button onClick={handleClickShowPassword} className="absolute right-4 h-full flex items-center">
+                        {
+                            !showPassword ? <ImageLegacy src={LockedEye}/> : <ImageLegacy src={Eye}/>
+                        }
+                    </button>
+                }
                  <div className={`${error ? "block" : "hidden"} absolute right-4 h-full flex items-center`}>
                     <ImageLegacy src={requiredIcon}/>
                 </div>
