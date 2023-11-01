@@ -1,76 +1,36 @@
-import { LocalStorage } from "@/utils/LocalStorage";
 import { createAsyncThunk, Dispatch } from "@reduxjs/toolkit";
-
-// import { ISignInParams } from "@/models/redux-models";
-
 import { authService } from "@/axios/api/authService";
 
-import * as actions from ".";
-import { notifyErrors } from "@/utils/notification";
-// import { toastMessage } from "@/app/utils/lib";
-// import { addAlert } from "../reducers/alert";
 
 export const authRegister = createAsyncThunk(
     "auth/authRegister",
     async (params: any, { dispatch, getState, rejectWithValue }) => {
-      try {
-        const response = await authService.register(params);
-        console.log("Log ~ file: auth.actions.ts:17 ~ response:", response)
-        return response;
-        
-      } 
-      catch (error) {
-        console.log("Log ~ file: auth.actions.ts:22 ~ error:", error)
-      }
+      const response = await authService.register(params);
+      return response;
     }
   );
 
 export const authSignIn = createAsyncThunk(
   "auth/authSignIn",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
-    try {
-      const response = await authService.signIn(params);
-      console.log("Log ~ file: auth.actions.ts:32 ~ response:", response)
-      return response;
-      if (response) {
-        // LocalStorage.setToken(response.data.access_token);
-        // dispatch(actions.getProfile(response.data.public_address));
-        
-      }
-    } 
-    catch (error) {
-      console.log("Log ~ file: auth.actions.ts:38 ~ error:", error)
-    }
+    const response = await authService.signIn(params);
+    return response;
   }
 );
 
 export const authVerify = createAsyncThunk(
   "auth/authVerify",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
-    try {
-      const response = await authService.verifyAccount(params);
-      console.log("Log ~ file: auth.actions.ts:17 ~ response:", response)
-      return response;
-      
-    } 
-    catch (error) {
-      console.log("Log ~ file: auth.actions.ts:22 ~ error:", error)
-    }
+    const response = await authService.verifyAccount(params);
+    return response;
   }
 );
 
 export const authRegenerateOTP = createAsyncThunk(
   "auth/authRegenerateOTP",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
-    try {
-      const response = await authService.regenerateOTP(params);
-      console.log("Log ~ file: auth.actions.ts:17 ~ response:", response)
-      return response;
-      
-    } 
-    catch (error) {
-      console.log("Log ~ file: auth.actions.ts:22 ~ error:", error)
-    }
+    const response = await authService.regenerateOTP(params);
+    return response;
   }
 );
 

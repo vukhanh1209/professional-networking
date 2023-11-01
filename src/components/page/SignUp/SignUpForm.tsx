@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { useAppDispatch } from "@/redux/hook";
 import { authRegister } from "@/redux/actions/auth.actions";
 import { useRouter } from "next/navigation";
+import { handleServiceResponse } from "@/utils/handleServiceResponse";
 
 const schema = yup.object().shape({
     nickname: yup
@@ -39,32 +40,16 @@ const SignUpForm = () => {
     const router = useRouter()
 
     const onSubmit = async (data : any) => {
-
-        // console.log("Log ~ file: SignUpForm.tsx:47 ~ onSubmit ~ reqBody:", data)
         if(data) {
             const res = await dispatch(authRegister(data))
-            console.log("Log ~ file: SignUpForm.tsx:43 ~ onSubmit ~ res:", res)
-            // if(res.meta.requestStatus == "fulfilled") router.push(`/account/otp?username=${data.username}`)
-           
+            handleServiceResponse(res)
+            if(res.meta.requestStatus === "fulfilled") {
+                setTimeout(() => {
+                    router.push(`/account/otp?email=${data.username}`)
+                }, 500)
+            }
         }
-        
-        // fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/contact_new`, {
-        //     method: 'POST', // or 'PUT'
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(dataRequestBody),
-        // }).then(response => response.json())
-        //     .then(dataRes => {
 
-        //         if (!dataRes.error_code) {
-        //             reset();
-        //         }
-
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //     });
 
     };
 
@@ -96,6 +81,7 @@ const SignUpForm = () => {
                     placeholder="Mật khẩu"
                     required={true}
                     name="password"
+                    type="password"
                 />
                 
             </div>

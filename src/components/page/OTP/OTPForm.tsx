@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAppDispatch } from "@/redux/hook";
-import { authVerify } from "@/redux/actions/auth.actions";
-import { useRouter, useSearchParams } from "next/navigation";
+import { authRegenerateOTP, authVerify } from "@/redux/actions/auth.actions";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { handleServiceResponse } from "@/utils/handleServiceResponse";
 
 const schema = yup.object().shape({
     otp: yup
@@ -31,27 +32,37 @@ const OTPForm = () => {
     
     const dispatch = useAppDispatch();
     const router = useRouter()
-    const searchParam = useSearchParams();
-
+    const searchParam = useSearchParams()
+    const userEmail = searchParam.get("email");
 
     const onSubmit = async (data : any) => {
-        const userEmail = searchParam.get("username");
         if(data) {
             const reqData = {
                 email : userEmail,
                 otp: data.otp
             }
             const res = await dispatch(authVerify(reqData))
-            console.log("Log ~ file: OTPForm.tsx:37 ~ onSubmit ~ res:", res)
-            if(res.meta.requestStatus == "fulfilled") router.push("/sign-in")
-            
+            handleServiceResponse(res)
+            if(res.meta.requestStatus === "fulfilled") {
+                setTimeout(() => {
+                    router.push("/sign-in")
+                }, 500)
+            }
+          
         }
 
 
     };
 
+    const handleResendOTP = async (e : any) => {
+        e.preventDefault()
+
+        const res = await dispatch(authRegenerateOTP(userEmail))
+        handleServiceResponse(res)
+    }
+
     return (
-        <form className="flex flex-col items-start gap-3" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col items-center gap-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col w-full">
                 <InputBox
                     register={register("otp")}
@@ -66,9 +77,10 @@ const OTPForm = () => {
             </div>
             <button 
                 type="submit"
-                className={`hover:bg-[#c82222] flex items-center justify-center py-3 px-6 w-full rounded-lg  bg-[#ed1b2f] transition-all duration-100 text-base font-semibold text-white mb-4`}>
+                className={`hover:bg-[#c82222] flex items-center justify-center py-3 px-6 w-full rounded-lg  bg-[#ed1b2f] transition-all duration-100 text-base font-semibold text-white`}>
                 Xác thực mã OTP
             </button>
+            <button onClick={handleResendOTP} className=" px-6 bg-transparent text-sm text-right text-hyperlink mb-4">Lấy lại mã OTP</button>
         </form>
 
 

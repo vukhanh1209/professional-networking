@@ -12,6 +12,17 @@ export const REGENERATE_OTP = "/regenerate-otp"
 
 
 /**
+ * * User
+ */
+export const USERS_SERVICE = "/users"
+export const FORGOT_PASSWORD = "/forgot-password"
+export const CHANGE_PASSWORD = "/change-password"
+export const RESET_PASSWORD = "/reset-password"
+
+
+
+
+/**
  * * BASE
  */
 const ROUTER_DAPP = "dapp";

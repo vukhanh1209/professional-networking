@@ -21,7 +21,7 @@ export const authService = {
     return axiosClient.put(`${PREFIX}${AUTH_SERVICE}${VERIFY_ACCOUNT}?email=${params.email}&otp=${params.otp}`);
   },
   regenerateOTP: (params:any) => {
-    return axiosClient.put(`${PREFIX}${AUTH_SERVICE}${REGENERATE_OTP}`, params);
+    return axiosClient.put(`${PREFIX}${AUTH_SERVICE}${REGENERATE_OTP}?email=${params}`);
   },
   // loginGoogle: (params:any) => {
   //   return axiosClient.post(`${AUTH_SIGN_IN_GOOGLE_ENDPOINT}`, params);

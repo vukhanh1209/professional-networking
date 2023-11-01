@@ -6,12 +6,11 @@ import LockedEye from "@/images/locked-eye.svg"
 import Eye from "@/images/eye.svg"
 
 
-const FormInput = ({title, placeholder, setInputValue, error, register, name, delay, required} : any) => {
+const FormInput = ({title, placeholder, setInputValue, error, register, name, delay, required, type} : any) => {
     const delayClassName = delay ? `delay-${delay}` : '';
     const [value, setValue] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    console.log("Log ~ file: FormInput.tsx:13 ~ FormInput ~ showPassword:", showPassword)
-    const isPasswordInput = useMemo(() => name === "password", [name]) 
+    const isPasswordInput = useMemo(() => type === "password", [type]) 
 
     const handleChangeInput = useCallback((e : any) => {
         setValue(String(e.target.value))
@@ -19,7 +18,6 @@ const FormInput = ({title, placeholder, setInputValue, error, register, name, de
 
     const handleClickShowPassword = useCallback((e: any) => {
         e.preventDefault()
-        console.log("Click")
         setShowPassword(!showPassword)
     }, [showPassword])
 

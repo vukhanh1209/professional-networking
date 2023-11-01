@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { authSignIn } from "@/redux/actions/auth.actions";
 import { useAppDispatch } from "@/redux/hook";
+import { handleServiceResponse } from "@/utils/handleServiceResponse";
+import { useParams, useRouter } from "next/navigation";
+import { notifySuccess } from "@/utils/notification";
 
 const schema = yup.object().shape({
     password: yup
@@ -31,15 +34,19 @@ const SignInForm = () => {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
     const dispatch = useAppDispatch()
-
+    const router = useRouter();
 
     const onLoginSubmit = async (data : any) => {
         if(data) {
             const res = await dispatch(authSignIn(data))
-            console.log("Log ~ file: OTPForm.tsx:37 ~ onSubmit ~ res:", res)
-            
+            handleServiceResponse(res)
+            if(res.meta.requestStatus === "fulfilled") {
+                notifySuccess("Đăng nhập thành công")
+                setTimeout(() => {
+                    router.push("/");
+                }, 500)
+            }
         }
-
     };
 
     return (
@@ -61,6 +68,7 @@ const SignInForm = () => {
                     placeholder="Mật khẩu"
                     required={true}
                     name="password"
+                    type="password"
                 />
                 
             </div>

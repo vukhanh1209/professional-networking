@@ -15,7 +15,7 @@ export default function RecruiterBody() {
         <div className="relative grid grid-cols-12 w-full">
             <section className=" flex flex-col gap-6 col-span-full lg:col-span-8">
                 <nav className="sticky top-[88px] z-40 flex justify-center lg:justify-start gap-12 bg-white w-full lg:rounded-lg drop-shadow-lg text-rich-grey px-6 font-semibold">
-                    <Link href="/recruiter" className={`${pathName === "/recruiter" && "tab--active"} py-4 lg:py-6  tab`}>
+                    <Link href="/recruiter" className={`${pathName === "/recruiter" && "tab--active"} py-4 lg:py-6 opacity-80 tab`}>
                         Giới thiệu
                     </Link>
                     <Link href="/recruiter/review" className={`${pathName.includes("/review") && "tab--active"} flex items-center gap-3  py-4 lg:py-6 opacity-80 tab`}>

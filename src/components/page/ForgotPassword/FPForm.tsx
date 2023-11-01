@@ -4,6 +4,10 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useAppDispatch } from "@/redux/hook";
+import { useRouter } from "next/navigation";
+import { handleServiceResponse } from "@/utils/handleServiceResponse";
+import { forgotPassword } from "@/redux/actions/user.action";
 
 const schema = yup.object().shape({
     email: yup
@@ -20,25 +24,22 @@ const FPForm = () => {
         reset,
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
-    
-    const onSubmit = (data : any) => {
-        const dataRequestBody = { ...data }
-        fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/contact_new`, {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataRequestBody),
-        }).then(response => response.json())
-            .then(dataRes => {
-                if (!dataRes.error_code) {
-                    reset();
-                }
+    const dispatch = useAppDispatch();
+    const router = useRouter()
 
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+    const onSubmit = async (data : any) => {
+        if(data) {
+            const resBody = {
+                email: data.email,
+            }
+            const res = await dispatch(forgotPassword(resBody))
+            handleServiceResponse(res)
+            if(res.meta.requestStatus === "fulfilled") {
+                setTimeout(() => {
+                    router.push(`/account/reset-password/${data.email}`);
+                }, 500)
+            }
+        }
 
     };
 
