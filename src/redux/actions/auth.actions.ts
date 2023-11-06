@@ -1,11 +1,15 @@
 import { createAsyncThunk, Dispatch } from "@reduxjs/toolkit";
 import { authService } from "@/axios/api/authService";
+import { LocalStorage } from "@/utils/LocalStorage";
+import { handleServiceResponse } from "@/utils/handleServiceResponse";
+import { notifyErrors, notifySuccess } from "@/utils/notification";
 
 
 export const authRegister = createAsyncThunk(
     "auth/authRegister",
     async (params: any, { dispatch, getState, rejectWithValue }) => {
       const response = await authService.register(params);
+  
       return response;
     }
   );
@@ -13,8 +17,19 @@ export const authRegister = createAsyncThunk(
 export const authSignIn = createAsyncThunk(
   "auth/authSignIn",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
-    const response = await authService.signIn(params);
-    return response;
+    try {
+      const response : any = await authService.signIn(params);
+      if(response) {
+        notifySuccess("Đăng nhập thành công");
+        LocalStorage.setToken(response?.accessToken)
+    
+      }
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message)
+      return rejectWithValue(err?.message);
+    }
   }
 );
 

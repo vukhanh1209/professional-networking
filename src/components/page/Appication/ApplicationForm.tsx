@@ -4,7 +4,6 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { authSignIn } from "@/redux/actions/auth.actions";
 import { useAppDispatch } from "@/redux/hook";
 import YourCV from "./YourCV";
 import CoverLetter from "./CoverLetter";

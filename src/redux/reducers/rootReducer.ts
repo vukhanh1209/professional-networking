@@ -1,11 +1,11 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import modalNFT from "./modalNFTSlice";
+import employee from "./employeeSlice";
 
 
 const rootReducer = combineReducers({
   // alert,
-  modalNFT,
+  employee,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

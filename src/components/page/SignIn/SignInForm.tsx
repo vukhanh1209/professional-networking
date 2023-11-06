@@ -9,6 +9,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { handleServiceResponse } from "@/utils/handleServiceResponse";
 import { useParams, useRouter } from "next/navigation";
 import { notifySuccess } from "@/utils/notification";
+import { LocalStorage } from "@/utils/LocalStorage";
 
 const schema = yup.object().shape({
     password: yup
@@ -39,13 +40,11 @@ const SignInForm = () => {
     const onLoginSubmit = async (data : any) => {
         if(data) {
             const res = await dispatch(authSignIn(data))
-            handleServiceResponse(res)
             if(res.meta.requestStatus === "fulfilled") {
-                notifySuccess("Đăng nhập thành công")
                 setTimeout(() => {
-                    router.push("/");
+                    router.push("/")
                 }, 500)
-            }
+            }            
         }
     };
 
