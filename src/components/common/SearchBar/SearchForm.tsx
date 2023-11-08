@@ -1,9 +1,9 @@
 "use client"
 import { useRef } from "react";
 import Image from "next/legacy/image";
-import CloseIcon from "public/images/close.svg";
+import CloseIcon from "@/images/close.svg";
 
-import SearchIcon from 'public/images/search.svg'
+import SearchIcon from '@/images/search.svg'
 import useSearch from "@/hook/useSearch";
 import CityOption from "./CityOption";
 
@@ -39,8 +39,8 @@ const SearchForm = () => {
         >
           <div
             className={` ${
-              focus ? " border-neutral-400" : "border-transparent" 
-            } border-[3px] relative w-full h-full flex items-center rounded-l-lg md:rounded-r-lg px-4 bg-white`}
+              focus ? " border-dark-red" : "border-transparent" 
+            } border-[3px] relative w-full h-full transition-all duration-300 flex items-center rounded-l-lg md:rounded-r-lg px-4 bg-white`}
           >
             {/* <div className="flex items-center w-5 h-5 ml-3 my-[14px]">
               <Image src={SearchIcon} alt="search icon" />

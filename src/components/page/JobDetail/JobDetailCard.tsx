@@ -10,7 +10,8 @@ import HeartIcon from '@/images/search/heart.svg'
 import TimeIcon from '@/images/search/time.svg'
 
 import ImageWrapper from "../../common/ImageWrapper";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 
 const jobData = {
     postedDate: 1,
@@ -55,13 +56,18 @@ const reasonsForWorking = [
 
 
 
-const JobDetailCard = () => {
+const JobDetailCard = ({data} : any) => {
     const router = useRouter()
 
     const handleClickApply = () => {
         router.push("/application")
     }
 
+    const currentDate = new Date().getTime();
+    const postedDate = new Date(data?.createdAt).getTime();
+    const elapsedTime = Math.floor((currentDate - postedDate) / 1000 / 60 / 60 / 24);
+
+  
     return (
         <article className="flex flex-col gap-3 pt-6 lg:py-6 bg-white lg:rounded-lg w-full h-fit drop-shadow-md text-primary-black">
                 <div className="px-5 md:px-6 ">
@@ -71,13 +77,19 @@ const JobDetailCard = () => {
                                 <ImageWrapper src={jobData.companyAvatar} width={100} alt=""/>
                             </div> */}
                             <div className="flex flex-col gap-2 w-full">
-                                <h1 className="text-2xl font-bold">{jobData.title}</h1>
+                                <h1 className="text-2xl font-bold">{data?.title}</h1>
                                 <div className="text-base text-rich-grey">
-                                    <Link href="/">{jobData.companyName}</Link>
+                                    <Link href={`/recruiter?id=${data?.company?.id}`}>{data?.company?.name}</Link>
                                 </div>
                                 <div  className="flex items-center">
                                     <ImageWrapper src={GreenCoin} height={24} width={24}  alt="coin"/>
-                                    <span className="pl-2 text-available-green text-base font-medium">{`${jobData.minSalary} - ${jobData.maxSalary} USD`}</span>
+                                    <span className="pl-2 text-available-green text-base font-medium">
+                                        {data?.minSalary ? 
+                                        
+                                        `${Number(data?.minSalary)} - ${Number(data?.maxSalary)} USD`
+                                        : "You'll love it"
+                                    }
+                                    </span>
                                 </div>
                             </div>  
 
@@ -102,7 +114,7 @@ const JobDetailCard = () => {
                                 <div className="flex items-center shrink-0">
                                     <Image src={LocationPin} className="w-4 h-4" alt="location"/>
                                 </div>
-                                <span className="pl-2">{jobData.location}</span>
+                                <span className="pl-2">{data?.company?.address}</span>
                             </div>
 
                             <div  className="flex items-center text-sm text-rich-grey">
@@ -116,12 +128,12 @@ const JobDetailCard = () => {
                                 <div className="flex items-center shrink-0 ">
                                     <Image src={TimeIcon} className="w-4 h-4" alt="remote"/>
                                 </div>
-                                <span className="pl-2">{`${jobData.postedDate} ngày trước`}</span>
+                                <span className="pl-2">{`${elapsedTime} ngày trước`}</span>
                             </div>
                             
                             <div className="flex flex-wrap w-full items-center gap-2 mb-2">
                                 <span className="text-sm text-rich-grey font-medium mr-2">Kỹ năng: </span>
-                                {jobData.jobSkills.map((skill : string, index: number) => (
+                                {data?.skills.map((skill : string, index: number) => (
                                     <div 
                                         key={index} 
                                         className="py-1 px-[10px] text-xs rounded-full bg-white text-rich-grey border border-silver-grey"
@@ -139,12 +151,12 @@ const JobDetailCard = () => {
 
                         <div className="py-6 gap-2 ">
                             <h2 className="text-xl font-bold mb-4">Mô tả công việc</h2>
-                            {renderList(jobDescription)}        
+                            {renderList(data?.description)}        
                         </div>
 
                         <div className="py-6 gap-2 ">
                             <h2 className="text-xl font-bold mb-4">Yêu cầu công việc</h2>
-                            {renderList(requirements)}
+                            {renderList(data?.requirements)}
                         </div>
 
                         <div className="py-6 gap-2 ">
@@ -159,9 +171,12 @@ const JobDetailCard = () => {
 
 
 const renderList = (listData : any) => {
+    let data = listData;
+    if(typeof(data) === "string") data = [data];
+    
     return (
         <ul className="my-2">
-            {listData.map((data : any, index: number) => (
+            {data?.map((data : any, index: number) => (
                 <li key={index} className="flex gap-3 items-center text-base text-primary-black py-[6px]">
                     <div className="w-[6px] h-[6px] rounded-full bg-primary-red"></div>
                     {data}

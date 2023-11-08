@@ -1,9 +1,9 @@
 "use client"
 import Image from 'next/image'
 
-import SunGroveCompany from "public/images/home/sungrove-company.png"
-import NabCompany from "public/images/home/nab-company.png"
-import MBCompany from "public/images/home/mb-company.png"
+import SunGroveCompany from "@/images/home/sungrove-company.png"
+import NabCompany from "@/images/home/nab-company.png"
+import MBCompany from "@/images/home/mb-company.png"
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 

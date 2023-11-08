@@ -21,9 +21,21 @@ export const LocalStorage = (function () {
     return localStorage.getItem("refreshToken");
   }
 
+  function _setProfile(profile : any) {
+    return localStorage.setItem("profile", JSON.stringify(profile))
+  }
+
+  function _getProfile() {
+    const jsonProfile = localStorage.getItem("profile")
+    if(jsonProfile) return JSON.parse(jsonProfile)
+    return null
+  }
+
   function _clearToken() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    localStorage.removeItem("profile");
+
   }
   function _setDataGoogle(data: any) {
     if (data) {
@@ -40,5 +52,7 @@ export const LocalStorage = (function () {
     getRefreshToken: _getRefreshToken,
     clearToken: _clearToken,
     setDataGoogle: _setDataGoogle,
+    setProfile: _setProfile,
+    getProfile: _getProfile
   };
 })();

@@ -1,9 +1,9 @@
 "use client"
 import Image from "next/legacy/image";
 import DropDown from "../Dropdown";
-import ArrowUp from 'public/images/arrow-up.svg'
+import ArrowUp from '@/images/arrow-up.svg'
 import { useState } from "react";
-import LocationPin from 'public/images/location-pin.svg'
+import LocationPin from '@/images/location-pin.svg'
 
 
 const cityItems = new Map([

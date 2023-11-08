@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Logo from "public/images/header/logo.png";
-import Banner from "public/images/footer/banner.svg"
+import Logo from "@/images/header/logo.png";
+import Banner from "@/images/footer/banner.svg"
 import FooterColumn from "./FooterColumn";
 
 const aboutUs = {

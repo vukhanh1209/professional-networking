@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Logo from "public/images/sign-in/logo.png"
-import Robot from "public/images/sign-up/robot.png"
+import Logo from "@/images/sign-in/logo.png"
+import Robot from "@/images/sign-up/robot.png"
 import OTPForm from "@/components/page/OTP/OTPForm";
 
 export default function OTP() {

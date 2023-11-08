@@ -1,8 +1,8 @@
 "use client"
 import Image from 'next/image'
 
-import JobFinding from "public/images/home/job-finding.svg"
-import Profile from "public/images/home/profile.svg"
+import JobFinding from "@/images/home/job-finding.svg"
+import Profile from "@/images/home/profile.svg"
 
 const features = [
     {

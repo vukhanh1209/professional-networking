@@ -4,6 +4,7 @@ import Link from "next/link";
 import Redirect from '@/images/search/redirect.svg'
 import CompanyAvatar from '@/images/search/companyAvatar.png'
 import ImageWrapper from "@/components/common/ImageWrapper";
+import { useMemo } from "react";
 
 
 const jobData = {
@@ -29,7 +30,14 @@ const companyProfile = {
     ot_policy: "Thêm lương OT"
 }
 
-export default function CompanyInfoCard() {
+export default function CompanyInfoCard({data} : any) {
+    const companyInfo = useMemo(() => {
+        return {
+            ...data?.company,
+            companyType: data?.companyType,
+            location: data?.location?.cityName
+        }
+    }, [data])
     return (
         <section className="flex flex-col gap-4 w-full z-40 bg-white lg:rounded-lg h-fit text-primary-black py-6 px-5 drop-shadow-md">
             <div className="flex flex-col items-center lg:flex-row lg:items-start gap-4">
@@ -37,8 +45,8 @@ export default function CompanyInfoCard() {
                     <ImageWrapper src={CompanyAvatar} width={120} height={120} alt="logo"/>
                 </div>
                 <div className="flex flex-col ">
-                    <h2 className="text-lg font-bold ">{jobData.companyName}</h2>
-                    <Link href="/" className="flex gap-1 items-center text-hyperlink text-base font-medium">
+                    <h2 className="text-lg font-bold ">{companyInfo?.name}</h2>
+                    <Link  href={`/recruiter?id=${data?.company?.id}`} className="flex gap-1 items-center text-hyperlink text-base font-medium">
                         Xem công ty
                         <Image src={Redirect} width={16} height={16} alt="redirect"/>
                     </Link>

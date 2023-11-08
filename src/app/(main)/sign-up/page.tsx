@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Logo from "public/images/sign-in/logo.png"
-import GoogleIcon from "public/images/sign-in/google.svg"
+import Logo from "@/images/sign-in/logo.png"
+import GoogleIcon from "@/images/sign-in/google.svg"
 import Link from "next/link";
-import Robot from "public/images/sign-up/robot.png"
+import Robot from "@/images/sign-up/robot.png"
 import SignUpForm from "@/components/page/SignUp/SignUpForm";
 
 export default function SignUp() {

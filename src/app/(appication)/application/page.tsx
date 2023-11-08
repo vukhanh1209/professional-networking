@@ -3,8 +3,8 @@ import ApplicationForm from "@/components/page/Appication/ApplicationForm";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Logo from "public/images/application/logo.png";
-import ArrowLeft from "public/images/arrow-left.svg"
+import Logo from "@/images/application/logo.png";
+import ArrowLeft from "@/images/arrow-left.svg"
 
 export default function Application() {
     const router = useRouter()
