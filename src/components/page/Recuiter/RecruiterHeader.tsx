@@ -1,9 +1,12 @@
+"use client"
 import ImageWrapper from "@/components/common/ImageWrapper"
 import Image from "next/legacy/image"
 import NAB from "@/images/NAB.png"
 import LocationPin from "@/images/location-pin.svg"
 import BriefCase from "@/images/briefcase.svg"
 import Link from "next/link"
+import { useAppSelector } from "@/redux/hook"
+import { selectCompanyInfo } from "@/redux/reducers/companySlice"
 
 
 const recruiter = {
@@ -42,7 +45,8 @@ const reasonsForWorking = [
 
 
 
-const RecuiterHeader = () => {
+const RecuiterHeader = ({data} : any) => {
+    const companyData = useAppSelector(selectCompanyInfo);
     return (
         <div className="flex justify-between items-center w-full lg:px-[1.875rem] py-8">
             <div className="flex flex-col items-center lg:flex-row lg:items-start gap-6">
@@ -50,15 +54,15 @@ const RecuiterHeader = () => {
                     <Image src={recruiter.avatar}  alt="logo" className="w-[120px] h-[120px] lg:w-[120px] lg:h-[120px]"/>
                 </div>
                 <div className="flex flex-col ">
-                    <h2 className="text-2xl lg:text-3xl font-bold pb-2 text-center lg:text-left">{recruiter.name}</h2>
+                    <h2 className="text-2xl lg:text-3xl font-bold pb-2 text-center lg:text-left">{companyData?.name}</h2>
                     <div className="flex flex-col lg:flex-row items-center gap-2 lg:gap-6 text-white text-sm font-normal lg:font-medium">
                         <div className="flex gap-2 items-center  ">
                             <Image src={LocationPin} width={16} height={16} alt="location"/>
-                            {recruiter.location}
+                            {companyData?.address}
                         </div>
                         <Link href="/" className="flex gap-2 items-center ">
                             <Image src={BriefCase} width={16} height={16} alt="job"/>
-                            <span className="underline">{`${recruiter.job_amount} việc làm đang tuyển dụng`}</span>
+                            <span className="underline">{`${companyData?.countJobOpening} việc làm đang tuyển dụng`}</span>
                         </Link>
                     </div>
                     <div className="flex gap-3 pt-8 text-base font-medium lg:font-semibold">

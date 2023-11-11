@@ -1,7 +1,10 @@
+"use client"
 import Image from "next/legacy/image"
 import Link from "next/link"
 import Globe from "@/images/globe.svg"
 import Facebook from "@/images/facebook.svg"
+import { useAppSelector } from "@/redux/hook"
+import { selectCompanyInfo } from "@/redux/reducers/companySlice"
 
 
 const overview = {
@@ -30,43 +33,30 @@ const overview = {
 
 
 export default function Overview() {
-    const chooseURLIcon = (type : string) => {
-        switch(type) {
-            case "website":
-                return Globe;
-            case "facebook":
-                return Facebook;
-            default:
-                break;
-        }
-    }
+    const companyData = useAppSelector(selectCompanyInfo);
 
-    const chooseURLTitle = (type : string) => {
-        switch(type) {
-            case "website":
-                return "Website công ty";
-            case "facebook":
-                return "Fanpage Facebook";
-            default:
-                break;
-        }
-    }
 
     return (
         <div className="divide-y divide-dashed divide-silver-grey bg-white w-full rounded-lg drop-shadow-lg text-rich-grey px-6 pt-6 pb-8">
             <h1 className="text-xl lg:text-2xl text-primary-black pb-4 font-bold">Giới thiệu công ty</h1>
             <div className="w-full py-4 leading-7 text-primary-black">
-                {renderContent(overview.content)}
+                {renderContent(companyData?.description)}
             </div>
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 pt-4">
                 {
-                    overview.url.map((item: any, index: number) => (
-                        <Link target="_blank" key={index} href={item.url} className="flex gap-2 items-center text-hyperlink text-base">
-                            <Image src={chooseURLIcon(item.type)} width={20} height={20} alt={item.type}/>
-                            <span className="">{chooseURLTitle(item.type)}</span>
-                        </Link>
-                    ))
+                    companyData?.website &&
+                    <Link target="_blank" href={companyData?.website} className="flex gap-2 items-center text-hyperlink text-base">
+                        <Image src={Globe} width={20} height={20} alt="website"/>
+                        <span className="">Website công ty</span>
+                    </Link>
                 }
+                {/* {
+                    companyData?.facebook &&
+                    <Link target="_blank" href={companyData?.facebook} className="flex gap-2 items-center text-hyperlink text-base">
+                        <Image src={Facebook} width={20} height={20} alt="facebook"/>
+                        <span className="">Fanpage Facebook</span>
+                    </Link>
+                } */}
                     
             </div>
         </div>
@@ -76,11 +66,14 @@ export default function Overview() {
 const renderContent = (contentList : any) => {
     return (
         <>
-            {contentList.map((data : any, index: number) => (
+            {
+            contentList?.length ? [contentList]?.map((data : any, index: number) => (
                 <p key={index}>
                     {data}
                 </p>
-            ))}
+            ))
+            : <p>{contentList}</p>
+            }
         </>
     )
 }

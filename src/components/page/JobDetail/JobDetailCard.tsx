@@ -6,12 +6,16 @@ import CompanyAvatar from '@/images/search/companyAvatar.png'
 import GreenCoin from '@/images/search/greenCoin.svg'
 import RemoteIcon from '@/images/search/remote.svg'
 import LocationPin from '@/images/location-pin.svg'
-import HeartIcon from '@/images/search/heart.svg'
+// import HeartIcon from '@/images/search/heart.svg'
 import TimeIcon from '@/images/search/time.svg'
 
 import ImageWrapper from "../../common/ImageWrapper";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useAppDispatch } from "@/redux/hook";
+import { deleteSavedJob, saveJob } from "@/redux/actions";
+import SVGHeart from "@/components/common/SVGHeart/SVGHeart";
+import { calculateElapsedDate } from "@/utils/lib";
 
 const jobData = {
     postedDate: 1,
@@ -57,16 +61,33 @@ const reasonsForWorking = [
 
 
 const JobDetailCard = ({data} : any) => {
+    console.log("Log ~ file: JobDetailCard.tsx:64 ~ JobDetailCard ~ data:", data)
+    const [isSaved, setIsSaved] = useState<boolean>()
+
+    useEffect(() => {
+        setIsSaved(data?.isSaved)
+    }, [data])
+
     const router = useRouter()
+    const dispatch = useAppDispatch();
 
     const handleClickApply = () => {
         router.push("/application")
     }
+    
 
-    const currentDate = new Date().getTime();
-    const postedDate = new Date(data?.createdAt).getTime();
-    const elapsedTime = Math.floor((currentDate - postedDate) / 1000 / 60 / 60 / 24);
 
+    const onSaveJob = async () => {
+        if(data?.isSaved) {
+            const res = await dispatch(deleteSavedJob(data?.id))
+            if(res.meta.requestStatus === "fulfilled") setIsSaved(false)
+        }
+        else {
+            const res = await dispatch(saveJob(data?.id))
+            if(res.meta.requestStatus === "fulfilled") setIsSaved(true)
+
+        }
+    }
   
     return (
         <article className="flex flex-col gap-3 pt-6 lg:py-6 bg-white lg:rounded-lg w-full h-fit drop-shadow-md text-primary-black">
@@ -100,8 +121,8 @@ const JobDetailCard = ({data} : any) => {
                                 <span className="text-base font-medium text-white">Ứng tuyển</span>
                             </button>
 
-                            <button className="">
-                                <ImageWrapper src={HeartIcon} width={32} height={32} alt="heart" />
+                            <button onClick={onSaveJob}>
+                                <SVGHeart fill={ isSaved ? "#ed1b2f" : "none"}/>
                             </button>
                         </div>
                     </div>
@@ -128,7 +149,7 @@ const JobDetailCard = ({data} : any) => {
                                 <div className="flex items-center shrink-0 ">
                                     <Image src={TimeIcon} className="w-4 h-4" alt="remote"/>
                                 </div>
-                                <span className="pl-2">{`${elapsedTime} ngày trước`}</span>
+                                <span className="pl-2">{`${calculateElapsedDate(data?.createdDate)} ngày trước`}</span>
                             </div>
                             
                             <div className="flex flex-wrap w-full items-center gap-2 mb-2">

@@ -3,24 +3,31 @@ import JobDetailCard from "@/components/page/JobDetail/JobDetailCard";
 import CompanyInfoCard from "@/components/page/JobDetail/CompanyInfoCard";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
-import { jobGetDataById } from "@/redux/actions/job.action";
+import { jobGetDataById, markAsViewd } from "@/redux/actions/job.action";
 import { useSearchParams } from "next/navigation";
 
 export default function JobDetail() {
     const [jobData, setJobData] = useState<any>()
-    
+    const [id, setId] = useState<any>()
+
     const dispatch = useAppDispatch()
     const searchParam = useSearchParams()
-    const id = searchParam.get('id')
+
+    useEffect(() => {
+        setId(searchParam.get('id'))
+    }, [])
 
     useEffect(() => {
         async function fetchJob() {
             const getJobDataResponse = await dispatch(jobGetDataById(id))
             if(getJobDataResponse.meta.requestStatus === "fulfilled") setJobData(getJobDataResponse.payload)
         }
-        if(id) fetchJob();
+        if(id) {
+            fetchJob();
+            dispatch(markAsViewd(id))
+        }
     }, [id])
 
     return (

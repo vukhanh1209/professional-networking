@@ -6,12 +6,16 @@ import CompanyAvatar from '@/images/search/companyAvatar.png'
 import GreenCoin from '@/images/search/greenCoin.svg'
 import RemoteIcon from '@/images/search/remote.svg'
 import LocationPin from '@/images/location-pin.svg'
-import HeartIcon from '@/images/search/heart.svg'
+// import HeartIcon from '@/images/search/heart.svg'
 import TimeIcon from '@/images/search/time.svg'
 import Redirect from '@/images/search/redirect.svg'
 
 import ImageWrapper from "../../common/ImageWrapper";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hook";
+import { saveJob } from "@/redux/actions";
+import SVGHeart from "@/components/common/SVGHeart/SVGHeart";
+import { useState } from "react";
 
 const jobData = {
     postedDate: 1,
@@ -62,14 +66,19 @@ const companyProfile = {
     ot_policy: "Thêm lương OT"
 }
 
-const JobDetailCard = () => {
+const JobDetailCard = ({data} : any) => {
+    const [isSaved, setIsSaved] = useState<boolean>(data?.isSaved || false)
     const router = useRouter()
-
+    const dispatch = useAppDispatch();
+    const id = 1;
     const handleClickApply = () => {
         router.push("/application")
     }
 
-    
+    const onSaveJob = () => {
+        dispatch(saveJob(id))
+        setIsSaved(!isSaved)
+    }
 
     return (
         <article className="hidden lg:flex lg:col-span-7">
@@ -98,8 +107,9 @@ const JobDetailCard = () => {
                                 <span className="text-base font-medium text-white">Ứng tuyển</span>
                             </button>
 
-                            <button className="">
-                                <ImageWrapper src={HeartIcon} width={32} height={32} alt="heart" />
+                            <button onClick={onSaveJob}>
+                                {/* <ImageWrapper src={HeartIcon} width={32} height={32} alt="heart" /> */}
+                                <SVGHeart fill={ isSaved ? "#ed1b2f" : "none"}/>
                             </button>
                         </div>
                     </div>

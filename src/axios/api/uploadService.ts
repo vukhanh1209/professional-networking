@@ -5,12 +5,17 @@ import {
 
 // const api_endpoint = "https://api-stag.innovaz.io/v1/storage/user"
 
+const UPLOAD_PRESET = ""
+const CLOUD_NAME = "dh8gztcr3"
+const CLOUDINARY = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`
+
 export const uploadService = {
 
-  uploadImage: (file:any) => {
+  uploadPDF: (file : any) => {
     const formData = new FormData();
-    formData.append("file", file);
-    // return axiosClient.post(UPLOAD_IMAGE_ENDPOINT, formData);
+    formData.append('file', file);
+    // formData.append('upload_preset', UPLOAD_PRESET);
+    return axiosClient.post(CLOUDINARY, formData);
   },
 
   // uploadImageType: (file:any) => {
