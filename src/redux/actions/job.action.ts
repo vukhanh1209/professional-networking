@@ -46,3 +46,17 @@ export const getViewedJobs = createAsyncThunk(
   }
 );
 
+export const searchByKeyword = createAsyncThunk(
+  "job/searchByKeyword",
+  async (params: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response = await jobService.searchByKeyword(params);
+      
+      return response;
+    }
+    catch(err : any) {
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+

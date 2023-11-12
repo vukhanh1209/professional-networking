@@ -32,7 +32,7 @@ export const APPLY_JOB = "/applyJob"
 export const JOB_SERVICE = "/job"
 export const MARK_AS_VIEWED = "/viewJob"
 export const VIEWED_JOBS = "/viewAtJob"
-
+export const SEARCH_BY_KEY = "/searchByKeyword"
 
 /**
  * * Company

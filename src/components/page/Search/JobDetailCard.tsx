@@ -12,10 +12,11 @@ import Redirect from '@/images/search/redirect.svg'
 
 import ImageWrapper from "../../common/ImageWrapper";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/redux/hook";
-import { saveJob } from "@/redux/actions";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { deleteSavedJob, saveJob } from "@/redux/actions";
 import SVGHeart from "@/components/common/SVGHeart/SVGHeart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { selectJobDetailByIndex, selectSelectedJob } from "@/redux/reducers/jobSlice";
 
 const jobData = {
     postedDate: 1,
@@ -67,18 +68,32 @@ const companyProfile = {
 }
 
 const JobDetailCard = ({data} : any) => {
-    const [isSaved, setIsSaved] = useState<boolean>(data?.isSaved || false)
+
+    const jobDetail = useAppSelector(selectJobDetailByIndex)
+
+    const [isSaved, setIsSaved] = useState<boolean>(jobDetail?.isSaved || false)
     const router = useRouter()
     const dispatch = useAppDispatch();
-    const id = 1;
+
     const handleClickApply = () => {
-        router.push("/application")
+        router.push(`/application?id=${jobDetail?.jobId}`)
     }
 
-    const onSaveJob = () => {
-        dispatch(saveJob(id))
-        setIsSaved(!isSaved)
+    const onSaveJob = async () => {
+        if(data?.isSaved) {
+            const res = await dispatch(deleteSavedJob(jobDetail?.jobId));
+            if(res.meta.requestStatus === "fulfilled") setIsSaved(false)
+        }
+        else {
+            const res = await dispatch(saveJob(jobDetail?.jobId));
+            if(res.meta.requestStatus === "fulfilled") setIsSaved(true)
+
+        }
     }
+    
+    useEffect(() => {
+        setIsSaved(jobDetail?.isSaved)
+    }, [jobDetail])
 
     return (
         <article className="hidden lg:flex lg:col-span-7">
@@ -87,12 +102,16 @@ const JobDetailCard = ({data} : any) => {
                     <div className="flex flex-col w-full  border-b border-silver-grey pb-2">
                         <div className="flex items-center gap-3">
                             <div className="flex items-center justify-center px-2 bg-white w-fit aspect-square rounded-lg border border-silver-grey">
-                                <ImageWrapper src={jobData.companyAvatar} width={100} alt=""/>
+                                <Link href={`/recruiter?id=${jobDetail?.companyId}`}>
+                                    <ImageWrapper src={jobData.companyAvatar} width={100} alt=""/>
+                                </Link>
                             </div>
                             <div className="flex flex-col gap-2 w-full">
-                                <h1 className="text-2xl font-bold">{jobData.title}</h1>
+                                <Link href={`/job-detail?id=${jobDetail?.jobId}`}>
+                                    <h1 className="text-2xl font-bold">{jobDetail?.title}</h1>
+                                </Link>
                                 <div className="text-base text-rich-grey">
-                                    <Link href="/">{jobData.companyName}</Link>
+                                    <Link href={`/recruiter?id=${jobDetail?.companyId}`}>{jobDetail?.companyName}</Link>
                                 </div>
                                 <div  className="flex items-center">
                                     <ImageWrapper src={GreenCoin} height={24} width={24}  alt="coin"/>
@@ -122,7 +141,7 @@ const JobDetailCard = ({data} : any) => {
                                 <div className="flex items-center shrink-0">
                                     <Image src={LocationPin} className="w-4 h-4" alt="location"/>
                                 </div>
-                                <span className="pl-2">{jobData.location}</span>
+                                <span className="pl-2">{jobDetail?.address}</span>
                             </div>
 
                             <div  className="flex items-center text-sm text-rich-grey">
@@ -141,7 +160,7 @@ const JobDetailCard = ({data} : any) => {
                             
                             <div className="flex flex-wrap w-full items-center gap-2 mb-2">
                                 <span className="text-sm text-rich-grey font-medium mr-2">Kỹ năng: </span>
-                                {jobData.jobSkills.map((skill : string, index: number) => (
+                                {jobDetail?.skills.map((skill : string, index: number) => (
                                     <div 
                                         key={index} 
                                         className="py-1 px-[10px] text-xs rounded-full bg-white text-rich-grey border border-silver-grey"
@@ -159,7 +178,7 @@ const JobDetailCard = ({data} : any) => {
 
                         <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
                             <h2 className="text-xl font-bold mb-4">Mô tả công việc</h2>
-                            {renderList(jobDescription)}        
+                            {renderList(jobDetail?.description)}        
                         </div>
 
                         <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
@@ -214,9 +233,10 @@ const JobDetailCard = ({data} : any) => {
 
 
 const renderList = (listData : any) => {
+    const renderData = Array.isArray(listData) ? listData : [listData]
     return (
         <ul className="my-2">
-            {listData.map((data : any, index: number) => (
+            {renderData?.map((data : any, index: number) => (
                 <li key={index} className="flex gap-3 items-center text-base text-primary-black py-[6px]">
                     <div className="w-[6px] h-[6px] rounded-full bg-primary-red"></div>
                     {data}

@@ -7,19 +7,20 @@ type CompanyInfo = {
     address: string,
     companySize: any,
     companyType: any,
-    countJobOpening: number,
+    countJobOpenings: number,
     country: string | null,
     createdDate: string,
     description: string,
     foundedDate: string,
-    id: number,
+    companyId: number,
     industry: string,
     lastModifiedBy: string,
     lastModifiedDate: string,
     logo: string,
-    name: string,
+    companyName: string,
     phoneNumber: string,
     website: string,
+    companyLogo: string | null,
 }
 
 type OpeningJob = {
@@ -47,12 +48,12 @@ const companySlice = createSlice({
     },
     extraReducers: (builder) => {
       builder.addCase(getCompanyInfo.fulfilled, (state, action : any) => {
-        state.copanyInfo = action.payload?.company;
+        state.copanyInfo = action.payload;
         state.openingJobs = action.payload?.jobOpenings;
       });
     },
   })
-// export const {openModalNFT,closeModalNFT} = .actions;
+
 export default companySlice.reducer;
 
 export const selectCompanyInfo = (state : RootState) => state.company.copanyInfo ;

@@ -61,9 +61,8 @@ const reasonsForWorking = [
 
 
 const JobDetailCard = ({data} : any) => {
-    console.log("Log ~ file: JobDetailCard.tsx:64 ~ JobDetailCard ~ data:", data)
     const [isSaved, setIsSaved] = useState<boolean>()
-
+    const searchParams = useSearchParams()
     useEffect(() => {
         setIsSaved(data?.isSaved)
     }, [data])
@@ -72,18 +71,18 @@ const JobDetailCard = ({data} : any) => {
     const dispatch = useAppDispatch();
 
     const handleClickApply = () => {
-        router.push("/application")
+        router.push(`/application?id=${data?.jobId}`)
     }
     
 
 
     const onSaveJob = async () => {
         if(data?.isSaved) {
-            const res = await dispatch(deleteSavedJob(data?.id))
+            const res = await dispatch(deleteSavedJob(data?.jobId));
             if(res.meta.requestStatus === "fulfilled") setIsSaved(false)
         }
         else {
-            const res = await dispatch(saveJob(data?.id))
+            const res = await dispatch(saveJob(data?.jobId));
             if(res.meta.requestStatus === "fulfilled") setIsSaved(true)
 
         }
@@ -98,7 +97,9 @@ const JobDetailCard = ({data} : any) => {
                                 <ImageWrapper src={jobData.companyAvatar} width={100} alt=""/>
                             </div> */}
                             <div className="flex flex-col gap-2 w-full">
-                                <h1 className="text-2xl font-bold">{data?.title}</h1>
+                                <Link href={`/job-detail?id=${data?.jobId}`}>
+                                    <h1 className="text-2xl font-bold">{data?.title}</h1>
+                                </Link>
                                 <div className="text-base text-rich-grey">
                                     <Link href={`/recruiter?id=${data?.company?.id}`}>{data?.company?.name}</Link>
                                 </div>
@@ -135,7 +136,7 @@ const JobDetailCard = ({data} : any) => {
                                 <div className="flex items-center shrink-0">
                                     <Image src={LocationPin} className="w-4 h-4" alt="location"/>
                                 </div>
-                                <span className="pl-2">{data?.company?.address}</span>
+                                <span className="pl-2">{data?.company?.address || data?.address}</span>
                             </div>
 
                             <div  className="flex items-center text-sm text-rich-grey">

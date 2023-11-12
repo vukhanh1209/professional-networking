@@ -60,9 +60,9 @@ export const getSavedJobs = createAsyncThunk(
 
 export const deleteSavedJob = createAsyncThunk(
   "user/deleteSavedJob",
-  async (params: any, { dispatch, getState, rejectWithValue }) => {
+  async (id: string, { dispatch, getState, rejectWithValue }) => {
     try {
-      const response : any = await userService.deleteSavedJob(params);
+      const response : any = await userService.deleteSavedJob(id);
       notifySuccess(response?.message);      
       return response;
     }

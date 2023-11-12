@@ -2,9 +2,12 @@
 import ApplicationForm from "@/components/page/Appication/ApplicationForm";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Logo from "@/images/application/logo.png";
 import ArrowLeft from "@/images/arrow-left.svg"
+import { jobGetDataById } from "@/redux/actions";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "@/redux/hook";
 
 export default function Application() {
     const router = useRouter()
@@ -13,6 +16,26 @@ export default function Application() {
         router.back();
     }
 
+    const [jobData, setJobData] = useState<any>()
+    console.log("Log ~ file: page.tsx:20 ~ Application ~ jobData:", jobData)
+    const [id, setId] = useState<any>()
+
+    const dispatch = useAppDispatch()
+    const searchParam = useSearchParams()
+
+    useEffect(() => {
+        setId(searchParam.get('id'))
+    }, [])
+
+    useEffect(() => {
+        async function fetchJob() {
+            const getJobDataResponse = await dispatch(jobGetDataById(id))
+            if(getJobDataResponse.meta.requestStatus === "fulfilled") setJobData(getJobDataResponse.payload)
+        }
+        if(id) {
+            fetchJob();
+        }
+    }, [id])
 
     return (
         <div className="mx-auto max-w-[884px] ">
@@ -24,8 +47,8 @@ export default function Application() {
                     <Image src={Logo} width={81} height={32} alt="logo" className="h-[1.875rem] w-[79.4px]"/>
                 </section>
                 <section className="bg-white drop-shadow-md w-full h-fit p-5 lg:p-8 lg:rounded-xl ">
-                    <h2 className="text-2xl mb-6 text-primary-black font-bold">[Remote] - Shopify App Dev (ReactJS, Laravel,Hidrogen) at Yet Company</h2>
-                    <ApplicationForm/>
+                    <h2 className="text-2xl mb-6 text-primary-black font-bold">{jobData?.title} tại {jobData?.companyName}</h2>
+                    <ApplicationForm id={id}/>
                 </section>
         </div>
     )

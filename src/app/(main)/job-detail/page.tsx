@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
 import { jobGetDataById, markAsViewd } from "@/redux/actions/job.action";
 import { useSearchParams } from "next/navigation";
+import { LocalStorage } from "@/utils/LocalStorage";
 
 export default function JobDetail() {
     const [jobData, setJobData] = useState<any>()
@@ -26,7 +27,7 @@ export default function JobDetail() {
         }
         if(id) {
             fetchJob();
-            dispatch(markAsViewd(id))
+            if(LocalStorage.getAccessToken()) dispatch(markAsViewd(id))
         }
     }, [id])
 

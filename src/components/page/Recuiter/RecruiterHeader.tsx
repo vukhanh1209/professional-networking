@@ -47,6 +47,7 @@ const reasonsForWorking = [
 
 const RecuiterHeader = ({data} : any) => {
     const companyData = useAppSelector(selectCompanyInfo);
+    console.log("Log ~ file: RecruiterHeader.tsx:50 ~ RecuiterHeader ~ companyData:", companyData)
     return (
         <div className="flex justify-between items-center w-full lg:px-[1.875rem] py-8">
             <div className="flex flex-col items-center lg:flex-row lg:items-start gap-6">
@@ -54,7 +55,7 @@ const RecuiterHeader = ({data} : any) => {
                     <Image src={recruiter.avatar}  alt="logo" className="w-[120px] h-[120px] lg:w-[120px] lg:h-[120px]"/>
                 </div>
                 <div className="flex flex-col ">
-                    <h2 className="text-2xl lg:text-3xl font-bold pb-2 text-center lg:text-left">{companyData?.name}</h2>
+                    <h2 className="text-2xl lg:text-3xl font-bold pb-2 text-center lg:text-left text-white">{companyData?.companyName}</h2>
                     <div className="flex flex-col lg:flex-row items-center gap-2 lg:gap-6 text-white text-sm font-normal lg:font-medium">
                         <div className="flex gap-2 items-center  ">
                             <Image src={LocationPin} width={16} height={16} alt="location"/>
@@ -62,7 +63,7 @@ const RecuiterHeader = ({data} : any) => {
                         </div>
                         <Link href="/" className="flex gap-2 items-center ">
                             <Image src={BriefCase} width={16} height={16} alt="job"/>
-                            <span className="underline">{`${companyData?.countJobOpening} việc làm đang tuyển dụng`}</span>
+                            <span className="underline">{`${companyData?.countJobOpenings} việc làm đang tuyển dụng`}</span>
                         </Link>
                     </div>
                     <div className="flex gap-3 pt-8 text-base font-medium lg:font-semibold">

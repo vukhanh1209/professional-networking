@@ -1,6 +1,11 @@
+"use client"
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import JobCard from "../../common/JobCard/JobCard";
 
 import CompanyAvatar from '@/images/search/companyAvatar.png'
+import { selectSearchJobsData, setSelectedJob } from "@/redux/reducers/jobSlice";
+import { useCallback, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const jobData = {
     postedDate: 1,
@@ -17,22 +22,22 @@ const jobData = {
 }
 
 const JobList = () => {
+    const [selectedJobIndex, setSelectedJobIndex] = useState<number>(0)
+    const seachJobsData = useAppSelector(selectSearchJobsData)
+    console.log("Log ~ file: JobList.tsx:27 ~ JobList ~ seachJobsData:", seachJobsData)
+    const dispatch = useAppDispatch()
+    const onClickJobCard = useCallback((index : number) => {
+        setSelectedJobIndex(index)
+        dispatch(setSelectedJob(index))
+    }, [selectedJobIndex])
+
     return (
         <div className="col-span-full lg:col-span-5 lg:pr-6">
-            <JobCard data={jobData} isSelected={true}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
-            <JobCard data={jobData} isSelected={false}/>
+            {seachJobsData?.jobs.map((jobData : any, index : number) => (
+                <button key={index} onClick={() => onClickJobCard(index)} className="w-full text-left">
+                    <JobCard data={jobData} isSelected={selectedJobIndex === index}/>
+                </button>
+            ))}
         </div>
     )
 

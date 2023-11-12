@@ -3,8 +3,8 @@ import { LocalStorage } from "@/utils/LocalStorage"
 
 const defaultHeader = {
   "Access-Control-Allow-Origin": "*",
-  "Content-Type": "application/json",
-  Accept: "application/json",
+  // "Content-Type": "application/json",
+  // Accept: "application/json",
 };
 // for multiple requests
 // let isRefreshing = false;

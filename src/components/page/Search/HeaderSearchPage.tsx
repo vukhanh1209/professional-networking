@@ -1,12 +1,20 @@
+"use client"
 import BellIcon from "@/images/search/bell.svg"
 import FilterIcon from "@/images/search/filter.svg"
+import { useAppSelector } from "@/redux/hook"
+import { selectTotalJob } from "@/redux/reducers/jobSlice"
 import Image from "next/legacy/image"
 
-const HeaderSearchPage = () => {
+type HeaderSearchPageProp = {
+    keyword: string
+}
+const HeaderSearchPage = ({keyword} : HeaderSearchPageProp) => {
+    const totalJob = useAppSelector(selectTotalJob)
+
     return (
         <div className="flex justify-between items-center w-full">
             <h1 className="text-3xl font-bold text-left">
-                62 việc làm <span className="text-primary-red">{`reactjs`}</span> tại Hồ Chí Minh
+                {totalJob} việc làm <span className="text-primary-red">{keyword}</span> tại Hồ Chí Minh
             </h1>
             <div className="flex items-center gap-3">
                 <button className="flex items-center justify-center gap-2 border border-primary-red rounded-lg py-2 px-5 hover:bg-white-red transition-all duration-100 ">

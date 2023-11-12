@@ -6,9 +6,11 @@ import CloseIcon from "@/images/close.svg";
 import SearchIcon from '@/images/search.svg'
 import useSearch from "@/hook/useSearch";
 import CityOption from "./CityOption";
+import { useSearchParams } from "next/navigation";
 
 
 const SearchForm = () => {
+  const searchParam = useSearchParams()
   const inputRef = useRef<HTMLInputElement>(null)
   const {
     value,
@@ -51,7 +53,7 @@ const SearchForm = () => {
               placeholder="Nhập từ khóa theo kỹ năng, chức vụ, công ty..."
               ref={inputRef}
               onFocus={onFocusInput}
-              value={value}
+              value={searchParam.get("key") || value}
               onChange={onInputChange}
               onKeyUp={(e) => handlePressEnter(e)}
               id="search"

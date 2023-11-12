@@ -31,13 +31,16 @@ const companyProfile = {
 }
 
 export default function CompanyInfoCard({data} : any) {
-    const companyInfo = useMemo(() => {
-        return {
-            ...data?.company,
-            companyType: data?.companyType,
-            location: data?.location?.cityName
-        }
-    }, [data])
+    console.log("Log ~ file: CompanyInfoCard.tsx:34 ~ CompanyInfoCard ~ data:", data)
+    // console.log("Log ~ file: CompanyInfoCard.tsx:34 ~ CompanyInfoCard ~ data:", data)
+    // const companyInfo = useMemo(() => {
+    //     return {
+    //         ...data?.company,
+    //         companyType: data?.companyType,
+    //         location: data?.location?.cityName
+    //     }
+    // }, [data])
+    // console.log("Log ~ file: CompanyInfoCard.tsx:42 ~ companyInfo ~ companyInfo:", companyInfo)
     return (
         <section className="flex flex-col gap-4 w-full z-40 bg-white lg:rounded-lg h-fit text-primary-black py-6 px-5 drop-shadow-md">
             <div className="flex flex-col items-center lg:flex-row lg:items-start gap-4">
@@ -45,8 +48,8 @@ export default function CompanyInfoCard({data} : any) {
                     <ImageWrapper src={CompanyAvatar} width={120} height={120} alt="logo"/>
                 </div>
                 <div className="flex flex-col ">
-                    <h2 className="text-lg font-bold ">{companyInfo?.name}</h2>
-                    <Link  href={`/recruiter?id=${data?.company?.id}`} className="flex gap-1 items-center text-hyperlink text-base font-medium">
+                    <h2 className="text-lg font-bold ">{data?.companyName}</h2>
+                    <Link  href={`/recruiter?id=${data?.companyId}`} className="flex gap-1 items-center text-hyperlink text-base font-medium">
                         Xem công ty
                         <Image src={Redirect} width={16} height={16} alt="redirect"/>
                     </Link>
