@@ -91,3 +91,20 @@
     color: #ed1b2f!important;
     border-color: #ed1b2f!important;
 }
+
+.button--primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: #ed1b2f;
+    transition: all 100ms ease-in-out;
+    font-size: 16px;
+    font-weight: semibold;
+    color: white;
+
+    &:hover {
+        background-color: #c82222;
+    }
+}

@@ -24,7 +24,9 @@ const config: Config = {
         "dark-grey": "#A6A6A6",
         "silver-grey": "#DEDEDE",
         "light-grey": "#F7F7F7",
-        "available-green": "#0ab305"
+        "available-green": "#0ab305",
+        'blur-form' : "rgba(18, 18, 18, 0.5)",
+
       }
     },
   },

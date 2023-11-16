@@ -12,7 +12,9 @@ import Empty from "@/images/my-job/empty.svg"
 export default function MyJobList () {
     const [tab, setTab] = useState<string>("");
     const [jobsData, setJobsData] = useState<any>();
-    const jobDataList = jobsData?.jobs?.content || jobsData?.jobs;
+    console.log("Log ~ file: MyJobList.tsx:15 ~ MyJobList ~ jobsData:", jobsData)
+    const jobDataList = jobsData?.jobs?.content || jobsData?.content || jobsData;
+    console.log("Log ~ file: MyJobList.tsx:16 ~ MyJobList ~ jobDataList:", jobDataList)
     const pathName = usePathname()
     const dispatch = useAppDispatch()
 
