@@ -1,13 +1,13 @@
 import { useState } from "react"
 import FormWrapper from "./FormWrapper"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
-import { closeEduForm, closeIntroForm, selectIsOpeningEduForm, selectIsOpeningIntroForm } from "@/redux/reducers/candidateSlice"
+import { closeEduForm, closeIntroForm, selectEducation, selectIsOpeningEduForm, selectIsOpeningIntroForm } from "@/redux/reducers/candidateSlice"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup";
+import { addEducation, getProfile } from "@/redux/actions"
+import { notifySuccess } from "@/utils/notification"
 
-import requiredIcon from '@/images/sign-in/requireIcon.svg'
-import Image from "next/image"
 const schema = yup.object().shape({
     school: yup
     .string()
@@ -17,20 +17,20 @@ const schema = yup.object().shape({
     .required('Vui lòng điền tên ngành học'),
     startDate: yup
     .string()
-    .matches(new RegExp('^(0[1-9]|1[0-2])/\d{4}$'), "Vui lòng nhập đúng định dạng MM/YYYY")
-    .required("Vui lòng chọn một mốc thời gian.")
-    .length(7, "Vui lòng nhập đủ tháng, năm"),
+    .matches(new RegExp(/^(0[1-9]|1[0-2])\/\d{4}$/), "Vui lòng nhập đúng định dạng")
+    .required("Vui lòng chọn một mốc thời gian."),
     endDate: yup
     .string()
-    .matches(new RegExp('^(0[1-9]|1[0-2])/\d{4}$'), "Vui lòng nhập đúng định dạng MM/YYYY")
-    .required("Vui lòng chọn một mốc thời gian.")
-    .length(7, "Vui lòng nhập đủ tháng, năm"),
+    .matches(new RegExp(/^(0[1-9]|1[0-2])\/\d{4}$/), "Vui lòng nhập đúng định dạng")
+    .required("Vui lòng chọn một mốc thời gian."),
 });
 
 
 
 export default function FormEducation() {
     const isOpeningEduForm = useAppSelector(selectIsOpeningEduForm)
+    const education = useAppSelector(selectEducation)
+
     const {
         register,
         handleSubmit,
@@ -38,16 +38,20 @@ export default function FormEducation() {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
     
-    console.log("Log ~ file: FormEducation.tsx:37 ~ FormEducation ~ errors:", errors)
     const dispatch = useAppDispatch();
     const onClose = () => {
         dispatch(closeEduForm())
         reset();
     }
 
-    const onSave = (data: any) => {
-        console.log("Log ~ file: FormEducation.tsx:45 ~ onSave ~ data:", data)
-        
+    const onSave = async (data: any) => {
+       if(data) {
+            const res = await dispatch(addEducation(data)) 
+            if(res.meta.requestStatus === "fulfilled") {
+                notifySuccess(res.payload?.mesage)
+                dispatch(getProfile({}))
+            }
+        }
     }
 
     return (
@@ -60,7 +64,7 @@ export default function FormEducation() {
                                 Tên trường
                                 <span className="ml-1 text-primary-red">*</span>
                             </label>
-                            <input {...register("school")} id="school" placeholder="Đại học Sư Phạm Kỹ Thuật TPHCM"  className="w-full p-4 rounded-lg border border-silver-grey" name="school"/>
+                            <input {...register("school")} defaultValue={education?.school} id="school" placeholder="Đại học Sư Phạm Kỹ Thuật TPHCM"  className="w-full p-4 rounded-lg border border-silver-grey" name="school"/>
                             {errors?.school && 
                             <span className="absolute text-primary-red text-sm left-0 top-[105%]">
                                 {String(errors?.school?.message)}
@@ -73,7 +77,7 @@ export default function FormEducation() {
                                 Ngành học
                                 <span className="ml-1 text-primary-red">*</span>
                             </label>
-                            <input {...register("major")} id="major" placeholder="Công nghệ thông tin"  className="w-full p-4 rounded-lg border border-silver-grey" name="major"/>
+                            <input {...register("major")} defaultValue={education?.major} id="major" placeholder="Công nghệ thông tin"  className="w-full p-4 rounded-lg border border-silver-grey" name="major"/>
                             {errors?.major && 
                             <span className="absolute text-primary-red text-sm left-0 top-[105%]">
                                 {String(errors?.major?.message)}
@@ -88,7 +92,7 @@ export default function FormEducation() {
                                     Ngày bắt đầu
                                     <span className="ml-1 text-primary-red">*</span>
                                 </label>
-                                <input {...register("startDate")} id="startDate" placeholder="MM/YYYY"  className="w-full p-4 rounded-lg border border-silver-grey" name="startDate"/>
+                                <input {...register("startDate")} defaultValue={education?.startDate} id="startDate" placeholder="MM/YYYY"  className="w-full p-4 rounded-lg border border-silver-grey" name="startDate"/>
                                 {errors?.startDate && 
                                 <span className="absolute text-primary-red text-sm left-0 top-[105%] ">
                                     {String(errors?.startDate?.message)}
@@ -100,7 +104,7 @@ export default function FormEducation() {
                                     Ngày kết thúc
                                     <span className="ml-1 text-primary-red">*</span>
                                 </label>
-                                <input {...register("endDate")} id="endDate" placeholder="MM/YYYY"  className="w-full p-4 rounded-lg border border-silver-grey" name="endDate"/>
+                                <input {...register("endDate")} defaultValue={education?.endDate} id="endDate" placeholder="MM/YYYY"  className="w-full p-4 rounded-lg border border-silver-grey" name="endDate"/>
                                 {errors?.endDate &&
                                 <span className="absolute text-primary-red text-sm left-0 top-[105%]  ">
                                     {String(errors?.endDate?.message)}

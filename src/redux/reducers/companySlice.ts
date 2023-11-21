@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { authSignIn } from "../actions/auth.actions";
+import { authSignIn } from "../actions/auth.action";
 import { RootState } from "./rootReducer";
 import { getCompanyInfo } from "../actions/company.action";
 

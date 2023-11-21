@@ -20,7 +20,8 @@ export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
     try {
-      const response = await userService.resetPassword(params);
+      const response : any = await userService.resetPassword(params);
+      notifySuccess(response?.message);   
       return response;
     }
     catch(err : any) {
@@ -93,6 +94,48 @@ export const getAppliedJobs = createAsyncThunk(
   async (params: any, { dispatch, getState, rejectWithValue }) => {
     try {
       const response : any = await userService.getAppliedJobs(params);
+      return response;
+    }
+    catch(err : any) {
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+
+export const writeCoverLetter = createAsyncThunk(
+  "user/writeCoverLetter",
+  async (params: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await userService.writeCoverLetter(params);
+      notifySuccess(response?.message)
+      return response;
+    }
+    catch(err : any) {
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+
+export const getCandidateCV = createAsyncThunk(
+  "user/getCandidateCV",
+  async (params: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await userService.getCandidateCV();
+      return response;
+    }
+    catch(err : any) {
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+
+
+export const uploadDefaultCV = createAsyncThunk(
+  "user/uploadDefaultCV",
+  async (params: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await userService.uploadDefaultCV(params);
+      notifySuccess(response?.message)
       return response;
     }
     catch(err : any) {

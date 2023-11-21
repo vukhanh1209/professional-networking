@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { authSignIn } from "../actions/auth.actions";
+import { authSignIn } from "../actions/auth.action";
 import { RootState } from "./rootReducer";
 
 type EmployeeInfo = {
@@ -16,13 +16,7 @@ const employeeSlice = createSlice({
     name: 'employee',
     initialState: initialState,
     reducers: {
-      openModalNFT(state, action: PayloadAction<any>) {
-        // state.isOpenModal = true
-      },
-  
-      closeModalNFT(state, action) {
-        // state.isOpenModal = false
-      },
+
     },
     extraReducers: (builder) => {
       builder.addCase(authSignIn.fulfilled, (state, action) => {
@@ -32,7 +26,6 @@ const employeeSlice = createSlice({
       });
     },
   })
-export const {openModalNFT,closeModalNFT} = employeeSlice.actions;
 export default employeeSlice.reducer;
 
 export const selectEmployeeInfo = (state : RootState) => state.employee.employeeInfo ;

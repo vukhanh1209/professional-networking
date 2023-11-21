@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { authSignIn } from "@/redux/actions/auth.actions";
+import { authSignIn } from "@/redux/actions/auth.action";
 import { useAppDispatch } from "@/redux/hook";
 import { handleServiceResponse } from "@/utils/handleServiceResponse";
 import { useParams, useRouter } from "next/navigation";

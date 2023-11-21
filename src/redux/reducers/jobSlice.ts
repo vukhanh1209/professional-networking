@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { authSignIn } from "../actions/auth.actions";
+import { authSignIn } from "../actions/auth.action";
 import { RootState } from "./rootReducer";
 import { getCompanyInfo } from "../actions/company.action";
 import { searchByKeyword } from "../actions";
@@ -10,11 +10,23 @@ type OpeningJob = {
     companyLogo: string,
     companyName: string,
     companyType: string,
-    createdDate: string,
+    createdDate: Date,
     description: string,
     jobId: number,
     skills: [],
     title: string,
+    companyId: number,
+    expiredDate: Date,
+    requirements: string,
+    jobType: string,
+    location: string,
+    isSaved: boolean,
+    isApplied: boolean,
+    minSalary: number,
+    maxSalary: number,
+    message: string,
+    status: string,
+    appliedAt: Date
 }
 
 const initialState = {
@@ -35,14 +47,6 @@ const jobSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder.addCase(searchByKeyword.fulfilled, (state, action : any) => {
-        // if(state.jobs.length > 0) {
-        //     const moreJobs = [
-        //         ...state.jobs,
-        //         action?.payload?.content
-        //     ];
-        //     state.jobs = moreJobs;
-        // }
-        // else state.jobs = action?.payload?.content;
         state.jobs = action?.payload?.content;
         state.currentPage = action?.payload?.number;
         state.totalJob = action?.payload?.totalElements;

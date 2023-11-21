@@ -14,7 +14,7 @@ const HeaderSearchPage = ({keyword} : HeaderSearchPageProp) => {
     return (
         <div className="flex justify-between items-center w-full">
             <h1 className="text-3xl font-bold text-left">
-                {totalJob} việc làm <span className="text-primary-red">{keyword}</span> tại Hồ Chí Minh
+                {totalJob} việc làm <span className="text-primary-red">{keyword}</span>
             </h1>
             <div className="flex items-center gap-3">
                 <button className="flex items-center justify-center gap-2 border border-primary-red rounded-lg py-2 px-5 hover:bg-white-red transition-all duration-100 ">

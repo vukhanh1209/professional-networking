@@ -5,7 +5,6 @@ import JobCard from "../../common/JobCard/JobCard";
 import CompanyAvatar from '@/images/search/companyAvatar.png'
 import { selectSearchJobsData, setSelectedJob } from "@/redux/reducers/jobSlice";
 import { useCallback, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const jobData = {
     postedDate: 1,

@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { LocalStorage } from "@/utils/LocalStorage"
+import { notifyWarning } from "@/utils/notification";
 
 const defaultHeader = {
   "Access-Control-Allow-Origin": "*",
@@ -54,8 +55,12 @@ axiosClient.interceptors.response.use(
   (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
-
+    if (error.response?.status === 401) {
+      // LocalStorage.clearToken();
+      notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục")
+      // setTimeout(() => {
+      //   window.location.replace("/")
+      // }, 5000)
       // if (isRefreshing) {
       //   return new Promise(function (resolve, reject) {
       //     failedQueue.push({ resolve, reject });

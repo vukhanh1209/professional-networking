@@ -15,8 +15,12 @@ const ImageWrapper = (props : ImageWrapperProps) => {
     return (
         <div 
             className={`flex items-center shrink-0 `}
-        >
+        >   
+        {typeof(src) === 'string' ?
             <Image src={src} loader={() => src} width={width} height={height} className={`object-contain ${roundedClassName}`} alt={alt}/>
+        :
+            <Image src={src} width={width} height={height} className={`object-contain ${roundedClassName}`} alt={alt}/>
+        }
         </div>
     )
 }

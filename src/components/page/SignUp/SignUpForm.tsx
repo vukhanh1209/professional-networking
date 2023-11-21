@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAppDispatch } from "@/redux/hook";
-import { authRegister } from "@/redux/actions/auth.actions";
+import { authRegister } from "@/redux/actions/auth.action";
 import { useRouter } from "next/navigation";
 import { handleServiceResponse } from "@/utils/handleServiceResponse";
 

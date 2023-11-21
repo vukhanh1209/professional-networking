@@ -17,6 +17,7 @@ import { deleteSavedJob, saveJob } from "@/redux/actions";
 import SVGHeart from "@/components/common/SVGHeart/SVGHeart";
 import { useEffect, useState } from "react";
 import { selectJobDetailByIndex, selectSelectedJob } from "@/redux/reducers/jobSlice";
+import CheckCircle from "@/images/check-circle.svg"
 
 const jobData = {
     postedDate: 1,
@@ -67,7 +68,7 @@ const companyProfile = {
     ot_policy: "Thêm lương OT"
 }
 
-const JobDetailCard = ({data} : any) => {
+const JobDetailCard = () => {
 
     const jobDetail = useAppSelector(selectJobDetailByIndex)
 
@@ -80,7 +81,7 @@ const JobDetailCard = ({data} : any) => {
     }
 
     const onSaveJob = async () => {
-        if(data?.isSaved) {
+        if(jobDetail?.isSaved) {
             const res = await dispatch(deleteSavedJob(jobDetail?.jobId));
             if(res.meta.requestStatus === "fulfilled") setIsSaved(false)
         }
@@ -121,16 +122,23 @@ const JobDetailCard = ({data} : any) => {
 
                             
                         </div>
-                        <div className="flex items-center gap-3 my-4">
-                            <button onClick={handleClickApply} className="w-full rounded-lg py-2 px-5 bg-primary-red hover:bg-dark-red transition-all duration-100 ">
-                                <span className="text-base font-medium text-white">Ứng tuyển</span>
-                            </button>
+                        {jobDetail?.isApplied ?
+                             <div className="flex items-center gap-2 w-full bg-[#eaf9e9] py-2 px-3 text-base text-primary-black mt-4 mb-3 rounded-md">
+                                <Image src={CheckCircle} width={24} height={24} alt="check-circle"/>
+                                Đã ứng tuyển {jobDetail?.appliedAt}
+                            </div>
+                        :
+                            <div className="flex items-center gap-3 my-4">
+                                <button onClick={handleClickApply} className="w-full rounded-lg py-2 px-5 bg-primary-red hover:bg-dark-red transition-all duration-100 ">
+                                    <span className="text-base font-medium text-white">Ứng tuyển</span>
+                                </button>
 
-                            <button onClick={onSaveJob}>
-                                {/* <ImageWrapper src={HeartIcon} width={32} height={32} alt="heart" /> */}
-                                <SVGHeart fill={ isSaved ? "#ed1b2f" : "none"}/>
-                            </button>
-                        </div>
+                                <button onClick={onSaveJob}>
+                                    {/* <ImageWrapper src={HeartIcon} width={32} height={32} alt="heart" /> */}
+                                    <SVGHeart fill={ isSaved ? "#ed1b2f" : "none"}/>
+                                </button>
+                            </div>
+                        }
                     </div>
                 </div>
 

@@ -10,6 +10,7 @@ import { calculateElapsedDate } from "@/utils/lib";
 import CompanyAvatar from '@/images/search/companyAvatar.png'
 import { useRouter, useSearchParams } from "next/navigation";
 
+import CheckCircle from "@/images/check-circle.svg"
 
 
 interface JobCardProps {
@@ -44,11 +45,11 @@ const JobCard = ({data, isSelected = false, isSuperHot = false ,paddingClassName
         const postedDate = jobItemData?.createdAt || jobItemData?.createdDate;
         const appliedDate = data?.appliedDate;
         if(postedDate) {
-            return`Đăng ${calculateElapsedDate(postedDate)} ngày trước`
+            return `Đăng ${calculateElapsedDate(postedDate)} ngày trước`
 
         }
         if(appliedDate) {
-            return `Ngày ứng tuyển: ${appliedDate}`
+            return "Ngày ứng tuyển: " + appliedDate
         }
     }
 
@@ -57,7 +58,7 @@ const JobCard = ({data, isSelected = false, isSuperHot = false ,paddingClassName
     }
 
     return (
-        <section onDoubleClick={onClickJobCard} className={`${isSelected && "job-card--selected"} ${isSuperHot && "job-card--super-hot"} bg-white relative mb-4 rounded-lg w-full h-fit cursor-pointer`}>
+        <section onDoubleClick={onClickJobCard} className={`${isSelected && "job-card--selected"} ${isSuperHot && "job-card--super-hot"} bg-white relative mb-4 rounded-lg w-full h-fit cursor-pointer overflow-hidden`}>
             <div className={`flex flex-col ${padding} w-full divide-y divide-dashed divide-silver-grey`}>
                 <div className="flex flex-col pb-3 gap-3 ">
                     <div className="flex items-end justify-between w-full">
@@ -71,8 +72,8 @@ const JobCard = ({data, isSelected = false, isSuperHot = false ,paddingClassName
                             </div>
                         }
                     </div>
-                    <Link href={`/job-detail?id=${jobItemData?.jobId}`}>
-                        <h1 className="text-lg font-bold text-primary-black">{jobItemData?.title}</h1>
+                    <Link href={`/job-detail?id=${jobItemData?.jobId}`} className="w-fit">
+                        <h1 className="text-lg font-bold text-primary-black w-fit">{jobItemData?.title}</h1>
                     </Link>
                     <div className="flex items-center">
                         <div className="flex items-center shrink-0 w-12 h-12 bg-white rounded-lg border border-silver-grey"> 
@@ -134,8 +135,13 @@ const JobCard = ({data, isSelected = false, isSuperHot = false ,paddingClassName
                         ))}
                     </ul>
                 }
-                
             </div>
+            {jobItemData?.isApplied &&
+                <div className="flex gap-2 items-center w-full bg-[#eaf9e9] py-2 px-3 text-sm text-primary-black">
+                    <Image src={CheckCircle} width={24} height={24} alt="check-circle"/>
+                    Đã ứng tuyển {jobItemData?.appliedAt}
+                </div>
+            }
         </section>
     )
 }

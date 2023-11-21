@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 import { File } from "buffer";
 import { useAppDispatch } from "@/redux/hook";
-import { applyJob } from "@/redux/actions";
+import { applyJob, getCandidateCV } from "@/redux/actions";
 import { uploadPDF } from "@/redux/actions/upload.action";
 
 const YourCV = ({register, error} : any) => {
@@ -31,6 +31,10 @@ const YourCV = ({register, error} : any) => {
             uploadCV()
           }
     }, [pdfFile])
+
+    useEffect(() => {
+        dispatch(getCandidateCV({}))
+    }, [])
   
 
     return (

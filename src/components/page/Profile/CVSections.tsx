@@ -4,18 +4,18 @@ import BlueEye from '@/images/blue-eye.svg'
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { File } from "buffer";
-import { useAppDispatch } from "@/redux/hook";
-import { applyJob } from "@/redux/actions";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { applyJob, getCandidateCV, uploadDefaultCV } from "@/redux/actions";
 import { uploadPDF } from "@/redux/actions/upload.action";
 import { useForm } from "react-hook-form";
 
 import Upload from "@/images/profile/upload.svg"
 import CV from '@/images/profile/cv.svg'
+import { selectCV } from "@/redux/reducers/candidateSlice";
 
-export default function CVSection() {
+export default function CVSection({linkCV} : any) {
     const [pdfFile, setPdfFile]=useState<any>();
     const [cvURL, setCVURL]=useState<string>("");
-    const {register, handleSubmit, formState: {errors}} = useForm()
 
     const dispatch = useAppDispatch()
     
@@ -29,7 +29,12 @@ export default function CVSection() {
         async function uploadCV() {
             const uploadPDFResult : any = await dispatch(uploadPDF(pdfFile));
             if(uploadPDFResult.meta.requestStatus === "fulfilled") {
-                setCVURL(uploadPDFResult.payload?.data?.url)
+                const cvURLResponse = uploadPDFResult.payload?.data?.url;
+                setCVURL(cvURLResponse)
+                const requestBody = {
+                    file: cvURLResponse
+                }
+                dispatch(uploadDefaultCV(requestBody))
             }
 
         }
@@ -37,6 +42,8 @@ export default function CVSection() {
             uploadCV()
           }
     }, [pdfFile])
+
+
   
 
     return (
@@ -55,10 +62,10 @@ export default function CVSection() {
                     <div className="flex justify-between w-full">
                         <div className="flex flex-col gap-2">
                             <span className="font-medium">CV của bạn</span>
-                            <Link href={cvURL} target="_blank" className="text-rich-grey underline truncate max-w-[80%] sm:max-w-full">
-                                CV_SoftwareEngineer_KhanhNguyen.pdf
+                            <Link href={cvURL || linkCV || ""} target="_blank" className="text-rich-grey underline truncate max-w-[80%] sm:max-w-full">
+                                {pdfFile ? pdfFile.name : "CV mặc định của bạn"}
                             </Link>
-                            <span className="text-sm text-[#868686]">Cập nhật: 14/11/2023</span>
+                            {/* <span className="text-sm text-[#868686]">Cập nhật: 14/11/2023</span> */}
 
                         </div>
                     </div>
@@ -83,9 +90,6 @@ export default function CVSection() {
                     } */}
 
                 </div>
-            </div>
-            <div className="flex justify-end w-full">
-                <button className="button--primary mt-4 w-fit">Lưu thay đổi</button>
             </div>
         </section>
     )

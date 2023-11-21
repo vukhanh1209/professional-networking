@@ -15,6 +15,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
 import { deleteSavedJob, saveJob } from "@/redux/actions";
 import SVGHeart from "@/components/common/SVGHeart/SVGHeart";
+import CheckCircle from "@/images/check-circle.svg"
+
 import { calculateElapsedDate } from "@/utils/lib";
 
 const jobData = {
@@ -117,15 +119,22 @@ const JobDetailCard = ({data} : any) => {
 
                             
                         </div>
-                        <div className="flex items-center gap-3 my-4">
-                            <button onClick={handleClickApply} className="w-full rounded-lg py-2 px-5 bg-primary-red hover:bg-dark-red transition-all duration-100 ">
-                                <span className="text-base font-medium text-white">Ứng tuyển</span>
-                            </button>
+                        {data?.isApplied ?
+                             <div className="flex items-center gap-2 w-full bg-[#eaf9e9] py-2 px-3 text-base text-primary-black mt-4 mb-3 rounded-md">
+                                <Image src={CheckCircle} width={24} height={24} alt="check-circle"/>
+                                Đã ứng tuyển {data?.appliedAt}
+                            </div>
+                        :
+                            <div className="flex items-center gap-3 my-4">
+                                <button onClick={handleClickApply} className="w-full rounded-lg py-2 px-5 bg-primary-red hover:bg-dark-red transition-all duration-100 ">
+                                    <span className="text-base font-medium text-white">Ứng tuyển</span>
+                                </button>
 
-                            <button onClick={onSaveJob}>
-                                <SVGHeart fill={ isSaved ? "#ed1b2f" : "none"}/>
-                            </button>
-                        </div>
+                                <button onClick={onSaveJob}>
+                                    <SVGHeart fill={ isSaved ? "#ed1b2f" : "none"}/>
+                                </button>
+                            </div>
+                        }
                     </div>
                 </div>
 
