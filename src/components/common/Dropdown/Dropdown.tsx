@@ -1,10 +1,9 @@
-
-const Dropdown = ({itemList, currentItem, handleClickDropdownItem} : any) => {
+const Dropdown = ({itemList, currentItem, handleClickDropdownItem, isFocusing} : any) => {
     
     return (
         <>
             <div className="h-2 w-full absolute top-[100%] left-0 bg-transparent z-50 "></div>
-            <div className={`group-hover:visible invisible group-hover:opacity-100 opacity-0 transition-opacity w-full md:right-0 flex duration-500 absolute border border-dropdown-border mt-2 left-0 top-[100%] flex-col bg-white rounded-lg p-[0.625rem] z-50`}>
+            <div className={`${isFocusing ? "visible opacity-100" : "invisible opacity-0"} transition-opacity w-full md:right-0 flex duration-500 absolute border border-dropdown-border mt-2 left-0 top-[100%] flex-col bg-white rounded-lg p-[0.625rem] z-50 shadow-lg`}>
                 {Array.from(itemList.values()).map((item : any, index : number) => (
                         <div 
                             key={index}

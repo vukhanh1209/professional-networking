@@ -13,7 +13,7 @@ import Upload from "@/images/profile/upload.svg"
 import CV from '@/images/profile/cv.svg'
 import { selectCV } from "@/redux/reducers/candidateSlice";
 
-export default function CVSection({linkCV} : any) {
+export default function CVSection({linkCV, updatedAt} : any) {
     const [pdfFile, setPdfFile]=useState<any>();
     const [cvURL, setCVURL]=useState<string>("");
 
@@ -65,7 +65,7 @@ export default function CVSection({linkCV} : any) {
                             <Link href={cvURL || linkCV || ""} target="_blank" className="text-rich-grey underline truncate max-w-[80%] sm:max-w-full">
                                 {pdfFile ? pdfFile.name : "CV mặc định của bạn"}
                             </Link>
-                            {/* <span className="text-sm text-[#868686]">Cập nhật: 14/11/2023</span> */}
+                            {updatedAt && <span className="text-sm text-[#868686]">Cập nhật: {updatedAt}</span>}
 
                         </div>
                     </div>

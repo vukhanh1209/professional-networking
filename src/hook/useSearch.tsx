@@ -13,7 +13,12 @@ const useSearch = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      keyword: "",
+      location: ""
+    }
+  });
 
   const onBlurInput = useCallback(() => {
     setFocus(false);
@@ -34,9 +39,16 @@ const useSearch = () => {
     setValue("");
   }, []);
 
-  const onSubmit = useCallback(() => {
-    const valueLowerCase = value.toLowerCase();
-    router.push(`/search?key=${valueLowerCase}`);
+  const onSubmit = useCallback((data : any) => {
+    console.log("Log ~ file: useSearch.tsx:43 ~ onSubmit ~ data:", data)
+    // const valueLowerCase = value.toLowerCase();
+    const keyword = data?.keyword;
+    const keywordQuery = `key=${keyword}`
+    const location = data?.location;
+    const locationQuery = `location=${location}`
+
+    if(keyword || location) router.push(`/search?${keywordQuery}&${locationQuery}`);
+    else router.push("/search")
   }, [value]);
 
   return useMemo(() => {

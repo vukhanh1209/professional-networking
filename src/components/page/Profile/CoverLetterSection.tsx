@@ -1,13 +1,11 @@
 "use client"
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {useForm} from "react-hook-form"
 import Edit from "@/images/profile/edit.svg"
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { selectCV } from "@/redux/reducers/candidateSlice";
 import { writeCoverLetter } from "@/redux/actions";
 
-const coverLetterDefault = "I am Khanh Nguyen, pursuing a Bachelor's degree in Information Technology at Ho Chi Minh University of Technology and Education. I have a solid foundation in programming, data structures, algorithms, and software development. With a passion for technology and a commitment to growth, I aspire to become a Full-Stack Developer. I am eager to learn, stay updated with trends, and contribute to a company's success. I adapt quickly, thrive in collaboration, and possess effective problem-solving skills"
 
 export default function CoverLetterSection({defaultCoverLetter} :any) {
     const maxLength = 500;
@@ -26,11 +24,11 @@ export default function CoverLetterSection({defaultCoverLetter} :any) {
     }
     
     const onSaveChange = async (data: any) => {
-        const requestBody = {
-            coverLetter: data?.coverLetter
+        console.log("Log ~ file: CoverLetterSection.tsx:27 ~ onSaveChange ~ data:", data)
+        if(data) {
+            const res = await dispatch(writeCoverLetter(data))
+            if(res.meta.requestStatus === "fulfilled") setCoverLetter(data?.coverLetter)
         }
-        const res = await dispatch(writeCoverLetter(requestBody))
-        if(res.meta.requestStatus === "fulfilled") setCoverLetter(data?.coverLetter)
         setIsEditing(false)
     }
 
@@ -56,7 +54,7 @@ export default function CoverLetterSection({defaultCoverLetter} :any) {
                     <div className="w-full rounded-lg border border-dark-grey p-4">
                         <textarea 
                             {...register("coverLetter")}
-                            defaultValue={defaultCoverLetter}
+                            defaultValue={coverLetter || defaultCoverLetter}
                             rows={6}
                             name="coverLetter"
                             onChange={handleChangeCoverLetter}
@@ -68,12 +66,12 @@ export default function CoverLetterSection({defaultCoverLetter} :any) {
 
                     <div className="flex justify-end w-full mt-4 gap-[10px]">
                         <button type="button" onClick={onCancelEditing} className="text-base text-rich-grey w-fit rounded-lg hover:bg-light-grey py-3 px-6 ">Hủy</button>
-                        <button type="submit"  onClick={onSaveChange} className="button--primary w-fit min-w-[140px]">Lưu</button>
+                        <button type="submit" className="button--primary w-fit min-w-[140px]">Lưu</button>
                     </div>
                 </form>
                 :          
                 <p className="my-6 leading-7">
-                    {defaultCoverLetter ||
+                    {coverLetter || defaultCoverLetter ||
                     "Giới thiệu bản thân và lí do vì sao bạn sẽ là lựa chọn tuyển dụng tuyệt vời"
                     }
                 </p>  

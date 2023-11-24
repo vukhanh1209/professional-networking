@@ -46,11 +46,39 @@ export const getViewedJobs = createAsyncThunk(
   }
 );
 
+export const searchAllJobs = createAsyncThunk(
+  "job/searchAllJobs",
+  async (params: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response = await jobService.searchAllJobs();
+      
+      return response;
+    }
+    catch(err : any) {
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+
 export const searchByKeyword = createAsyncThunk(
   "job/searchByKeyword",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
     try {
       const response = await jobService.searchByKeyword(params);
+      
+      return response;
+    }
+    catch(err : any) {
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+
+export const searchBySkill = createAsyncThunk(
+  "job/searchBySkill",
+  async (params: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response = await jobService.searchBySkill(params);
       
       return response;
     }

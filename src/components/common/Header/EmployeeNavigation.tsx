@@ -24,12 +24,12 @@ const EmployeeNavigation = ({profile, setProfile} : any) => {
         {
             title: "Hồ sơ và CV",
             icon: User,
-            link: "profile",
+            link: "/profile",
         },
         {
             title: "Việc làm của tôi",
             icon: Briefcase,
-            link: "my-jobs",
+            link: "/my-jobs",
         },
         {
             title: "Đăng xuất",

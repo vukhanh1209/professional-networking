@@ -1,72 +1,73 @@
 "use client"
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/legacy/image";
 import CloseIcon from "@/images/close.svg";
 
 import SearchIcon from '@/images/search.svg'
-import useSearch from "@/hook/useSearch";
-import CityOption from "./CityOption";
-import { useSearchParams } from "next/navigation";
+import CityOption, { cityData } from "./CityOption";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useAppSelector } from "@/redux/hook";
+import { selectSearchFilter } from "@/redux/reducers/searchSlice";
 
+const schema = yup.object().shape({
+  keyword: yup.string()
+});
 
 const SearchForm = () => {
   const searchParam = useSearchParams()
-  const inputRef = useRef<HTMLInputElement>(null)
-  const {
-    value,
-    handleSubmit,
-    onSubmit,
-    focus,
-    register,
-    onBlurInput,
-    onFocusInput,
-    onInputChange,
-    onRemoveSearchText,
-  } = useSearch();
 
-  const handlePressEnter = (event: any) => {
-    if(event.code == "Enter") {
-      onBlurInput();
-      onRemoveSearchText();
-      if(inputRef) inputRef?.current?.blur();
-    }
-  }
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const searchFilter = useAppSelector(selectSearchFilter)
+  
+  const router = useRouter();
+  
+  const onSearchJob = (data : any) => {
+    const keyword = data?.keyword;
+    const keywordQuery = `key=${keyword}`
+    const location = searchFilter?.location;
+    const locationQuery = `location=${location}`
+
+    if(keyword || location) router.push(`/search?${keywordQuery}&${locationQuery}`);
+    else router.push("/search")
+  };
+
  
   return (
     <div className=" relative w-full h-fit ">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row gap-3">
+      <form onSubmit={handleSubmit(onSearchJob)} className="flex flex-col md:flex-row gap-3">
         <CityOption/>
         <div
           className={`flex md:gap-3 w-full h-14 rounded-lg `}
         >
           <div
-            className={` ${
-              focus ? " border-dark-red" : "border-transparent" 
-            } border-[3px] relative w-full h-full transition-all duration-300 flex items-center rounded-l-lg md:rounded-r-lg px-4 bg-white`}
+            className={`
+              focus:border-dark-red border-transparent
+            border-[3px] relative w-full h-full transition-all duration-300 flex items-center rounded-l-lg md:rounded-r-lg px-4 bg-white`}
           >
-            {/* <div className="flex items-center w-5 h-5 ml-3 my-[14px]">
-              <Image src={SearchIcon} alt="search icon" />
-            </div> */}
             <input
               className={`grow text-base outline-none placeholder:text-[#8C8C8C] bg-transparent text-primary-black`}
-              {...register("search")}
+              {...register("keyword")}
+              type="text"
               placeholder="Nhập từ khóa theo kỹ năng, chức vụ, công ty..."
-              ref={inputRef}
-              onFocus={onFocusInput}
-              value={searchParam.get("key") || value}
-              onChange={onInputChange}
-              onKeyUp={(e) => handlePressEnter(e)}
-              id="search"
-              onBlur={onBlurInput}
+              value={searchParam.get("key") || watch("keyword")}
               autoComplete="off"
             />
             <button
-                disabled={value == ""}
+                disabled={watch("keyword") == ""}
                 type="button"
-                className={`${value == "" && "invisible"} ml-4 flex items-center`}
+                className={`${watch("keyword") == "" && "invisible"} ml-4 flex items-center`}
                 onClick={(e) => {
                   e.preventDefault();
-                  onRemoveSearchText()
+                  setValue("keyword", "")
                 }}
               >
                 <Image src={CloseIcon} alt="close" className="w-5 h-auto" />

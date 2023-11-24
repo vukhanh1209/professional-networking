@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { authSignIn } from "../actions/auth.action";
 import { RootState } from "./rootReducer";
 import { getCompanyInfo } from "../actions/company.action";
-import { searchByKeyword } from "../actions";
+import { searchAllJobs, searchByKeyword } from "../actions";
 
 
 type OpeningJob = {
@@ -47,6 +47,12 @@ const jobSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder.addCase(searchByKeyword.fulfilled, (state, action : any) => {
+        state.jobs = action?.payload?.content;
+        state.currentPage = action?.payload?.number;
+        state.totalJob = action?.payload?.totalElements;
+        state.totalPage = action?.payload?.totalPages;
+      });
+      builder.addCase(searchAllJobs.fulfilled, (state, action : any) => {
         state.jobs = action?.payload?.content;
         state.currentPage = action?.payload?.number;
         state.totalJob = action?.payload?.totalElements;

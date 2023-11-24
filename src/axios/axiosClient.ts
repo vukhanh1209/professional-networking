@@ -9,19 +9,19 @@ const defaultHeader = {
 };
 // for multiple requests
 // let isRefreshing = false;
-// let failedQueue: any = [];
+let failedQueue: any = [];
 
-// const processQueue = (error: any, token = null) => {
-//   failedQueue.forEach((prom: any) => {
-//     if (error) {
-//       prom.reject(error);
-//     } else {
-//       prom.resolve(token);
-//     }
-//   });
+const processQueue = (error: any, token = null) => {
+  failedQueue.forEach((prom: any) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
 
-//   failedQueue = [];
-// };
+  failedQueue = [];
+};
 
 // @ts-ignore
 const baseURL: string = process.env.NEXT_PUBLIC_API_ENDPOINT.toString() || "";
@@ -54,13 +54,12 @@ axiosClient.interceptors.response.use(
   },
   (error) => {
     const originalRequest = error.config;
+    console.log("Log ~ file: axiosClient.ts:57 ~ originalRequest:", originalRequest)
 
     if (error.response?.status === 401) {
-      // LocalStorage.clearToken();
-      notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục")
-      // setTimeout(() => {
-      //   window.location.replace("/")
-      // }, 5000)
+      clearAuthToken()
+      notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại")
+     
       // if (isRefreshing) {
       //   return new Promise(function (resolve, reject) {
       //     failedQueue.push({ resolve, reject });

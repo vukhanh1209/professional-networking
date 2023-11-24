@@ -6,15 +6,17 @@ import { selectTotalJob } from "@/redux/reducers/jobSlice"
 import Image from "next/legacy/image"
 
 type HeaderSearchPageProp = {
-    keyword: string
+    keyword: string,
+    location: string
 }
-const HeaderSearchPage = ({keyword} : HeaderSearchPageProp) => {
+const HeaderSearchPage = () => {
     const totalJob = useAppSelector(selectTotalJob)
 
     return (
         <div className="flex justify-between items-center w-full">
             <h1 className="text-3xl font-bold text-left">
-                {totalJob} việc làm <span className="text-primary-red">{keyword}</span>
+                {/* {totalJob} việc làm <span className="text-primary-red">{keyword}</span> */}
+                {totalJob} việc làm được tìm thấy
             </h1>
             <div className="flex items-center gap-3">
                 <button className="flex items-center justify-center gap-2 border border-primary-red rounded-lg py-2 px-5 hover:bg-white-red transition-all duration-100 ">
