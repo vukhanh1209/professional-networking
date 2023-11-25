@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "@/images/header/logo.png";
+import Logo from "@/images/header/logo-2.svg";
 import Banner from "@/images/footer/banner.svg"
 import FooterColumn from "./FooterColumn";
 
@@ -7,7 +7,7 @@ const aboutUs = {
     title: "Về chúng tôi",
     itemList: [
         "Trang Chủ",
-        "Về ITviec.com",
+        "Về HeyDevs.com",
         "Dịch vụ gợi ý ứng viên",
         "Liên Hệ",
         "Việc Làm IT",
@@ -19,7 +19,7 @@ const campaign = {
     title: "Chương trình",
     itemList: [
         "Trang Chủ",
-        "Về ITviec.com",
+        "Về HeyDevs.com",
         "Dịch vụ gợi ý ứng viên",
         "Liên Hệ",
         "Việc Làm IT",
@@ -43,7 +43,7 @@ const contact = {
     itemList: [
         "Hồ Chí Minh: (+84) 977 460 519",
         "Hà Nội: (+84) 983 131 351",
-        "Email: love@itviec.com",
+        "Email: love@heydevs.com",
         "Gửi thông tin liên hệ",
     ]
 }
@@ -58,10 +58,10 @@ const Footer = () => {
             <div className="flex flex-col lg:flex-row lg:justify-between w-full max-w-[1320px] mx-auto">
                 <div className="flex flex-col flex-1 items-start mb-4 lg:mb-0 max-w-[330px] w-full mr-10">
                     <div className="flex flex-col">
-                        <div className="flex shrink-0">
-                            <Image src={Logo} width={0} height={0} alt="logo" className="w-[132.5px] h-[50px]"/>
+                        <div className="flex shrink-0 lg:py-4">
+                            <Image src={Logo} width={0} height={0} alt="logo" className="w-[224px] "/>
                         </div>
-                        <p className="text-base text-white whitespace-nowrap">Ít nhưng mà chất</p>
+                        {/* <p className="text-base text-white whitespace-nowrap">Ít nhưng mà chất</p> */}
                     </div>
                 </div>
 

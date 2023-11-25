@@ -43,7 +43,7 @@ const EmployeeNavigation = ({profile, setProfile} : any) => {
             <div className="flex items-center gap-3">
                 <Image src={Avatar} width={32} height={32} alt="avatar" className="rounded-full border border-white"/>
                 <div className="flex gap-2 items-center">
-                    <span className="first-letter:uppercase font-medium text-base text-white">{profile?.username}</span>
+                    <span className="first-letter:uppercase font-medium text-base text-white hidden lg:inline">{profile?.username}</span>
                     <div className="rotate-90 group-hover:-rotate-90 transition-all duration-300">
                         <ImageWrapper src={ArrowLeft} width={16} height={16} alt="arrow"/>
                     </div>

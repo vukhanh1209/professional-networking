@@ -10,10 +10,10 @@ export default function SignUp() {
         <div className="mx-auto max-w-[1340px]">
             <div className="flex flex-col w-full pt-[0.875rem] pb-[6.25rem]">
                 <div className="flex items-center w-full my-6">
-                    <h1 className="text-primary-black text-xl font-bold">Chào mừng bạn đến với</h1>
-                    <div className="flex shrink-0 px-1 lg:px-2">
+                    <h1 className="text-primary-black text-xl font-bold">Chào mừng bạn đến với HeyDevs</h1>
+                    {/* <div className="flex shrink-0 px-1 lg:px-2">
                         <Image src={Logo} width={0} height={0} alt="logo" className="w-20 h-[1.875rem]"/>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="flex flex-wrap justify-between ">
                     <section className="flex flex-col max-w-[536px] ">
@@ -25,7 +25,7 @@ export default function SignUp() {
                                 <a href="" target="_blank" className="text-[#0e2eed]"> Điều khoản dịch vụ </a>
                                 và 
                                 <a href="" target="_blank" className="text-[#0e2eed]"> Chính sách và quyền riêng tư </a>
-                                của ITviec liên quan đến thông tin riêng tư của bạn.
+                                của HeyDevs liên quan đến thông tin riêng tư của bạn.
                             </label>
                         </div>
                         <button className="flex items-center justify-center py-2 px-6 w-full rounded-lg border border-[#ed1b2f] bg-transparent hover:bg-[#fff5f5] transition-all duration-100">

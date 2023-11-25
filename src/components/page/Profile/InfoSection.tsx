@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { openInfoForm, selectProfile } from "@/redux/reducers/candidateSlice";
 
 
-const avatarUrl = "https://itviec.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMExqTmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--dff1aa1037d189ab459a0aeb2527bdea2802cd88/AAcHTtcqGTwNOdvlwpcsUm-bdAN6yNXpxsPbzbjlwtrn=s96-c.jpg"
+const avatarUrl = "https://heydevs.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMExqTmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--dff1aa1037d189ab459a0aeb2527bdea2802cd88/AAcHTtcqGTwNOdvlwpcsUm-bdAN6yNXpxsPbzbjlwtrn=s96-c.jpg"
 
 
 export default function InfoSection() {

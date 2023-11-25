@@ -40,6 +40,7 @@ const SearchForm = () => {
     else router.push("/search")
   };
 
+
  
   return (
     <div className=" relative w-full h-fit ">
@@ -58,13 +59,13 @@ const SearchForm = () => {
               {...register("keyword")}
               type="text"
               placeholder="Nhập từ khóa theo kỹ năng, chức vụ, công ty..."
-              value={searchParam.get("key") || watch("keyword")}
+              defaultValue={searchParam.get("key") || watch("keyword")}
               autoComplete="off"
             />
             <button
                 disabled={watch("keyword") == ""}
                 type="button"
-                className={`${watch("keyword") == "" && "invisible"} ml-4 flex items-center`}
+                className={`${!watch("keyword") && "invisible"} ml-4 flex items-center`}
                 onClick={(e) => {
                   e.preventDefault();
                   setValue("keyword", "")
@@ -75,7 +76,7 @@ const SearchForm = () => {
           </div>
           <button 
               type="submit"
-              className="hover:bg-[#c2222] md:min-w-[240px] flex items-center justify-center py-3 px-6 w-fit md:rounded-l-lg rounded-r-lg bg-[#ed1b2f] transition-all duration-100 ">
+              className="hover:bg-[#c22222] md:min-w-[240px] flex items-center justify-center py-3 px-6 w-fit md:rounded-l-lg rounded-r-lg bg-[#ed1b2f] transition-all duration-200 ">
               <div className="inline w-5 h-5 shrink-0 md:mr-2">
                 <Image src={SearchIcon} alt="search" className="w-5 h-5"/>
               </div>

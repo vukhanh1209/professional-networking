@@ -36,6 +36,7 @@ const SignUpForm = () => {
         reset,
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
+    const [isConfirmed, setIsConfirmed] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const router = useRouter()
 
@@ -86,18 +87,19 @@ const SignUpForm = () => {
                 
             </div>
             <div className="">
-                <input type="checkbox" name="term" id="itviec-term" className="inline-block w-5 h-5 mr-2"/>
-                <label htmlFor="itviec-term" className="text-[#414042] text-base text-medium mb-6 inline">
+                <input type="checkbox" onChange={() => setIsConfirmed(!isConfirmed)} checked={isConfirmed} name="term" id="heydevs-term" className="inline-block w-5 h-5 mr-2"/>
+                <label htmlFor="heydevs-term" className="text-[#414042] text-base text-medium mb-6 inline">
                     Tôi đã đồng ý với các 
                     <a href="" target="_blank" className="text-[#0e2eed]"> Điều khoản dịch vụ </a>
                     và 
                     <a href="" target="_blank" className="text-[#0e2eed]"> Chính sách và quyền riêng tư </a>
-                    của ITviec liên quan đến thông tin riêng tư của tôi.
+                    của HeyDevs liên quan đến thông tin riêng tư của tôi.
                 </label>
             </div>
             <button 
+                disabled={!isConfirmed}
                 type="submit"
-                className={`hover:bg-[#c82222] flex items-center justify-center py-3 px-6 w-full rounded-lg  bg-[#ed1b2f]  transition-all duration-100 text-base font-semibold text-white mb-4`}>
+                className={`${isConfirmed ? "hover:bg-[#c82222] bg-[#ed1b2f]" : "bg-dark-grey"}  flex items-center justify-center py-3 px-6 w-full rounded-lg    transition-all duration-100 text-base font-semibold text-white mb-4`}>
                 Đăng ký bằng Email
             </button>
         </form>

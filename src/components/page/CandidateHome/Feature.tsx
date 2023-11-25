@@ -23,7 +23,7 @@ const Feature = () => {
     return (
         <section className="flex flex-col items-center w-full bg-white px-5 py-20 text-primary-black">
             <h1 className="text-2xl md:text-3xl font-bold text-center">Công cụ tốt nhất cho hành trang ứng tuyển của bạn</h1>
-            <p className="text-base pt-4 text-center">Khẳng định bản thân qua hồ sơ &quot;chất&quot; với công cụ và kiến thức bổ ích từ ITviec.</p>
+            <p className="text-base pt-4 text-center">Khẳng định bản thân qua hồ sơ &quot;chất&quot; với công cụ và kiến thức bổ ích từ HeyDevs.</p>
             <div className="flex flex-col md:flex-row gap-14 text-primary-black mt-[60px]">
                 {features.map((feature : any, index : number) => (
                 <div key={index} className="flex flex-col items-center max-w-[440px] bg-white rounded-3xl px-8 py-6 drop-shadow-2xl">

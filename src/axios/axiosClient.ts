@@ -56,9 +56,9 @@ axiosClient.interceptors.response.use(
     const originalRequest = error.config;
     console.log("Log ~ file: axiosClient.ts:57 ~ originalRequest:", originalRequest)
 
-    if (error.response?.status === 401) {
-      clearAuthToken()
-      notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại")
+    // if (error.response?.status === 401) {
+      // clearAuthToken()
+      // notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại")
      
       // if (isRefreshing) {
       //   return new Promise(function (resolve, reject) {
@@ -122,7 +122,7 @@ axiosClient.interceptors.response.use(
       //       isRefreshing = false;
       //     });
       // });
-    }
+    // }
 
     return Promise.reject(handleError(error));
   }
