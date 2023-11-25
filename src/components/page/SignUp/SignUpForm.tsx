@@ -87,9 +87,9 @@ const SignUpForm = () => {
                 
             </div>
             <div className="">
-                <input type="checkbox" onChange={() => setIsConfirmed(!isConfirmed)} checked={isConfirmed} name="term" id="heydevs-term" className="inline-block w-5 h-5 mr-2"/>
+                <input type="checkbox" onChange={() => setIsConfirmed(!isConfirmed)} checked={isConfirmed} name="term" id="heydevs-term" className="absolute mt-[2px] inline-block w-5 h-5 mr-2"/>
                 <label htmlFor="heydevs-term" className="text-[#414042] text-base text-medium mb-6 inline">
-                    Tôi đã đồng ý với các 
+                    <span className="ml-8">Tôi đã đọc và đồng ý với các </span>
                     <a href="" target="_blank" className="text-[#0e2eed]"> Điều khoản dịch vụ </a>
                     và 
                     <a href="" target="_blank" className="text-[#0e2eed]"> Chính sách và quyền riêng tư </a>

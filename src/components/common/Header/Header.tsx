@@ -28,13 +28,13 @@ const Header = () => {
                 </Link>
             </div>
             <div className="flex gap-6">
-                <button className="bg-transparent text-white text-sm text-center lg:text-base font-medium hidden lg:inline">Nhà tuyển dụng</button>
+                <Link href="/for-recruiter" className="bg-transparent text-white text-sm text-center lg:text-base font-medium hidden lg:inline">Nhà tuyển dụng</Link>
                 {profile?.username ? 
                 (
                     <EmployeeNavigation profile={profile} setProfile={setProfile}/>
                 )
                 : (
-                    <div className="bg-transparent text-white text-sm text-center lg:text-base font-medium">
+                    <div className="bg-transparent text-white text-center text-base font-medium">
                         <Link href="/sign-in">Đăng nhập</Link>
                         <Link href="/sign-up" className="hidden md:inline">/Đăng ký</Link>
                     </div >
