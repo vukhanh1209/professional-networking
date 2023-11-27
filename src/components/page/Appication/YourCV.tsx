@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import BlueEye from '@/images/blue-eye.svg'
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { File } from "buffer";
 import { useAppDispatch } from "@/redux/hook";
-import { applyJob, getCandidateCV } from "@/redux/actions";
+import { getCandidateCV } from "@/redux/actions";
 import { uploadPDF } from "@/redux/actions/upload.action";
 
 const YourCV = ({register, error} : any) => {

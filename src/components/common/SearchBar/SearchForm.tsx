@@ -5,12 +5,13 @@ import CloseIcon from "@/images/close.svg";
 
 import SearchIcon from '@/images/search.svg'
 import CityOption, { cityData } from "./CityOption";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { selectSearchFilter } from "@/redux/reducers/searchSlice";
+import { searchAllJobs, searchByKeyword } from "@/redux/actions";
 
 const schema = yup.object().shape({
   keyword: yup.string()
@@ -29,15 +30,33 @@ const SearchForm = () => {
   const searchFilter = useAppSelector(selectSearchFilter)
   
   const router = useRouter();
+  const pathName = usePathname()
+  const dispatch = useAppDispatch()
   
   const onSearchJob = (data : any) => {
-    const keyword = data?.keyword;
+    let keyword = data?.keyword;
     const keywordQuery = `key=${keyword}`
-    const location = searchFilter?.location;
+    let location = searchFilter?.location;
     const locationQuery = `location=${location}`
 
     if(keyword || location) router.push(`/search?${keywordQuery}&${locationQuery}`);
     else router.push("/search")
+
+    if(location) {
+        const locationQuery = cityData.get(location) || ""
+        location = location === "ALL" ? "" : locationQuery;
+    }
+    
+    const searchParam = {
+        keyword,
+        location
+    }
+    if(!keyword && !location) {
+        dispatch(searchAllJobs({}))
+    }
+    else {
+        dispatch(searchByKeyword(searchParam))
+    }
   };
 
 

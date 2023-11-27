@@ -23,7 +23,6 @@ const jobData = {
 const JobList = () => {
     const [selectedJobIndex, setSelectedJobIndex] = useState<number>(0)
     const seachJobsData = useAppSelector(selectSearchJobsData)
-    console.log("Log ~ file: JobList.tsx:27 ~ JobList ~ seachJobsData:", seachJobsData)
     const dispatch = useAppDispatch()
     const onClickJobCard = useCallback((index : number) => {
         setSelectedJobIndex(index)

@@ -36,11 +36,11 @@ const ApplicationForm = ({id} : {id : string}) => {
 
 
     const onSubmit = async (data : any) => {
-        const reqBody = {
-            ...data,
+        const params = {
+            reqBody: data,
             jobId: Number(id)
         }
-        dispatch(applyJob(reqBody))
+        dispatch(applyJob(params))
     };
 
     return (

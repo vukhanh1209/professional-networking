@@ -3,11 +3,6 @@ import JobList from "@/components/page/Search/JobList";
 import HeaderSearchPage from "@/components/page/Search/HeaderSearchPage";
 import SearchForm from "@/components/common/SearchBar/SearchForm";
 import JobDetailCard from "@/components/page/Search/JobDetailCard";
-import { useSearchParams } from "next/navigation";
-import { useAppDispatch } from "@/redux/hook";
-import { useEffect, useState } from "react";
-import { searchAllJobs, searchByKeyword } from "@/redux/actions";
-import { cityData } from "@/components/common/SearchBar/CityOption";
 
 type searchQueryType = {
     keyword?: string,
@@ -15,38 +10,6 @@ type searchQueryType = {
 }
 
 export default function SearchPage() {
-    // const [searchQueries, setSearchQueries] = useState<searchQueryType>({})
-    const searchParams = useSearchParams()
-    const dispatch = useAppDispatch()
-
-
-    useEffect(() => {
-        const keyword = searchParams.get("key");
-        let location = searchParams.get("location") || ""
-        if(location) {
-            const locationQuery = cityData.get(location) || ""
-            location = location === "ALL" ? "" : locationQuery;
-        }
-        const searchParam = {
-            keyword,
-            location
-        }
-        if(!keyword && !location) {
-            dispatch(searchAllJobs({}))
-        }
-        else {
-            dispatch(searchByKeyword(searchParam))
-        }
-    },[])
-
-    // useEffect(() => {
-    //     const params = {
-    //         keyword: searchQueries.keyword
-    //     }
-
-    //     if(keyword) dispatch(searchByKeyword(params))
-        
-    // }, [searchQueries])
 
     return (
         <>

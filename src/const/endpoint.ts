@@ -22,7 +22,7 @@ export const SAVE_JOB = `${PREFIX}${USERS_SERVICE}/saveJob`
 export const SAVE_JOBS = `${PREFIX}${USERS_SERVICE}/saveJobs`
 export const SAVED_JOBS = `${PREFIX}${USERS_SERVICE}/savedJobs`
 export const APPLIED_JOBS= `${PREFIX}${USERS_SERVICE}/appliedJobs`
-export const APPLY_JOB = `${PREFIX}${USERS_SERVICE}/applyJob`
+export const APPLY_JOB = `/applyJob`
 export const WRITE_COVERLETTER = `${PREFIX}${USERS_SERVICE}/writeCoverLetter`
 export const UPLOAD_CV = `${PREFIX}${USERS_SERVICE}/uploadUserCv`
 export const GET_CV = `${PREFIX}${USERS_SERVICE}/userCv`
@@ -62,3 +62,9 @@ export const DELETE_EXPERIENCE = `${PREFIX}${PROFILE}/experience`
 export const DOWNLOAD_CV = `${PREFIX}${PROFILE}/downloadCv`
 export const WRITE_ABOUT_ME = `${PREFIX}${PROFILE}/write-about-me`
 
+/**
+ * * Recruiter
+ */
+const RECRUITER = "/recruiter"
+export const LOG_IN = `${PREFIX}${RECRUITER}/login`
+export const REGISTER_RECRUITER = `${PREFIX}${RECRUITER}/register`

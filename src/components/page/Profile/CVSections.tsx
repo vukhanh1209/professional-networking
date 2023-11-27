@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 import { File } from "buffer";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { applyJob, getCandidateCV, uploadDefaultCV } from "@/redux/actions";
+import { uploadDefaultCV } from "@/redux/actions";
 import { uploadPDF } from "@/redux/actions/upload.action";
 import { useForm } from "react-hook-form";
 

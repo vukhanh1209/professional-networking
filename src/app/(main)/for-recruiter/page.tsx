@@ -1,6 +1,3 @@
-import Feature from "@/components/page/CandidateHome/Feature";
-import SearchSection from "@/components/page/CandidateHome/SearchSection";
-import TopRecruiters from "@/components/page/CandidateHome/TopRecuiters";
 import Image from "next/image";
 import Banner from "@/images/for-recruiter/banner.png"
 import Link from "next/link";
@@ -48,12 +45,12 @@ export default function Home() {
             <p className="text-base text-silver-grey mt-6 mb-12">
               Với hiểu biết sâu sắc về lĩnh vực IT và các kỹ năng chuyên môn, chúng tôi có thể giúp bạn tiếp cận và tuyển dụng những ứng viên IT tốt nhất.
             </p>
-            <Link href="#ContactForm" className="hover:bg-[#c82222] flex items-center justify-center py-4 px-6 w-full rounded-lg  bg-[#ed1b2f] transition-all duration-100 text-base font-semibold text-white mb-4 md:max-w-[210px]"
+            <Link href="#Contact" className="hover:bg-[#c82222] flex items-center justify-center py-4 px-6 w-full rounded-lg  bg-[#ed1b2f] transition-all duration-100 text-base font-semibold text-white mb-4 md:max-w-[210px]"
             >
               Liên hệ ngay
             </Link>
             <div className="mt-8">
-              <span className="text-dark-grey">Đã có tài khoản khách hàng? <Link href="/customer/sign-in" className="text-white text-base underline">Đăng nhập</Link></span>
+              <span className="text-dark-grey">Đã có tài khoản khách hàng? <Link href="/for-recruiter/sign-in" className="text-white text-base underline">Đăng nhập</Link></span>
             </div>
           </div>
           <div className="max-w-[610px]">
@@ -131,7 +128,7 @@ export default function Home() {
         </div>
       </section >
 
-      <section className="flex justify-center contact-bg w-full bg-white text-primary-black  pt-12 pb-14 px-6 md:px-12">
+      <section className="flex justify-center contact-bg w-full bg-white text-primary-black  pt-12 pb-14 px-6 md:px-12" id="Contact">
         <div className="max-w-[1340px] w-full">
           <h1 className="font-bold text-2xl md:text-3xl mt-8 ">Tìm kiếm nhân tài IT phù hợp</h1>
           <p className="text-base text-rich-grey mt-6 mb-12">

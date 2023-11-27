@@ -29,7 +29,7 @@ export const userService = {
     return axiosClient.delete(`${SAVE_JOBS}/${id}`)
   },
   applyJob: (params : any) => {
-    return axiosClient.post(APPLY_JOB, params, {headers: defaultHeader});
+    return axiosClient.post(`${PREFIX}${USERS_SERVICE}/${params.jobId}${APPLY_JOB}`, params.reqBody, {headers: defaultHeader});
   },
   getAppliedJobs: (params : any) => {
     return axiosClient.get(APPLIED_JOBS, {params});
