@@ -23,6 +23,7 @@ const jobData = {
 const JobList = () => {
     const [selectedJobIndex, setSelectedJobIndex] = useState<number>(0)
     const seachJobsData = useAppSelector(selectSearchJobsData)
+    console.log("Log ~ file: JobList.tsx:26 ~ JobList ~ seachJobsData:", seachJobsData)
     const dispatch = useAppDispatch()
     const onClickJobCard = useCallback((index : number) => {
         setSelectedJobIndex(index)
@@ -31,7 +32,7 @@ const JobList = () => {
 
     return (
         <div className="col-span-full lg:col-span-5 lg:pr-6">
-            {seachJobsData?.jobs.map((jobData : any, index : number) => (
+            {seachJobsData?.jobs?.map((jobData : any, index : number) => (
                 <button key={index} onClick={() => onClickJobCard(index)} className="w-full text-left">
                     <JobCard data={jobData} isSelected={selectedJobIndex === index}/>
                 </button>

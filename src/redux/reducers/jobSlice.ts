@@ -29,11 +29,20 @@ type OpeningJob = {
     appliedAt: Date
 }
 
+type JobDataType = {
+  jobs: any[],
+  totalPage: number,
+  totalJob: number,
+  currentPage: number,
+}
+
 const initialState = {
-    jobs: [] as any[],
-    totalPage: 0,
-    totalJob: 0,
-    currentPage: 0,
+    jobData: {
+      jobs: [],
+      totalPage: 0,
+      totalJob: 0,
+      currentPage: 0,
+    } as JobDataType,
     selectedJob: 0,
 }
 
@@ -47,17 +56,20 @@ const jobSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder.addCase(searchByKeyword.fulfilled, (state, action : any) => {
-        state.jobs = action?.payload?.content;
-        state.currentPage = action?.payload?.number;
-        state.totalJob = action?.payload?.totalElements;
-        state.totalPage = action?.payload?.totalPages;
+        state.jobData = {
+          jobs: action?.payload?.content, 
+          totalPage: action?.payload?.totalPages, 
+          totalJob: action?.payload?.totalElements, 
+          currentPage: action?.payload?.number
+        }
       });
       builder.addCase(searchAllJobs.fulfilled, (state, action : any) => {
-        state.jobs = action?.payload?.content;
-        state.currentPage = action?.payload?.number;
-        state.totalJob = action?.payload?.totalElements;
-        state.totalPage = action?.payload?.totalPages;
-        
+        state.jobData = {
+          jobs: action?.payload?.content, 
+          totalPage: action?.payload?.totalPages, 
+          totalJob: action?.payload?.totalElements, 
+          currentPage: action?.payload?.number
+        }
       });
     },
   })
@@ -65,15 +77,8 @@ export default jobSlice.reducer;
 
 export const {setSelectedJob} = jobSlice.actions
 
-export const selectSearchJobsData = (state : RootState) => {
-    return {
-        jobs: state.job.jobs,
-        totalPage: state.job.totalPage,
-        totalJob: state.job.totalJob,
-        currentPage: state.job.currentPage,
-    }
-}
-export const selectTotalJob = (state : RootState) => state.job.totalJob
+export const selectSearchJobsData = (state : RootState) => state.job.jobData
+export const selectTotalJob = (state : RootState) => state.job.jobData.totalJob
 
 export const selectSelectedJob = (state : RootState) => state.job.selectedJob
-export const selectJobDetailByIndex = (state : RootState) => state.job.jobs[state.job.selectedJob]
+export const selectJobDetailByIndex = (state : RootState) => state.job.jobData.jobs[state.job.selectedJob]

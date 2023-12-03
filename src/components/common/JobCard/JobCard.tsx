@@ -11,12 +11,12 @@ import CompanyAvatar from '@/images/search/companyAvatar.png'
 import { useRouter, useSearchParams } from "next/navigation";
 
 import CheckCircle from "@/images/check-circle.svg"
+import { useMemo } from "react";
 
 
 interface JobCardProps {
     data: any;
     isSelected : boolean;
-    isSuperHot?: boolean;
     paddingClassName?: string;
 }
 
@@ -35,10 +35,20 @@ const fakeData = {
     benefits: ["Salary review twice a year", "13th month salary", "Working model : Remote"],
 }
 
-const JobCard = ({data, isSelected = false, isSuperHot = false ,paddingClassName} : JobCardProps) => {
+const JobCard = ({data, isSelected = false ,paddingClassName} : JobCardProps) => {
     const router = useRouter()
-    const searchParams = useSearchParams()
     const jobItemData = data?.job || data;
+
+    const isSuperHot = useMemo(() => {
+        if(jobItemData?.level && jobItemData.level === "SUPER_HOT") return true;
+        return false;
+    },[jobItemData?.level])
+
+    const isHot = useMemo(() => {
+        if(jobItemData?.level && jobItemData.level === "HOT") return true;
+        return false;
+    },[jobItemData?.level])
+
     let padding = paddingClassName ? paddingClassName : "px-3 py-2";
 
     const createSubTitle = () => {
@@ -58,18 +68,23 @@ const JobCard = ({data, isSelected = false, isSuperHot = false ,paddingClassName
     }
 
     return (
-        <section onDoubleClick={onClickJobCard} className={`${isSelected && "job-card--selected"} ${isSuperHot && "job-card--super-hot"} bg-white relative mb-4 rounded-lg w-full h-fit cursor-pointer overflow-hidden`}>
+        <section onDoubleClick={onClickJobCard} className={`${isSelected && "job-card--selected"} ${isSuperHot && "job-card--super-hot"} bg-white relative mb-4 rounded-lg w-full h-fit cursor-pointer shadow-md`}>
             <div className={`flex flex-col ${padding} w-full divide-y divide-dashed divide-silver-grey`}>
                 <div className="flex flex-col pb-3 gap-3 ">
                     <div className="flex items-end justify-between w-full">
                         <span className="text-sm font-medium text-dark-grey">{createSubTitle()}</span>
-                        {isSuperHot && 
-                            <div className="flex items-center rounded-l-md bg-primary-red px-3 py-1 translate-x-3 job-label">
+                        {isSuperHot ?
+                            <div className="flex items-center rounded-l-md bg-primary-red px-3 py-1 translate-x-3 job-label--super-hot">
                                 <div className="flex items-center shrink-0 w-4 h-[15px]">
                                     <Image src={SuperHot} className="w-4 h-[15px]" alt="fire"/>
                                 </div>
                                 <span className="uppercase text-white text-sm font-semibold">Super hot</span>
                             </div>
+                            : isHot ?
+                            <div className="flex items-center rounded-l-md bg-[#ff9119] px-3 py-1 translate-x-3 job-label--hot">
+                                <span className="uppercase text-white text-sm font-semibold">Hot</span>
+                            </div>
+                            : null
                         }
                     </div>
                     <Link href={`/job-detail?id=${jobItemData?.jobId}`} className="w-fit">

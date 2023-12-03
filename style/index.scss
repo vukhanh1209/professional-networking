@@ -37,10 +37,6 @@
     border: 1px solid #ed1b2f;
 }
 
-.job-card--super-hot {
-    background-color: #fff4e9;
-}
-
 .job-card--selected::before {
     content: "";
     position: absolute;
@@ -64,7 +60,12 @@
     border-left: 8px solid #ed1b2f;
 }
 
-.job-label::after {
+.job-card--super-hot {
+    background-color: #fff4e9;
+}
+
+
+.job-label--super-hot::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -73,7 +74,17 @@
     height: 0;
     border-left: 8px solid transparent;
     border-top: 8px solid #ed1b2f;
+}
 
+.job-label--hot::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #ff9119;
 }
 
 .tab {
