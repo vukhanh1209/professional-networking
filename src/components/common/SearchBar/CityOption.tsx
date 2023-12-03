@@ -10,9 +10,9 @@ import { selectSearchFilter, setSearchFilter } from "@/redux/reducers/searchSlic
 
 export const cityData = new Map([
     ["ALL", "Tất cả thành phố"],
-    ["HCM", "Hồ Chí Minh"],
-    ["HN", "Hà Nội"],
-    ["DN", "Đà Nẵng"],
+    ["HCM", "Ho Chi Minh"],
+    ["HN", "Hanoi"],
+    ["DN", "Da Nang"],
     // ["OTHERS", "Các thành phố khác"],
 
   ]);

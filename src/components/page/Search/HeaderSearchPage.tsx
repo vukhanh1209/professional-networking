@@ -1,16 +1,22 @@
 "use client"
 import BellIcon from "@/images/search/bell.svg"
 import FilterIcon from "@/images/search/filter.svg"
-import { useAppSelector } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { selectTotalJob } from "@/redux/reducers/jobSlice"
+import { closeFilterModal, openFilterModal } from "@/redux/reducers/searchSlice"
 import Image from "next/legacy/image"
 
-type HeaderSearchPageProp = {
-    keyword: string,
-    location: string
-}
+
 const HeaderSearchPage = () => {
     const totalJob = useAppSelector(selectTotalJob)
+    const dispatch = useAppDispatch();
+    const onOpenFilterModal = () => {
+        dispatch(openFilterModal())
+    }
+
+    const onCloseFilterModal = () => {
+        dispatch(closeFilterModal())
+    }
 
     return (
         <div className="flex justify-between items-center w-full">
@@ -26,7 +32,7 @@ const HeaderSearchPage = () => {
                     <span className="text-base font-medium text-primary-red">Nhận thông báo</span>
                 </button>
 
-                <button className="flex items-center justify-center gap-2 border border-primary-red rounded-lg py-2 px-5 hover:bg-white-red transition-all duration-100 ">
+                <button onClick={onOpenFilterModal} className="flex items-center justify-center gap-2 border border-primary-red rounded-lg py-2 px-5 hover:bg-white-red transition-all duration-100 ">
                     <div className="flex items-center shrink-0">
                         <Image src={FilterIcon} alt="notification" className="w-5 h-5"/>
                     </div>

@@ -3,6 +3,7 @@ import JobList from "@/components/page/Search/JobList";
 import HeaderSearchPage from "@/components/page/Search/HeaderSearchPage";
 import SearchForm from "@/components/common/SearchBar/SearchForm";
 import JobDetailCard from "@/components/page/Search/JobDetailCard";
+import ModalFilter from "@/components/page/Search/ModalFilter";
 
 type searchQueryType = {
     keyword?: string,
@@ -28,6 +29,7 @@ export default function SearchPage() {
                     </div>
                 </div>
             </section>
+            <ModalFilter/>
         </>
     )
 }

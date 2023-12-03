@@ -8,8 +8,8 @@ export const jobService = {
   searchAllJobs : () => {
     return axiosClient.get(`${PREFIX}${JOB_SERVICE}`)
   },
-  searchByKeyword : (params : any) => {
-    return axiosClient.get(`${PREFIX}${JOB_SERVICE}${SEARCH_BY_KEY}`, {params})
+  searchByKeyword : (queryString : string) => {
+    return axiosClient.get(`${PREFIX}${JOB_SERVICE}${SEARCH_BY_KEY}?${queryString}`)
   },
   searchBySkill : (params : any) => {
     return axiosClient.get(`${PREFIX}${JOB_SERVICE}${SEARCH_BY_SKILL}`, {params})

@@ -64,7 +64,18 @@ export const searchByKeyword = createAsyncThunk(
   "job/searchByKeyword",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
     try {
-      const response = await jobService.searchByKeyword(params);
+      let queryString = "";
+      if(params?.keyword) queryString += `keyword=${params.keyword}`
+      if(params?.location) queryString += `&location=${params.location}`
+      for (let key in params) {
+        const value = params[key];
+        if(value && typeof(value) === "object" && value?.length > 0) {
+          let childQueryString = "&" + key + "=";
+          childQueryString += value.join(`&${key}=`)
+          queryString += childQueryString;
+        }
+      }
+      const response = await jobService.searchByKeyword(queryString);
       
       return response;
     }

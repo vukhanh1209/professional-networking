@@ -1,8 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { authSignIn } from "../actions/auth.action";
+import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./rootReducer";
-import { getCompanyInfo } from "../actions/company.action";
-import { searchAllJobs, searchByKeyword } from "../actions";
+
 
 export type searchFilterType = {
     location?: string,
@@ -14,7 +12,12 @@ export type searchFilterType = {
 }
 
 const initialState = {
-    searchFilter: {} as searchFilterType
+    searchFilter: {} as searchFilterType,
+    isOpenFilterModal: false,
+    candidateLevelFilter: [] as string[],
+    companyTypeFilter: [] as string[],
+    jobTypeFilter: [] as string[],
+    filterCount: 0
 }
 
 const searchSlice = createSlice({
@@ -26,6 +29,57 @@ const searchSlice = createSlice({
                 ...state.searchFilter,
                 ...action.payload
             }
+        },
+        openFilterModal: (state) => {
+            state.isOpenFilterModal = true
+        },
+        closeFilterModal: (state) => {
+            state.isOpenFilterModal = false
+        },
+        setCandidateLevelFilter: (state, action) => {
+            const currentIndex = state.candidateLevelFilter.findIndex((item : string) => item === action.payload)
+            if(currentIndex >= 0) {
+                let currentState = state.candidateLevelFilter
+                currentState.splice(currentIndex, 1)
+                state.candidateLevelFilter = currentState
+                state.filterCount -= 1;
+            }
+            else {
+                state.candidateLevelFilter.push(action.payload)
+                state.filterCount += 1;
+            }
+        },
+        setCompanyTypeFilter: (state, action) => {
+            const currentIndex = state.companyTypeFilter.findIndex((item : string) => item === action.payload)
+            if(currentIndex >= 0) {
+                let currentState = state.companyTypeFilter
+                currentState.splice(currentIndex, 1)
+                state.companyTypeFilter = currentState
+                state.filterCount -= 1;
+            }
+            else {
+                state.companyTypeFilter.push(action.payload)
+                state.filterCount += 1;
+            }
+        },
+        setJobTypeFilter: (state, action) => {
+            const currentIndex = state.jobTypeFilter.findIndex((item : string) => item === action.payload)
+            if(currentIndex >= 0) {
+                let currentState = state.jobTypeFilter
+                currentState.splice(currentIndex, 1)
+                state.jobTypeFilter = currentState
+                state.filterCount -= 1;
+            }
+            else {
+                state.jobTypeFilter.push(action.payload)
+                state.filterCount += 1;
+            }
+        },
+        deleteFilter: (state) => {
+            state.candidateLevelFilter = [];
+            state.companyTypeFilter = [];
+            state.jobTypeFilter = [];
+            state.filterCount = 0;
         }
     },
     extraReducers: (builder) => {
@@ -33,6 +87,12 @@ const searchSlice = createSlice({
   })
 export default searchSlice.reducer;
 
-export const {setSearchFilter} = searchSlice.actions
+export const {setSearchFilter, openFilterModal, closeFilterModal, setCandidateLevelFilter, setCompanyTypeFilter, setJobTypeFilter, deleteFilter} = searchSlice.actions
 
 export const selectSearchFilter = (state : RootState) => state.search.searchFilter
+export const selectIsOpenFilterModal = (state : RootState) => state.search.isOpenFilterModal
+export const selectJobTypeFilter = (state : RootState) => state.search.jobTypeFilter
+export const selectCompanyTypeFilter = (state : RootState) => state.search.companyTypeFilter
+export const selectCandidateLevelFilter = (state : RootState) => state.search.candidateLevelFilter
+export const selectFilterCount = (state : RootState) => state.search.filterCount;
+
