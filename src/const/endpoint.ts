@@ -70,3 +70,6 @@ export const GET_ALL_SKILL = `${PREFIX}${PROFILE}/get-all-skill`
 const RECRUITER = "/recruiter"
 export const LOG_IN = `${PREFIX}${RECRUITER}/login`
 export const REGISTER_RECRUITER = `${PREFIX}${RECRUITER}/register`
+export const LIST_ALL_JOB= `${PREFIX}${RECRUITER}/list-all-job`
+export const GET_JOB_BY_ID = `${PREFIX}${RECRUITER}/getJob`
+export const UPDATE_JOB = `${PREFIX}${RECRUITER}/update-job`

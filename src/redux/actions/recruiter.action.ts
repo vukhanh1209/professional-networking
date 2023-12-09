@@ -23,7 +23,7 @@ export const recruiterRegister = createAsyncThunk(
   );
 
 export const recruiterLogIn = createAsyncThunk(
-  "recruiter/recruiterSignIn",
+  "recruiter/recruiterLogIn",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
     try {
       const response : any = await recruiterService.logIn(params);
@@ -34,9 +34,53 @@ export const recruiterLogIn = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      console.log("Log ~ file: recruiter.action.ts:37 ~ err:", err)
       notifyErrors(err?.message)
       return rejectWithValue(err?.message);
+    }
+  }
+);
+
+export const recruiterGetPostedJobs = createAsyncThunk(
+  "recruiter/recruiterGetPostedJobs",
+  async (params: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.getPostedJobs();
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message)
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+
+export const recruiterGetPostedJob = createAsyncThunk(
+  "recruiter/recruiterGetPostedJob",
+  async (jobId: string, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.getPostedJobById(jobId);
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message)
+      return rejectWithValue(err?.message);
+    }
+  }
+);
+
+export const recruiterUpdateJob = createAsyncThunk(
+  "recruiter/recruiterUpdateJob",
+  async (request : any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.updateJob(request);
+      if(response) {
+        notifySuccess("Cập nhật bài tuyển dụng thành công");
+      }
+      return response;
+    }
+    catch (err : any) {
+      // notifyErrors(err?.message)
+      // return rejectWithValue(err?.message);
     }
   }
 );
