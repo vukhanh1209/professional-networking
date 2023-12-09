@@ -9,6 +9,8 @@ import FormInfo from "./FormInfo"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { memo, useEffect } from "react"
 import { getProfile } from "@/redux/actions"
+import FormSkills from "./FormSkills"
+import { selectSkills } from "@/redux/reducers/candidateSlice"
 
 const CandidateProfile = () => {
     const dispatch = useAppDispatch();
@@ -27,7 +29,7 @@ const CandidateProfile = () => {
             <FormInfo/>
             <FormIntroduction/>
             <FormEducation/>
-
+            <FormSkills/>
         </section>
     )
 }

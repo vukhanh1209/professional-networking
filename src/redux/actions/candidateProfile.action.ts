@@ -80,3 +80,35 @@ export const getProfile = createAsyncThunk(
       }
     }
   );
+
+  export const addSkill = createAsyncThunk(
+    "candidateProfile/addSkill",
+    async (params: any, { dispatch, getState, rejectWithValue }) => {
+      try {
+        const response : any = await candidateProfileService.addSkill(params);
+        if(response?.data) {
+          notifySuccess(response?.message)
+        }
+        return response;
+      }
+      catch(err : any) {
+        return rejectWithValue(err?.message);
+      }
+    }
+  );
+
+  export const getAllSkill = createAsyncThunk(
+    "candidateProfile/getAllSkill",
+    async (params: any, { dispatch, getState, rejectWithValue }) => {
+      try {
+        const response : any = await candidateProfileService.getAllSkill();
+        return response;
+      }
+      catch(err : any) {
+        return rejectWithValue(err?.message);
+      }
+    }
+  );
+  
+
+  

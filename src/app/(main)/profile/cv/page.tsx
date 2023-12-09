@@ -1,4 +1,4 @@
-import CandidateCV from "@/components/page/Profile/CandidateCV";
+import CandidateCV from "@/components/page/Profile/CV/CandidateCV";
 
 export default function CVPage () {
 

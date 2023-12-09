@@ -1,12 +1,10 @@
-import { useState } from "react"
 import FormWrapper from "./FormWrapper"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { closeIntroForm, selectIntroduction, selectIsOpeningIntroForm } from "@/redux/reducers/candidateSlice"
 import {useForm} from "react-hook-form"
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
-import { getProfile, updateProfile, writeAboutMe } from "@/redux/actions"
-import { LocalStorage } from "@/utils/LocalStorage"
+import { getProfile, writeAboutMe } from "@/redux/actions"
 import { notifySuccess } from "@/utils/notification"
 
 

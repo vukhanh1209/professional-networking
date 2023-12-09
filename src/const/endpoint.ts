@@ -61,6 +61,8 @@ export const DELETE_EDUCATION = `${PREFIX}${PROFILE}/educations`
 export const DELETE_EXPERIENCE = `${PREFIX}${PROFILE}/experience`
 export const DOWNLOAD_CV = `${PREFIX}${PROFILE}/downloadCv`
 export const WRITE_ABOUT_ME = `${PREFIX}${PROFILE}/write-about-me`
+export const ADD_SKILL =  `${PREFIX}${PROFILE}/add-skill`
+export const GET_ALL_SKILL = `${PREFIX}${PROFILE}/get-all-skill`
 
 /**
  * * Recruiter
