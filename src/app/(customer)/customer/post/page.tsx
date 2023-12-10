@@ -180,6 +180,15 @@ export default function FormPostedJob() {
           )}
         </div>
       </div>
+      <div className="flex justify-center px-6 pb-10">
+        <button
+          type="submit"
+          onClick={onSave}
+          className="text-white bg-primary-red text-lg py-3 px-8 rounded-lg hover:bg-dark-red max-w-[200px] w-full"
+        >
+          Đăng bài
+        </button>
+      </div>
     </form>
   );
 }

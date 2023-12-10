@@ -11,6 +11,10 @@ import ApplicationCard from "./ApplicationCard";
 
 export default function ApplicationList() {
   const [applications, setApplications] = useState<any[]>();
+  console.log(
+    "Log ~ file: ApplicationList.tsx:14 ~ ApplicationList ~ applications:",
+    applications
+  );
 
   const dispatch = useAppDispatch();
   useEffect(() => {

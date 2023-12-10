@@ -30,6 +30,7 @@ const jobData = {
 const JobList = () => {
   const [selectedJobIndex, setSelectedJobIndex] = useState<number>(0);
   const seachJobsData = useAppSelector(selectSearchJobsData);
+
   const dispatch = useAppDispatch();
   const onClickJobCard = useCallback(
     (index: number) => {
