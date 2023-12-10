@@ -6,6 +6,7 @@ import job from './jobSlice'
 import candidate from './candidateSlice'
 import search from "./searchSlice"
 import postedJob from "./postedJobSlice"
+import recruiter from "./recruiterSlice"
 
 const rootReducer = combineReducers({
   employee,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   job,
   candidate,
   search,
-  postedJob
+  postedJob,
+  recruiter
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

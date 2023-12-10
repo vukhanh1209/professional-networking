@@ -53,8 +53,8 @@ axiosClient.interceptors.response.use(
     return handleResponse(response);
   },
   (error) => {
-    const originalRequest = error.config;
-    console.log("Log ~ file: axiosClient.ts:57 ~ originalRequest:", originalRequest)
+    // const originalRequest = error.config;
+    // console.log("Log ~ file: axiosClient.ts:57 ~ originalRequest:", originalRequest)
 
     // if (error.response?.status === 401) {
       // clearAuthToken()
@@ -137,8 +137,8 @@ const handleResponse = (res: AxiosResponse<any>) => {
 };
 
 const handleError = (error: { response: { data: any } }) => {
-  const { data } = error.response;
-
+  // const { data } = error?.response;
+  const data =  error?.response?.data
   console.error(error);
 
   return data;

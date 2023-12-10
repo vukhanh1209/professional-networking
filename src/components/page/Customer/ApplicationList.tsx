@@ -1,5 +1,4 @@
 "use client";
-
 import Pagination from "@/components/common/Pagination/Pagination";
 import PostCard from "./PostCard";
 import { useAppDispatch } from "@/redux/hook";
@@ -9,7 +8,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
 
-export default function PostList() {
+export default function ApplicationList() {
   const [postedJobs, setPostedJobs] = useState<any[]>();
 
   const dispatch = useAppDispatch();
@@ -39,7 +38,7 @@ export default function PostList() {
           <div className="w-full h-full flex flex-col items-center gap-4 justify-center">
             <Image src={Empty} width={153} height={153} alt="empty" />
             <p className="text-rich-grey text-xl text-center">
-              Bạn chưa có bài tuyển dụng nào
+              Bạn chưa nhận được đơn ứng tuyển
             </p>
           </div>
         )

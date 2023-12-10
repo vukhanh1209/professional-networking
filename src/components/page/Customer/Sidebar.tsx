@@ -49,7 +49,7 @@ export default function Sidebar() {
   };
 
   return (
-    <nav className="fixed w-full max-w-[350px] h-screen mb-[344px]">
+    <nav className="hidden md:block fixed w-full max-w-[350px] h-screen mb-[344px]">
       <div className="flex flex-col h-full border-r border-silver-grey px-3 py-3">
         {SIDEBAR_TAB.map((tab: SideBar, index: number) => (
           <Link

@@ -1,17 +1,7 @@
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import {
-  closeEduForm,
-  closeIntroForm,
-  selectEducation,
-  selectIsOpeningEduForm,
-  selectIsOpeningIntroForm,
-} from "@/redux/reducers/candidateSlice";
+import { useAppDispatch } from "@/redux/hook";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { addEducation, getProfile } from "@/redux/actions";
-import { notifySuccess } from "@/utils/notification";
 import FormWrapper from "../Profile/Profile/FormWrapper";
 import {
   recruiterGetPostedJob,
@@ -58,7 +48,7 @@ export default function FormPostedJob({
 
   return (
     <>
-      {isOpening && (
+      {isOpening ? (
         <FormWrapper
           title="Chỉnh sửa bài đăng"
           onClose={onClose}
@@ -212,7 +202,7 @@ export default function FormPostedJob({
             </div>
           </div>
         </FormWrapper>
-      )}
+      ) : null}
     </>
   );
 }

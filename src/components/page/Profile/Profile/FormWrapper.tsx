@@ -1,4 +1,6 @@
 "use client";
+import CloseIcon from "@/images/close.svg";
+import Image from "next/image";
 type FormWrapperProps = {
   children: React.ReactNode;
   title: string;
@@ -20,9 +22,12 @@ export default function FormWrapper({
         onSubmit={handleSubmit(onSave)}
         className="h-fit w-full md:max-w-[50%] bg-white rounded-lg"
       >
-        <h1 className="font-bold text-xl text-primary-black py-4 pr-4 pl-8 border-b-2 border-silver-grey">
-          {title}
-        </h1>
+        <div className="flex justify-between py-4 pr-4 pl-8 border-b-2 border-silver-grey">
+          <h2 className="font-bold text-xl text-primary-black ">{title}</h2>
+          <button type="button" onClick={onClose}>
+            <Image src={CloseIcon} width={32} height={32} alt="close" />
+          </button>
+        </div>
         {children}
         <div className="flex justify-end gap-2 py-3 px-5 border-t border-t-silver-grey">
           <button
