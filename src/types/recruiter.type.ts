@@ -8,6 +8,7 @@ enum ApplicationStatus {
 
 
 export type ApplicationResponse = {
+    id: number,
     linkCV: string,
     jobId: number
     jobTitle: string

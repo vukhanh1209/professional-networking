@@ -1,3 +1,4 @@
+"use client";
 import { ApplicationResponse } from "@/types/recruiter.type";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,7 @@ export default function ApplicationCard({
 }) {
   const router = useRouter();
   const onClickApplication = () => {
-    router.push(`/application-detail?id=`);
+    router.push(`/customer/application-detail?id=${data?.id}`);
   };
 
   return (

@@ -45,8 +45,9 @@ const PostCard = ({ data }: PostCardProps) => {
   }, [data?.createdDate]);
 
   const expiredDescription = useMemo(() => {
-    const expiredDate = data?.expiredDate;
-    return `Hết hạn: ${calculateElapsedDate(expiredDate)} ngày`;
+    const expiredDate = calculateElapsedDate(data?.expiredDate);
+    if (expiredDate <= 0) return `Hết hạn sau: ${-expiredDate} ngày`;
+    else return `Đã hết hạn: ${expiredDate} ngày`;
   }, [data?.expiredDate]);
 
   const onClickPostCard = () => {

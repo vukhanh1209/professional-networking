@@ -7,12 +7,13 @@ import { recruiterPostJob } from "@/redux/actions/recruiter.action";
 
 const schema = yup.object().shape({
   jobTitle: yup.string().required("Vui lòng nhập tiêu đề công việc"),
-  minSalary: yup.number(),
-  maxSalary: yup.number(),
+  minSalary: yup.number().required("Vui lòng nhập mức lương tối thiểu"),
+  maxSalary: yup.number().required("Vui lòng nhập mức lương tối đa"),
   location: yup.string().required("Vui lòng nhập nơi làm việc"),
   jobType: yup.string().required("Vui lòng nhập loại công việc"),
   description: yup.string().required("Vui lòng nhập mô tả công việc"),
   requirements: yup.string().required("Vui lòng nhập yêu cầu công việc"),
+  skills: yup.string().required("Vui lòng nhập kỹ năng yêu cầu cho công việc"),
 });
 
 export default function FormPostedJob() {
@@ -27,7 +28,15 @@ export default function FormPostedJob() {
 
   const onSave = async (data: any) => {
     if (data) {
-      const postJobResponse = await dispatch(recruiterPostJob(data));
+      const skills = data.skills
+        .split(",")
+        .map((skill: string) => skill.trim())
+        .filter((skill: string) => skill !== "");
+      const requestBody = {
+        ...data,
+        skills,
+      };
+      const postJobResponse = await dispatch(recruiterPostJob(requestBody));
       if (postJobResponse.meta.requestStatus === "fulfilled") reset();
     }
   };
@@ -67,6 +76,7 @@ export default function FormPostedJob() {
           <div className="relative flex flex-col gap-2 w-full">
             <label htmlFor="minSalary" className="font-semibold">
               Mức lương tối thiểu
+              <span className="ml-1 text-primary-red">*</span>
             </label>
             <input
               {...register("minSalary")}
@@ -85,6 +95,7 @@ export default function FormPostedJob() {
           <div className="relative flex flex-col gap-2  w-full">
             <label htmlFor="maxSalary" className="font-semibold">
               Mức lương tối đa
+              <span className="ml-1 text-primary-red">*</span>
             </label>
             <input
               {...register("maxSalary")}
@@ -100,6 +111,28 @@ export default function FormPostedJob() {
               </span>
             )}
           </div>
+        </div>
+
+        <div className="relative flex flex-col gap-2">
+          <label htmlFor="skills" className="font-semibold">
+            Kỹ năng yêu cầu
+            <span className="ml-1 text-primary-red">*</span>
+          </label>
+          <input
+            {...register("skills")}
+            placeholder="Java, Spring Boot"
+            id="skills"
+            className="w-full p-4 rounded-lg border border-silver-grey"
+            name="skills"
+          />
+          <span className="text-dark-grey text-sm">
+            Lưu ý: Các kỹ năng cách nhau bởi dấu phẩy
+          </span>
+          {errors?.skills && (
+            <span className="absolute text-primary-red text-sm left-0 top-[105%]">
+              {String(errors?.skills?.message)}
+            </span>
+          )}
         </div>
 
         <div className="relative flex flex-col gap-2">

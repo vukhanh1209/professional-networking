@@ -35,36 +35,20 @@ const jobData = {
   hot_level: 2,
 };
 
-const topReasons = [
-  "Salary review twice a year",
-  "13th month salary",
-  "Working model : Remote",
-];
+const topReasons =
+  "Salary review twice a year\n 13th month salary\nWorking model : Remote";
+
 const jobDescription = [
   "Join Shopify's new Hidrogen-powered project",
   "Use Laravel to develop Shopify applications",
   "Work in groups and coordinate work based on the team leader's work assignments",
 ];
 
-const requirements = [
-  "At least 2 years of React experience",
-  "Experience with Shopify (Hidrogen) is advantageous",
-  "Know Laravel and use it properly",
-  "Has enthusiasm, responsibility for work and good teamwork skills",
-  "Communication in English, knowing Japanese is advantageous",
-  "Priority given to English CVs",
-];
+const requirements =
+  "At least 2 years of React experience\nExperience with Shopify (Hidrogen) is advantageous\nKnow Laravel and use it properly\nHas enthusiasm, responsibility for work and good teamwork skills\nCommunication in English, knowing Japanese is advantageous\nPriority given to English CVs";
 
-const reasonsForWorking = [
-  "After a 2-month probationary, working model will be decided at the office, remote or hybrid",
-  "Salary review twice a year",
-  "Monthly party, and birthday gifts given to employees whose birthdays are that month",
-  "Female employee's gifts on March 8 and October 20",
-  "Allowances:",
-  "Lunch: 50,000 VND",
-  "Gasoline, bus, parking fees",
-  "Snacks, drinks",
-];
+const reasonsForWorking =
+  "After a 2-month probationary, working model will be decided at the office, remote or hybrid\n Salary review twice a year\nMonthly party, and birthday gifts given to employees whose birthdays are that month\nFemale employee's gifts on March 8 and October 20\nAllowances:\nLunch: 50,000 VND\nGasoline, bus, parking fees\nSnacks, drinks";
 
 const companyProfile = {
   type: "Product",
@@ -170,7 +154,7 @@ const PostedJobDetail = () => {
                   <span className="text-sm text-rich-grey font-medium mr-2">
                     Kỹ năng:
                   </span>
-                  {jobData?.skills.map((skill: string, index: number) => (
+                  {postData?.skills?.map((skill: string, index: number) => (
                     <div
                       key={index}
                       className="py-1 px-[10px] text-xs rounded-full bg-white text-rich-grey border border-silver-grey"
@@ -182,7 +166,7 @@ const PostedJobDetail = () => {
               </div>
 
               <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
-                <h2 className="text-xl font-bold mb-4">{`${topReasons.length} Lý do để gia nhập công ty`}</h2>
+                <h2 className="text-xl font-bold mb-4">{`Top 3 lý do để gia nhập công ty`}</h2>
                 {renderList(topReasons)}
               </div>
 
@@ -260,16 +244,16 @@ const PostedJobDetail = () => {
   );
 };
 
-const renderList = (listData: any) => {
-  const renderData = Array.isArray(listData) ? listData : [listData];
+const renderList = (listData: string) => {
+  const renderData = listData?.split("\n");
   return (
     <ul className="my-2">
       {renderData?.map((data: any, index: number) => (
         <li
           key={index}
-          className="flex gap-3 items-center text-base text-primary-black py-[6px]"
+          className="flex gap-3 items-start text-base text-primary-black py-[6px]"
         >
-          <div className="w-[6px] h-[6px] rounded-full bg-primary-red"></div>
+          <div className="shrink-0 w-[6px] h-[6px] aspect-square rounded-full bg-primary-red mt-[9px]"></div>
           {data}
         </li>
       ))}
