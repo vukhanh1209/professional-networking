@@ -50,7 +50,7 @@ const PostCard = ({ data }: PostCardProps) => {
   }, [data?.expiredDate]);
 
   const onClickPostCard = () => {
-    router.push(`posted-job?id=${data?.jobId}`);
+    router.push(`/customer/posted-job?id=${data?.jobId}`);
   };
 
   return (
@@ -62,7 +62,7 @@ const PostCard = ({ data }: PostCardProps) => {
         className={`flex flex-col p-6 py-4 w-full divide-y divide-dashed divide-silver-grey`}
       >
         <div className="flex flex-col pb-3 gap-3 ">
-          <div className="flex items-end justify-between w-full">
+          <div className="flex flex-col md:flex-row gap-2 justify-between w-full">
             <span className="text-sm font-medium text-dark-grey">
               {postedDescription}
             </span>

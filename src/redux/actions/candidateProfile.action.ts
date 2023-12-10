@@ -11,7 +11,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );
@@ -28,7 +28,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );
@@ -44,7 +44,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );
@@ -60,7 +60,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );
@@ -76,7 +76,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );
@@ -92,7 +92,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );
@@ -105,7 +105,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );

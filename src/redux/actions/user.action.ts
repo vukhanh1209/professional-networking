@@ -10,8 +10,8 @@ export const forgotPassword = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -25,8 +25,8 @@ export const resetPassword = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -40,8 +40,8 @@ export const saveJob = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -54,7 +54,7 @@ export const getSavedJobs = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -68,8 +68,8 @@ export const deleteSavedJob = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -83,8 +83,8 @@ export const applyJob = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -97,7 +97,7 @@ export const getAppliedJobs = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -111,7 +111,7 @@ export const writeCoverLetter = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -124,7 +124,7 @@ export const getCandidateCV = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -139,7 +139,7 @@ export const uploadDefaultCV = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );

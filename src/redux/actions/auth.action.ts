@@ -13,8 +13,8 @@ export const authRegister = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        notifyErrors(err?.message)
-        return rejectWithValue(err?.message);
+        notifyErrors(err?.message || err?.errorCode)
+        return rejectWithValue(err?.message || err?.errorCode);
       }
   
     }
@@ -39,8 +39,8 @@ export const authSignIn = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -54,8 +54,8 @@ export const authVerify = createAsyncThunk(
   
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -69,8 +69,8 @@ export const authRegenerateOTP = createAsyncThunk(
   
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );

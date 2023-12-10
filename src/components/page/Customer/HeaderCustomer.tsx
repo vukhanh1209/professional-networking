@@ -26,7 +26,7 @@ const HeaderCustomer = () => {
 
   return (
     <header className="fixed top-0 w-full flex items-center justify-between px-5 lg:px-[1.875rem] h-[5.5rem] primary-gradient border-b border-neutral-800 z-50">
-      <button onClick={onClickMenuIcon} className="p-2 rounded-full">
+      <button onClick={onClickMenuIcon} className="p-2 rounded-full md:hidden">
         <Image src={Hamburger} width={24} height={24} alt="menu" />
       </button>
       <div className="flex shrink-0">

@@ -1,43 +1,17 @@
 "use client";
 import Link from "next/link";
-import SearchIcon from "@/images/customer/search.svg";
-import ApplicationIcon from "@/images/customer/application.svg";
-import PostIcon from "@/images/customer/post.svg";
-import ProfileIcon from "@/images/customer/profile.svg";
 import LogoutIcon from "@/images/customer/logout.svg";
 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { LocalStorage } from "@/utils/LocalStorage";
+import { SIDEBAR_TAB } from "@/const/recruiter";
 
 type SideBar = {
   title: string;
   href: string;
   icon: any;
 };
-
-const SIDEBAR_TAB = [
-  {
-    title: "Bài tuyển dụng",
-    href: "/customer",
-    icon: PostIcon,
-  },
-  {
-    title: "Đơn ứng tuyển",
-    href: "/customer/application",
-    icon: ApplicationIcon,
-  },
-  // {
-  //   title: "Tìm kiếm ứng viên",
-  //   href: "/customer",
-  //   icon: SearchIcon,
-  // },
-  {
-    title: "Hồ sơ công ty",
-    href: "/customer/profile",
-    icon: ProfileIcon,
-  },
-];
 
 export default function Sidebar() {
   const pathName = usePathname();

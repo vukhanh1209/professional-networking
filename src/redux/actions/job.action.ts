@@ -11,8 +11,8 @@ export const jobGetDataById = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -26,8 +26,8 @@ export const markAsViewd = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -41,7 +41,7 @@ export const getViewedJobs = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -55,7 +55,7 @@ export const searchAllJobs = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -80,7 +80,7 @@ export const searchByKeyword = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -94,7 +94,7 @@ export const searchBySkill = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      return rejectWithValue(err?.message);
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );

@@ -1,4 +1,5 @@
 "use client";
+
 import Pagination from "@/components/common/Pagination/Pagination";
 import PostCard from "./PostCard";
 import { useAppDispatch } from "@/redux/hook";
@@ -8,7 +9,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
 
-export default function ApplicationList() {
+export default function PostList() {
   const [postedJobs, setPostedJobs] = useState<any[]>();
 
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export default function ApplicationList() {
       {postedJobs ? (
         postedJobs?.length > 0 ? (
           <>
-            <h5 className="text-3xl font-bold text-left text-primary-black mb-8">
+            <h5 className="text-2xl md:text-3xl font-bold text-left text-primary-black mb-8">
               Bạn đang có {postedJobs?.length} bài tuyển dụng
             </h5>
             {postedJobs.map((post: any, index: number) => (
@@ -38,7 +39,7 @@ export default function ApplicationList() {
           <div className="w-full h-full flex flex-col items-center gap-4 justify-center">
             <Image src={Empty} width={153} height={153} alt="empty" />
             <p className="text-rich-grey text-xl text-center">
-              Bạn chưa nhận được đơn ứng tuyển
+              Bạn chưa có bài tuyển dụng nào
             </p>
           </div>
         )

@@ -1,8 +1,11 @@
 import axiosClient from "../axiosClient";
 import {
+  DELETE_JOB,
+  GET_ALL_APPLICATION,
+  GET_APPLICATION,
   GET_JOB_BY_ID,
   LIST_ALL_JOB,
-  LOG_IN, REGISTER_RECRUITER, UPDATE_JOB, 
+  LOG_IN, POST_JOB, REGISTER_RECRUITER, UPDATE_APPLICATION, UPDATE_JOB, 
 } from "@/const/endpoint";
 
 
@@ -23,6 +26,21 @@ export const recruiterService = {
     const id = params?.id;
     const body =  params?.body
     return axiosClient.post(`${UPDATE_JOB}?id=${id}`, body)
+  },
+  postJob: (params : any) => {
+    return axiosClient.post(POST_JOB, params)
+  },
+  deleteJob: (jobId : string) => {
+    return axiosClient.delete(`${DELETE_JOB}?id=${jobId}`)
+  },
+  getAllApplication: () => {
+    return axiosClient.get(GET_ALL_APPLICATION)
+  },
+  getApplicationById: (applicationId: string) => {
+    return axiosClient.get(`${GET_APPLICATION}/${applicationId}`)
+  },
+  updateApplication: (request: any) => {
+    return axiosClient.post(`${UPDATE_APPLICATION}/${request.applicationId}`, request)
   }
 
 };

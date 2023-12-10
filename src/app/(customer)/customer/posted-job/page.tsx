@@ -1,4 +1,4 @@
-import PostedJobDetail from "@/components/page/Customer/PostedJobDetail";
+import PostedJobDetail from "@/components/page/Customer/Post/PostedJobDetail";
 
 export default function CustomerPostedJob() {
   return (

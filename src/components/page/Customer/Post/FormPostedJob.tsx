@@ -2,7 +2,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import FormWrapper from "../Profile/Profile/FormWrapper";
+import FormWrapper from "../../Profile/Profile/FormWrapper";
 import {
   recruiterGetPostedJob,
   recruiterUpdateJob,
@@ -82,7 +82,6 @@ export default function FormPostedJob({
               <div className="relative flex flex-col gap-2 w-full">
                 <label htmlFor="minSalary" className="font-semibold">
                   Mức lương tối thiểu
-                  <span className="ml-1 text-primary-red">*</span>
                 </label>
                 <input
                   {...register("minSalary")}
@@ -101,7 +100,6 @@ export default function FormPostedJob({
               <div className="relative flex flex-col gap-2  w-full">
                 <label htmlFor="maxSalary" className="font-semibold">
                   Mức lương tối đa
-                  <span className="ml-1 text-primary-red">*</span>
                 </label>
                 <input
                   {...register("maxSalary")}

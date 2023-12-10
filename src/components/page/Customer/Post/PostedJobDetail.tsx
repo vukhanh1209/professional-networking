@@ -7,7 +7,7 @@ import LocationPin from "@/images/location-pin.svg";
 import TimeIcon from "@/images/search/time.svg";
 import Edit from "@/images/profile/edit.svg";
 
-import ImageWrapper from "../../common/ImageWrapper";
+import ImageWrapper from "../../../common/ImageWrapper";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useEffect, useState } from "react";
@@ -110,12 +110,13 @@ const PostedJobDetail = () => {
               <Image src={Edit} width={32} height={32} alt="edit" />
             </button>
             <div className="flex flex-col w-full  border-b border-silver-grey pb-6">
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-3">
                 <div className="flex items-center justify-center px-2 bg-white w-fit aspect-square rounded-lg border border-silver-grey">
-                  <ImageWrapper
+                  <Image
                     src={jobData?.companyAvatar}
-                    width={100}
-                    alt=""
+                    width={80}
+                    className="w-20 md:w-[100px] aspect-auto"
+                    alt="avatar"
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">
@@ -208,7 +209,7 @@ const PostedJobDetail = () => {
                     {jobData.companyName}
                   </h2>
                 </div>
-                <div className="grid grid-cols-3 w-full gap-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-y-4">
                   <div className="flex flex-col col-span-1 pr-4">
                     <h5 className="text-sm text-dark-grey">Mô hình công ty</h5>
                     <span className="text-base text-primary-black">

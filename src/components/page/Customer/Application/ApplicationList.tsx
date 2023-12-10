@@ -1,37 +1,37 @@
 "use client";
-
 import Pagination from "@/components/common/Pagination/Pagination";
-import PostCard from "./PostCard";
+import PostCard from "../Post/PostCard";
 import { useAppDispatch } from "@/redux/hook";
 import { useEffect, useState } from "react";
-import { recruiterGetPostedJobs } from "@/redux/actions/recruiter.action";
+import { recruiterAllApplication } from "@/redux/actions/recruiter.action";
 import ClipLoader from "react-spinners/ClipLoader";
 import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
+import ApplicationCard from "./ApplicationCard";
 
-export default function PostList() {
-  const [postedJobs, setPostedJobs] = useState<any[]>();
+export default function ApplicationList() {
+  const [applications, setApplications] = useState<any[]>();
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const jobResponse = dispatch(recruiterGetPostedJobs({}));
+    const jobResponse = dispatch(recruiterAllApplication({}));
     jobResponse.then((response) => {
       if (response.meta.requestStatus === "fulfilled") {
-        setPostedJobs(response.payload);
-      } else setPostedJobs([]);
+        setApplications(response.payload);
+      } else setApplications([]);
     });
   }, []);
 
   return (
     <section className="w-full py-6">
-      {postedJobs ? (
-        postedJobs?.length > 0 ? (
+      {applications ? (
+        applications?.length > 0 ? (
           <>
             <h5 className="text-3xl font-bold text-left text-primary-black mb-8">
-              Bạn đang có {postedJobs?.length} bài tuyển dụng
+              Bạn đang có {applications?.length} bài tuyển dụng
             </h5>
-            {postedJobs.map((post: any, index: number) => (
-              <PostCard key={index} data={post} />
+            {applications.map((application: any, index: number) => (
+              <ApplicationCard key={index} data={application} />
             ))}
             <Pagination total={10} currentPage={1} onChange={() => {}} />
           </>
@@ -39,7 +39,7 @@ export default function PostList() {
           <div className="w-full h-full flex flex-col items-center gap-4 justify-center">
             <Image src={Empty} width={153} height={153} alt="empty" />
             <p className="text-rich-grey text-xl text-center">
-              Bạn chưa có bài tuyển dụng nào
+              Bạn chưa nhận được đơn ứng tuyển
             </p>
           </div>
         )

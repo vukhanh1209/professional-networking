@@ -11,7 +11,7 @@ export const uploadPDF = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        return rejectWithValue(err?.message);
+        return rejectWithValue(err?.message || err?.errorCode);
       }
     }
   );

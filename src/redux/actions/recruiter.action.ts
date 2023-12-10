@@ -15,8 +15,8 @@ export const recruiterRegister = createAsyncThunk(
         return response;
       }
       catch(err : any) {
-        notifyErrors(err?.message)
-        return rejectWithValue(err?.message);
+        notifyErrors(err?.message || err?.errorCode)
+        return rejectWithValue(err?.message || err?.errorCode);
       }
   
     }
@@ -34,8 +34,8 @@ export const recruiterLogIn = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -48,8 +48,8 @@ export const recruiterGetPostedJobs = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -62,8 +62,8 @@ export const recruiterGetPostedJob = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message)
-      return rejectWithValue(err?.message);
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
@@ -79,8 +79,88 @@ export const recruiterUpdateJob = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      // notifyErrors(err?.message)
-      // return rejectWithValue(err?.message);
+      // notifyErrors(err?.message || err?.errorCode)
+      // return rejectWithValue(err?.message || err?.errorCode);
     }
   }
 );
+
+export const recruiterPostJob = createAsyncThunk(
+  "recruiter/recruiterPostJob",
+  async (requestBody : any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.postJob(requestBody);
+      if(response) {
+        notifySuccess("Đăng bài tuyển dụng thành công");
+      }
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+
+export const recruiterDeleteJob = createAsyncThunk(
+  "recruiter/recruiterDeleteJob",
+  async (jobId : string, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.deleteJob(jobId);
+      if(response) {
+        notifySuccess("Xóa bài tuyển dụng thành công");
+      }
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+
+export const recruiterAllApplication = createAsyncThunk(
+  "recruiter/recruiterAllApplication",
+  async (params : any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.getAllApplication();
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+
+export const recruiterApplicationById = createAsyncThunk(
+  "recruiter/recruiterApplicationById",
+  async (applicationId: string, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.getApplicationById(applicationId);
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+
+export const recruiterUpdateApplication = createAsyncThunk(
+  "recruiter/recruiterUpdateApplication",
+  async (request: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.updateApplication(request);
+      if(response) {
+        notifySuccess("Cập nhật trạng thái đơn ứng tuyển thành công");
+      }
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+

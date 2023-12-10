@@ -73,3 +73,10 @@ export const REGISTER_RECRUITER = `${PREFIX}${RECRUITER}/register`
 export const LIST_ALL_JOB= `${PREFIX}${RECRUITER}/list-all-job`
 export const GET_JOB_BY_ID = `${PREFIX}${RECRUITER}/getJob`
 export const UPDATE_JOB = `${PREFIX}${RECRUITER}/update-job`
+export const POST_JOB = `${PREFIX}${RECRUITER}/post-job`
+export const DELETE_JOB = `${PREFIX}${RECRUITER}/delete-job`
+export const GET_ALL_APPLICATION = `${PREFIX}${RECRUITER}/get-application-form`
+export const GET_APPLICATION = `${PREFIX}${RECRUITER}/getApplicationById`
+export const UPDATE_APPLICATION = `${PREFIX}${RECRUITER}/updateApplication`
+
+

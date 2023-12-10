@@ -1,4 +1,4 @@
-import ApplicationList from "@/components/page/Customer/ApplicationList";
+import ApplicationList from "@/components/page/Customer/Application/ApplicationList";
 
 export default function CustomerApplication() {
   return (

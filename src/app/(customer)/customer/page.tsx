@@ -1,4 +1,4 @@
-import PostList from "@/components/page/Customer/PostList";
+import PostList from "@/components/page/Customer/Post/PostList";
 
 export default function CustomerHome() {
   return (

@@ -14,35 +14,13 @@ import {
   onDisplaySidebar,
   selectIsOpeningSidebar,
 } from "@/redux/reducers/recruiterSlice";
+import { SIDEBAR_TAB } from "@/const/recruiter";
 
 type SideBar = {
   title: string;
   href: string;
   icon: any;
 };
-
-const SIDEBAR_TAB = [
-  {
-    title: "Bài tuyển dụng",
-    href: "/customer",
-    icon: PostIcon,
-  },
-  {
-    title: "Đơn ứng tuyển",
-    href: "/customer/application",
-    icon: ApplicationIcon,
-  },
-  // {
-  //   title: "Tìm kiếm ứng viên",
-  //   href: "/customer",
-  //   icon: SearchIcon,
-  // },
-  {
-    title: "Hồ sơ công ty",
-    href: "/customer/profile",
-    icon: ProfileIcon,
-  },
-];
 
 export default function SidebarMobile() {
   const pathName = usePathname();
