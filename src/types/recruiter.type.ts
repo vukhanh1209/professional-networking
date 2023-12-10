@@ -17,4 +17,8 @@ export type ApplicationResponse = {
     coverLetter: string
     status: ApplicationStatus
     candidateId: number
+    phoneNumber: string
+    email: string
+    birthdate: string
+    address : string
 }

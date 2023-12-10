@@ -33,8 +33,8 @@ export const recruiterService = {
   deleteJob: (jobId : string) => {
     return axiosClient.delete(`${DELETE_JOB}?id=${jobId}`)
   },
-  getAllApplication: () => {
-    return axiosClient.get(GET_ALL_APPLICATION)
+  getAllApplication: (params : any) => {
+    return axiosClient.get(`${GET_ALL_APPLICATION}?page=${params?.page}&size=${params?.size}`)
   },
   getApplicationById: (applicationId: string) => {
     return axiosClient.get(`${GET_APPLICATION}/${applicationId}`)

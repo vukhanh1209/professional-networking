@@ -123,7 +123,7 @@ export const recruiterAllApplication = createAsyncThunk(
   "recruiter/recruiterAllApplication",
   async (params : any, { dispatch, getState, rejectWithValue }) => {
     try {
-      const response : any = await recruiterService.getAllApplication();
+      const response : any = await recruiterService.getAllApplication(params);
       return response;
     }
     catch (err : any) {

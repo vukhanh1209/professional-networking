@@ -13,10 +13,6 @@ export default function ApplicationDetail() {
   const searchParams = useSearchParams();
   const applicationId = searchParams.get("id");
   const applicationData = useSelector(selectApplicationData);
-  console.log(
-    "Log ~ file: ApplicationDetail.tsx:16 ~ ApplicationDetail ~ applicationData:",
-    applicationData
-  );
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -41,16 +37,20 @@ export default function ApplicationDetail() {
 
       <div className="flex flex-col">
         <h5 className="text-xl mb-3 font-medium">Thông tin ứng viên:</h5>
-        <div className="flex gap-5 px-3 border border-silver-grey rounded-lg px-4 py-3">
+        <div className="flex gap-5 border border-silver-grey rounded-lg px-4 py-3">
           <div className="flex flex-col gap-2">
             <span>Tên ứng viên:</span>
             <span>Email: </span>
             <span>Số điện thoại: </span>
+            <span>Ngày sinh: </span>
+            <span>Địa chỉ: </span>
           </div>
           <div className="flex flex-col gap-2">
             <span>{applicationData?.candidateName}</span>
-            <span>{`nghvukhanh@gmail.com`}</span>
-            <span>{`0986354614`}</span>
+            <span>{applicationData?.email}</span>
+            <span>{applicationData?.phoneNumber}</span>
+            <span>{applicationData?.birthdate}</span>
+            <span>{applicationData?.address}</span>
           </div>
         </div>
       </div>

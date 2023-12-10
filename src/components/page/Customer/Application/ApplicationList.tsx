@@ -9,35 +9,58 @@ import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
 import ApplicationCard from "./ApplicationCard";
 
+type ApplicationsData = {
+  content: any[];
+  number: number;
+  numberOfElements: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+};
+
 export default function ApplicationList() {
-  const [applications, setApplications] = useState<any[]>();
-  console.log(
-    "Log ~ file: ApplicationList.tsx:14 ~ ApplicationList ~ applications:",
-    applications
-  );
+  const [applicationsData, setApplicationsData] = useState<ApplicationsData>();
+  const applicationList = applicationsData?.content;
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const jobResponse = dispatch(recruiterAllApplication({}));
+    const jobResponse = dispatch(
+      recruiterAllApplication({ page: 0, size: 10 })
+    );
     jobResponse.then((response) => {
       if (response.meta.requestStatus === "fulfilled") {
-        setApplications(response.payload);
-      } else setApplications([]);
+        setApplicationsData(response.payload);
+      }
     });
   }, []);
 
+  const onChagePage = (value: any) => {
+    const jobResponse = dispatch(
+      recruiterAllApplication({ page: value - 1, size: 10 })
+    );
+    jobResponse.then((response) => {
+      if (response.meta.requestStatus === "fulfilled") {
+        setApplicationsData(response.payload);
+      }
+    });
+  };
+
   return (
     <section className="w-full py-6">
-      {applications ? (
-        applications?.length > 0 ? (
+      {applicationList ? (
+        applicationList?.length > 0 ? (
           <>
             <h5 className="text-3xl font-bold text-left text-primary-black mb-8">
-              Bạn đang có {applications?.length} bài tuyển dụng
+              Bạn đang có {applicationList?.length} bài tuyển dụng
             </h5>
-            {applications.map((application: any, index: number) => (
+            {applicationList?.map((application: any, index: number) => (
               <ApplicationCard key={index} data={application} />
             ))}
-            <Pagination total={10} currentPage={1} onChange={() => {}} />
+            <Pagination
+              total={applicationsData?.totalPages}
+              currentPage={applicationsData?.number + 1}
+              onChange={onChagePage}
+            />
           </>
         ) : (
           <div className="w-full h-full flex flex-col items-center gap-4 justify-center">
