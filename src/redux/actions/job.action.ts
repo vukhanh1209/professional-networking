@@ -67,6 +67,8 @@ export const searchByKeyword = createAsyncThunk(
       let queryString = "";
       if(params?.keyword) queryString += `keyword=${params.keyword}`
       if(params?.location) queryString += `&location=${params.location}`
+      if(params?.page) queryString += `&page=${params.page}`
+
       for (let key in params) {
         const value = params[key];
         if(value && typeof(value) === "object" && value?.length > 0) {

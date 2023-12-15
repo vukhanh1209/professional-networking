@@ -34,13 +34,13 @@ export const recruiterService = {
     return axiosClient.delete(`${DELETE_JOB}?id=${jobId}`)
   },
   getAllApplication: (params : any) => {
-    return axiosClient.get(`${GET_ALL_APPLICATION}?page=${params?.page}&size=${params?.size}`)
+    return axiosClient.get(`${GET_ALL_APPLICATION}?page=${params?.page}&size=${params?.size}&type=${params?.type}`)
   },
   getApplicationById: (applicationId: string) => {
     return axiosClient.get(`${GET_APPLICATION}/${applicationId}`)
   },
   updateApplication: (request: any) => {
-    return axiosClient.post(`${UPDATE_APPLICATION}/${request.applicationId}`, request)
+    return axiosClient.post(`${UPDATE_APPLICATION}/${request.applicationId}`, request.requestBody)
   }
 
 };

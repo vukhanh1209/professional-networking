@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Empty from "@/images/my-job/empty.svg";
+import { ClipLoader } from "react-spinners";
 
 export default function MyJobList() {
   const [tab, setTab] = useState<string>("");
@@ -60,21 +61,29 @@ export default function MyJobList() {
 
   return (
     <section className=" w-full max-w-[1340px] mx-auto pb-10">
-      {typeof jobsData === "object" ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
-          {jobDataList?.map((data: any, index: number) => (
-            <JobCard
-              key={index}
-              data={data}
-              isSelected={false}
-              paddingClassName="px-4 pt-4 pb-5"
-            />
-          ))}
-        </div>
+      {jobsData ? (
+        <>
+          {typeof jobsData === "object" ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+              {jobDataList?.map((data: any, index: number) => (
+                <JobCard
+                  key={index}
+                  data={data}
+                  isSelected={false}
+                  paddingClassName="px-4 pt-4 pb-5"
+                />
+              ))}
+            </div>
+          ) : (
+            <div className=" flex flex-col items-center gap-5 bg-white rounded-lg w-full pt-9 pb-10">
+              <Image src={Empty} width={153} height={153} alt="empty" />
+              <span className="text-dark-grey font-base">{jobsData}</span>
+            </div>
+          )}
+        </>
       ) : (
-        <div className=" flex flex-col items-center gap-5 bg-white rounded-lg w-full pt-9 pb-10">
-          <Image src={Empty} width={153} height={153} alt="empty" />
-          <span className="text-dark-grey font-base">{jobsData}</span>
+        <div className="w-full h-full flex items-center justify-center">
+          <ClipLoader color="#ed1b2f" size={50} />
         </div>
       )}
     </section>

@@ -15,7 +15,12 @@ const listSkill = [
   "NodeJS",
 ];
 
-export default function InputSkill({ register, errors }: any) {
+export default function InputSkill({
+  register,
+  errors,
+  onFocusInput,
+  onBlurInput,
+}: any) {
   const isOpeningSkillsForm = useAppSelector(selectIsOpeningSkillsForm);
   const [isFocusing, setIsFocusing] = useState<boolean>(false);
   const [skillValue, setSkillValue] = useState("");
@@ -54,6 +59,11 @@ export default function InputSkill({ register, errors }: any) {
       <div className="relative w-full">
         <input
           onFocus={() => setIsFocusing(true)}
+          onBlurCapture={() => {
+            setTimeout(() => {
+              setIsFocusing(false);
+            }, 100);
+          }}
           {...register("skill")}
           id="skill"
           onChange={onChangeSkill}

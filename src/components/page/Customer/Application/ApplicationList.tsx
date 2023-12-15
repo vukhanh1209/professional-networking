@@ -8,6 +8,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
 import ApplicationCard from "./ApplicationCard";
+import { AppicationType, ApplicationStatus } from "@/types/recruiter.type";
 
 type ApplicationsData = {
   content: any[];
@@ -18,14 +19,22 @@ type ApplicationsData = {
   totalPages: number;
 };
 
+const APPICATION_STATUS: AppicationType[] = ["DELIVERED", "APPROVED"];
+
 export default function ApplicationList() {
   const [applicationsData, setApplicationsData] = useState<ApplicationsData>();
+  const [applicationType, setApplicationType] =
+    useState<AppicationType>("DELIVERED");
   const applicationList = applicationsData?.content;
 
   const dispatch = useAppDispatch();
   useEffect(() => {
     const jobResponse = dispatch(
-      recruiterAllApplication({ page: 0, size: 10 })
+      recruiterAllApplication({
+        page: 0,
+        size: 10,
+        type: "DELIVERED",
+      })
     );
     jobResponse.then((response) => {
       if (response.meta.requestStatus === "fulfilled") {
@@ -36,7 +45,23 @@ export default function ApplicationList() {
 
   const onChagePage = (value: any) => {
     const jobResponse = dispatch(
-      recruiterAllApplication({ page: value - 1, size: 10 })
+      recruiterAllApplication({
+        page: value - 1,
+        size: 10,
+        type: applicationType,
+      })
+    );
+    jobResponse.then((response) => {
+      if (response.meta.requestStatus === "fulfilled") {
+        setApplicationsData(response.payload);
+      }
+    });
+  };
+
+  const onChangeAppicationType = (type: AppicationType) => {
+    setApplicationType(type);
+    const jobResponse = dispatch(
+      recruiterAllApplication({ page: 0, size: 10, type })
     );
     jobResponse.then((response) => {
       if (response.meta.requestStatus === "fulfilled") {
@@ -47,11 +72,26 @@ export default function ApplicationList() {
 
   return (
     <section className="w-full py-6">
+      <div className="flex gap-5 mb-10">
+        {APPICATION_STATUS.map((status: AppicationType, index: number) => (
+          <button
+            key={index}
+            onClick={() => onChangeAppicationType(status)}
+            className={`${
+              applicationType === status
+                ? "border-primary-red text-primary-red"
+                : "border-dark-grey text-dark-grey hover:text-primary-red hover:border-primary-red hover:bg-white-red"
+            } px-3 py-2 rounded-lg border-2 text-lg  transition-all`}
+          >
+            {status}
+          </button>
+        ))}
+      </div>
       {applicationList ? (
         applicationList?.length > 0 ? (
           <>
             <h5 className="text-3xl font-bold text-left text-primary-black mb-8">
-              Bạn đang có {applicationList?.length} bài tuyển dụng
+              {applicationsData?.totalElements} bài tuyển dụng được tìm thấy
             </h5>
             {applicationList?.map((application: any, index: number) => (
               <ApplicationCard key={index} data={application} />
@@ -66,7 +106,9 @@ export default function ApplicationList() {
           <div className="w-full h-full flex flex-col items-center gap-4 justify-center">
             <Image src={Empty} width={153} height={153} alt="empty" />
             <p className="text-rich-grey text-xl text-center">
-              Bạn chưa nhận được đơn ứng tuyển
+              {applicationType === "APPROVED"
+                ? "Bạn chưa phê duyệt đơn ứng tuyển nào"
+                : "Bạn chưa nhận được đơn ứng tuyển"}
             </p>
           </div>
         )

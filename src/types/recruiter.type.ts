@@ -1,10 +1,6 @@
-enum ApplicationStatus {
-    PENDING,
-    SUBMITTED,
-    DELIVERED,
-    APPROVED,
-    REJECTED,
-}
+export type ApplicationStatus = 'DELIVERED' | 'APPROVED' |  'REJECTED'
+
+export type AppicationType = "DELIVERED" | "APPROVED";
 
 
 export type ApplicationResponse = {
@@ -15,7 +11,7 @@ export type ApplicationResponse = {
     candidateName: string
     submittedAt: string
     coverLetter: string
-    status: ApplicationStatus
+    status: AppicationType
     candidateId: number
     phoneNumber: string
     email: string

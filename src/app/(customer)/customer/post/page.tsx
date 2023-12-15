@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { recruiterPostJob } from "@/redux/actions/recruiter.action";
+import { JOB_TYPE, LOCATION } from "@/const/job";
 
 const schema = yup.object().shape({
   jobTitle: yup.string().required("Vui lòng nhập tiêu đề công việc"),
@@ -28,10 +29,8 @@ export default function FormPostedJob() {
 
   const onSave = async (data: any) => {
     if (data) {
-      const skills = data.skills
-        .split(",")
-        .map((skill: string) => skill.trim())
-        .filter((skill: string) => skill !== "");
+      let skills = data.skills.split(",").map((skill: string) => skill.trim());
+      skills = skills.filter((skill: string) => skill !== "");
       const requestBody = {
         ...data,
         skills,
@@ -140,13 +139,18 @@ export default function FormPostedJob() {
             Nơi làm việc
             <span className="ml-1 text-primary-red">*</span>
           </label>
-          <input
+          <select
             {...register("location")}
-            placeholder="Hồ Chí Minh"
             id="location"
             className="w-full p-4 rounded-lg border border-silver-grey"
             name="location"
-          />
+          >
+            {LOCATION.map((location: string, index: number) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
+          </select>
           {errors?.location && (
             <span className="absolute text-primary-red text-sm left-0 top-[105%]">
               {String(errors?.location?.message)}
@@ -159,13 +163,18 @@ export default function FormPostedJob() {
             Loại công việc
             <span className="ml-1 text-primary-red">*</span>
           </label>
-          <input
+          <select
             {...register("jobType")}
-            placeholder="Remote"
             id="jobType"
             className="w-full p-4 rounded-lg border border-silver-grey"
             name="jobType"
-          />
+          >
+            {JOB_TYPE.map((type: string, index: number) => (
+              <option key={index} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
           {errors?.jobType && (
             <span className="absolute text-primary-red text-sm left-0 top-[105%]">
               {String(errors?.jobType?.message)}

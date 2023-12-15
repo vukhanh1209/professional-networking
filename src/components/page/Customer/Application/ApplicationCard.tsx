@@ -29,7 +29,14 @@ export default function ApplicationCard({
         {data.jobTitle}
       </Link>
       <span className="">{data.candidateName}</span>
-      <button className="absolute px-2 py-1 rounded-lg right-6 border border-available-green text-available-green text-sm">
+      <button
+        className={`${
+          data.status === "APPROVED" &&
+          "border-available-green text-available-green"
+        } ${
+          data.status === "DELIVERED" && "border-hyperlink text-hyperlink"
+        }  absolute px-2 py-1 rounded-lg right-6 border  text-sm`}
+      >
         {data.status}
       </button>
     </div>

@@ -7,6 +7,7 @@ import { searchByKeyword } from "@/redux/actions";
 import { selectSearchFilter } from "@/redux/reducers/searchSlice";
 import { cityData } from "@/components/common/SearchBar/CityOption";
 import { useSearchParams } from "next/navigation";
+import { ClipLoader } from "react-spinners";
 
 export default function SearchPageBody() {
   const seachJobsData = useAppSelector(selectSearchJobsData);
@@ -32,17 +33,25 @@ export default function SearchPageBody() {
   };
   return (
     <div className="flex flex-col gap-4 w-full">
-      <div className="grid grid-cols-12 mt-6 w-full">
-        <JobList />
-        <JobDetailCard />
-      </div>
-      {seachJobsData.totalPage > 1 ? (
-        <Pagination
-          total={seachJobsData.totalPage}
-          currentPage={seachJobsData.currentPage + 1}
-          onChange={onChangePage}
-        />
-      ) : null}
+      {seachJobsData ? (
+        <>
+          <div className="grid grid-cols-12 mt-6 w-full">
+            <JobList />
+            <JobDetailCard />
+          </div>
+          {seachJobsData.totalPage > 1 ? (
+            <Pagination
+              total={seachJobsData.totalPage}
+              currentPage={seachJobsData.currentPage + 1}
+              onChange={onChangePage}
+            />
+          ) : null}
+        </>
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          <ClipLoader color="#ed1b2f" size={50} />
+        </div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { LocalStorage } from "@/utils/LocalStorage"
 import { notifyWarning } from "@/utils/notification";
 
@@ -9,19 +9,19 @@ const defaultHeader = {
 };
 // for multiple requests
 // let isRefreshing = false;
-let failedQueue: any = [];
+// let failedQueue: any = [];
 
-const processQueue = (error: any, token = null) => {
-  failedQueue.forEach((prom: any) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(token);
-    }
-  });
+// const processQueue = (error: any, token = null) => {
+//   failedQueue.forEach((prom: any) => {
+//     if (error) {
+//       prom.reject(error);
+//     } else {
+//       prom.resolve(token);
+//     }
+//   });
 
-  failedQueue = [];
-};
+//   failedQueue = [];
+// };
 
 // @ts-ignore
 const baseURL: string = process.env.NEXT_PUBLIC_API_ENDPOINT.toString() || "";
@@ -53,12 +53,12 @@ axiosClient.interceptors.response.use(
     return handleResponse(response);
   },
   (error) => {
-    // const originalRequest = error.config;
-    // console.log("Log ~ file: axiosClient.ts:57 ~ originalRequest:", originalRequest)
-
-    // if (error.response?.status === 401) {
-      // clearAuthToken()
-      // notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại")
+    const originalRequest = error.config;
+    console.log("Log ~ file: axiosClient.ts:60 ~ error.response?.status:", error.response)
+    if (error.response?.status === 401 || error.code === 'ERR_NETWORK') {
+      clearAuthToken()
+      notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại")
+      // window.location.reload();
      
       // if (isRefreshing) {
       //   return new Promise(function (resolve, reject) {
@@ -122,13 +122,13 @@ axiosClient.interceptors.response.use(
       //       isRefreshing = false;
       //     });
       // });
-    // }
+    }
 
     return Promise.reject(handleError(error));
   }
 );
 
-const handleResponse = (res: AxiosResponse<any>) => {
+const handleResponse = (res: AxiosResponse) => {
   if (res && res.data) {
     return res.data;
   }
@@ -136,9 +136,10 @@ const handleResponse = (res: AxiosResponse<any>) => {
   return res as any;
 };
 
-const handleError = (error: { response: { data: any } }) => {
+const handleError = (error: AxiosError) => {
   // const { data } = error?.response;
   const data =  error?.response?.data
+  console.log("Log ~ file: axiosClient.ts:144 ~ handleError ~ error:", error)
   console.error(error);
 
   return data;

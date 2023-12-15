@@ -39,7 +39,9 @@ const ApplicationForm = ({ id }: { id: string }) => {
     };
     const applyResponse = await dispatch(applyJob(params));
     if (applyResponse.meta.requestStatus === "fulfilled") {
-      router.back();
+      setTimeout(() => {
+        router.back();
+      }, 2000);
     }
   };
 

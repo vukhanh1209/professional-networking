@@ -30,7 +30,6 @@ const schema = yup.object().shape({
 export default function FormSkills() {
   const isOpeningSkillsForm = useAppSelector(selectIsOpeningSkillsForm);
   const [currentSkills, setCurrentSkills] = useState<string[]>([]);
-
   const skills = useAppSelector(selectSkills);
 
   useEffect(() => {

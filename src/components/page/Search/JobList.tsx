@@ -7,7 +7,12 @@ import {
   selectSearchJobsData,
   setSelectedJob,
 } from "@/redux/reducers/jobSlice";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { usePathname, useSearchParams } from "next/navigation";
+import { selectSearchFilter } from "@/redux/reducers/searchSlice";
+import { cityData } from "@/components/common/SearchBar/CityOption";
+import { searchAllJobs, searchByKeyword } from "@/redux/actions";
 
 const jobData = {
   postedDate: 1,
@@ -39,6 +44,30 @@ const JobList = () => {
     },
     [selectedJobIndex]
   );
+
+  const searchFilter = useAppSelector(selectSearchFilter);
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+
+  useEffect(() => {
+    let keyword = searchParams.get("key") || "";
+    let location = searchFilter?.location;
+
+    if (location) {
+      const locationQuery = cityData.get(location) || "";
+      location = location === "ALL" ? "" : locationQuery;
+    }
+
+    const searchParam = {
+      keyword,
+      location,
+    };
+    if (!keyword && !location) {
+      dispatch(searchAllJobs({}));
+    } else {
+      dispatch(searchByKeyword(searchParam));
+    }
+  }, [pathName, searchParams]);
 
   return (
     <div className="col-span-full lg:col-span-5 lg:pr-6">
