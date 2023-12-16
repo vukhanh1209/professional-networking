@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./rootReducer";
-import { addEducation, getCandidateCV, getProfile, searchByKeyword, updateProfile } from "../actions";
+import { getCandidateCV, getProfile} from "../actions";
 
 type EducationType = {
     id : number;

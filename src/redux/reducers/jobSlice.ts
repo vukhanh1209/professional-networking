@@ -1,7 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { authSignIn } from "../actions/auth.action";
+import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./rootReducer";
-import { getCompanyInfo } from "../actions/company.action";
 import { searchAllJobs, searchByKeyword } from "../actions";
 
 
@@ -44,6 +42,7 @@ const initialState = {
       currentPage: 0,
     } as JobDataType,
     selectedJob: 0,
+    isLoading: false,
 }
 
 const jobSlice = createSlice({
@@ -55,6 +54,12 @@ const jobSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+      builder.addCase(searchByKeyword.pending, (state) => {
+        state.isLoading = true;
+      });
+      builder.addCase(searchAllJobs.pending, (state) => {
+        state.isLoading = true;
+      });
       builder.addCase(searchByKeyword.fulfilled, (state, action : any) => {
         state.jobData = {
           jobs: action?.payload?.content, 
@@ -62,6 +67,7 @@ const jobSlice = createSlice({
           totalJob: action?.payload?.totalElements, 
           currentPage: action?.payload?.number
         }
+        state.isLoading = false;
       });
       builder.addCase(searchAllJobs.fulfilled, (state, action : any) => {
         state.jobData = {
@@ -70,6 +76,7 @@ const jobSlice = createSlice({
           totalJob: action?.payload?.totalElements, 
           currentPage: action?.payload?.number
         }
+        state.isLoading = false;
       });
     },
   })
@@ -82,3 +89,4 @@ export const selectTotalJob = (state : RootState) => state.job.jobData.totalJob
 
 export const selectSelectedJob = (state : RootState) => state.job.selectedJob
 export const selectJobDetailByIndex = (state : RootState) => state.job.jobData.jobs[state.job.selectedJob]
+export const selectSearchingStatus = (state : RootState) => state.job.isLoading

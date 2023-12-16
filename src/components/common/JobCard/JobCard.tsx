@@ -44,7 +44,6 @@ const JobCard = ({
 }: JobCardProps) => {
   const router = useRouter();
   const jobItemData = data?.job || data;
-  console.log("Log ~ file: JobCard.tsx:47 ~ jobItemData:", jobItemData);
 
   const isSuperHot = useMemo(() => {
     if (jobItemData?.level && jobItemData.level === "SUPER_HOT") return true;

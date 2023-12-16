@@ -25,14 +25,16 @@ const SearchForm = () => {
   const searchFilter = useAppSelector(selectSearchFilter);
 
   const router = useRouter();
+
   const onSearchJob = (data: any) => {
     let keyword = data?.keyword;
-    const keywordQuery = `key=${keyword}`;
+    let searchQuery = keyword ? `key=${keyword}` : "";
     let location = searchFilter?.location;
-    const locationQuery = `location=${location}`;
+    searchQuery = location
+      ? searchQuery + `&location=${location}`
+      : searchQuery;
 
-    if (keyword || location)
-      router.push(`/search?${keywordQuery}&${locationQuery}`);
+    if (keyword || location) router.push(`/search?${searchQuery}`);
     else router.push("/search");
   };
 

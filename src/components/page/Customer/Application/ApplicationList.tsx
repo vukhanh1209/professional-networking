@@ -1,6 +1,5 @@
 "use client";
 import Pagination from "@/components/common/Pagination/Pagination";
-import PostCard from "../Post/PostCard";
 import { useAppDispatch } from "@/redux/hook";
 import { useEffect, useState } from "react";
 import { recruiterAllApplication } from "@/redux/actions/recruiter.action";
