@@ -142,9 +142,7 @@ const JobCard = ({
             <div className="flex items-center shrink-0 ">
               <Image src={RemoteIcon} className="w-4 h-4" alt="remote" />
             </div>
-            <span className="pl-2">
-              {fakeData?.isRemote ? "Làm từ xa" : "Tại văn phòng"}
-            </span>
+            <span className="pl-2">{jobItemData?.jobType}</span>
           </div>
 
           <div className="flex items-center mt-1 text-sm text-rich-grey">

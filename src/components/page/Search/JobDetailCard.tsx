@@ -48,20 +48,15 @@ const topReasons = [
   "13th month salary",
   "Working model : Remote",
 ];
-const jobDescription = [
-  "Join Shopify's new Hidrogen-powered project",
-  "Use Laravel to develop Shopify applications",
-  "Work in groups and coordinate work based on the team leader's work assignments",
-];
 
-const requirements = [
-  "At least 2 years of React experience",
-  "Experience with Shopify (Hidrogen) is advantageous",
-  "Know Laravel and use it properly",
-  "Has enthusiasm, responsibility for work and good teamwork skills",
-  "Communication in English, knowing Japanese is advantageous",
-  "Priority given to English CVs",
-];
+// const requirements = [
+//   "At least 2 years of React experience",
+//   "Experience with Shopify (Hidrogen) is advantageous",
+//   "Know Laravel and use it properly",
+//   "Has enthusiasm, responsibility for work and good teamwork skills",
+//   "Communication in English, knowing Japanese is advantageous",
+//   "Priority given to English CVs",
+// ];
 
 const reasonsForWorking = [
   "After a 2-month probationary, working model will be decided at the office, remote or hybrid",
@@ -141,7 +136,7 @@ const JobDetailCard = () => {
                     width={24}
                     alt="coin"
                   />
-                  <span className="pl-2 text-available-green text-base font-medium">{`${jobData.minSalary} - ${jobData.maxSalary} USD`}</span>
+                  <span className="pl-2 text-available-green text-base font-medium">{`${jobDetail?.minSalary} - ${jobDetail?.maxSalary} USD`}</span>
                 </div>
               </div>
             </div>
@@ -189,16 +184,14 @@ const JobDetailCard = () => {
                 <div className="flex items-center shrink-0 ">
                   <Image src={RemoteIcon} className="w-4 h-4" alt="remote" />
                 </div>
-                <span className="pl-2">
-                  {jobData.isRemote ? "Làm từ xa" : "Tại văn phòng"}
-                </span>
+                <span className="pl-2">{jobDetail?.jobType}</span>
               </div>
 
               <div className="flex items-center text-sm text-rich-grey">
                 <div className="flex items-center shrink-0 ">
                   <Image src={TimeIcon} className="w-4 h-4" alt="remote" />
                 </div>
-                <span className="pl-2">{`${jobData.postedDate} ngày trước`}</span>
+                <span className="pl-2">{`${jobDetail?.createdDate} ngày trước`}</span>
               </div>
 
               <div className="flex flex-wrap w-full items-center gap-2 mb-2">
@@ -228,7 +221,7 @@ const JobDetailCard = () => {
 
             <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
               <h2 className="text-xl font-bold mb-4">Yêu cầu công việc</h2>
-              {renderList(requirements)}
+              {renderList(jobDetail?.requirements)}
             </div>
 
             <div className="py-6 border-b gap-2 border-silver-grey">
@@ -241,7 +234,7 @@ const JobDetailCard = () => {
             <div className="flex flex-col w-full py-6">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-bold mb-4">
-                  {jobData.companyName}
+                  {jobDetail?.companyName}
                 </h2>
                 <Link
                   href="/"
@@ -298,9 +291,9 @@ const renderList = (listData: any) => {
       {renderData?.map((data: any, index: number) => (
         <li
           key={index}
-          className="flex gap-3 items-center text-base text-primary-black py-[6px]"
+          className="flex gap-3 items-start text-base text-primary-black py-[6px]"
         >
-          <div className="w-[6px] h-[6px] rounded-full bg-primary-red"></div>
+          <div className="w-[6px] h-[6px] rounded-full shrink-0 bg-primary-red mt-[9px]"></div>
           {data}
         </li>
       ))}

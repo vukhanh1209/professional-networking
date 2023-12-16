@@ -17,6 +17,7 @@ const avatarUrl =
 export default function InfoSection() {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectProfile);
+
   const onOpenInfoForm = () => {
     dispatch(openInfoForm());
   };
@@ -26,23 +27,10 @@ export default function InfoSection() {
       <button className="absolute right-6 top-6" onClick={onOpenInfoForm}>
         <Image loading="lazy" src={Edit} width={20} height={20} alt="edit" />
       </button>
-      <div className="hidden md:block">
-        <ImageWrapper
-          src={avatarUrl}
-          width={120}
-          height={120}
-          rounded={"full"}
-          alt="avatar"
-        />
-      </div>
-      <div className="flex md:hidden w-full justify-center mb-4">
-        <ImageWrapper
-          src={avatarUrl}
-          width={64}
-          height={64}
-          rounded={"full"}
-          alt="avatar"
-        />
+      <div className="flex items-center justify-center h-full w-[120px] md:h-full aspect-square shrink-0 rounded-full border border-rich-grey bg-dark-grey">
+        <p className="leading-[100%] text-6xl font-semibold  text-white">
+          {profile?.fullName ? profile?.fullName[0] : ""}
+        </p>
       </div>
       <div className=" md:ml-8 flex flex-col w-full text-rich-grey">
         <span className="font-bold text-2xl md:text-3xl uppercase text-primary-black text-center md:text-left">

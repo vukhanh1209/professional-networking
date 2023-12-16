@@ -39,7 +39,6 @@ export default function FormWrapper({
           </button>
           <button
             type="submit"
-            onClick={onSave}
             className="text-white bg-primary-red text-base py-2 px-6 rounded-lg hover:bg-dark-red max-w-[140px] w-full"
           >
             Lưu

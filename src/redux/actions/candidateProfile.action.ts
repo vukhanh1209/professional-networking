@@ -1,5 +1,5 @@
 import { candidateProfileService } from "@/axios/api/candidateProfileService";
-import { notifySuccess } from "@/utils/notification";
+import { notifyErrors, notifySuccess } from "@/utils/notification";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
@@ -92,6 +92,7 @@ export const getProfile = createAsyncThunk(
         return response;
       }
       catch(err : any) {
+        notifyErrors(err?.message || err?.errorCode)
         return rejectWithValue(err?.message || err?.errorCode);
       }
     }

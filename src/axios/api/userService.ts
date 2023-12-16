@@ -14,10 +14,8 @@ export const userService = {
   forgotPassword: (params:any) => {
     return axiosClient.post(`${FORGOT_PASSWORD}`, params);
   },
-  resetPassword: (params:any) => {
-    const requestBody = params?.requestBody;
-    const email = params?.email;
-    return axiosClient.post(`${RESET_PASSWORD}/${email}`, requestBody);
+  resetPassword: (requestBody:any) => {
+    return axiosClient.post(`${RESET_PASSWORD}`, requestBody);
   },
   saveJob: (params : any) => {
     return axiosClient.post(`${SAVE_JOB}/${params}`)

@@ -2,28 +2,11 @@
 import { getAllSkill } from "@/redux/actions";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { selectIsOpeningSkillsForm } from "@/redux/reducers/candidateSlice";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-const listSkill = [
-  "Java",
-  "ReactJs",
-  "Angular",
-  "NodeJS",
-  "Java",
-  "ReactJs",
-  "Angular",
-  "NodeJS",
-];
-
-export default function InputSkill({
-  register,
-  errors,
-  onFocusInput,
-  onBlurInput,
-}: any) {
+export default function InputSkill({ skill, setSkill }: any) {
   const isOpeningSkillsForm = useAppSelector(selectIsOpeningSkillsForm);
   const [isFocusing, setIsFocusing] = useState<boolean>(false);
-  const [skillValue, setSkillValue] = useState("");
 
   const [skillList, setSkillList] = useState<string[]>([]);
 
@@ -39,20 +22,20 @@ export default function InputSkill({
   }, [isOpeningSkillsForm]);
 
   const onChangeSkill = (e: any) => {
-    setSkillValue(e.target.value);
+    setSkill(e.target.value);
   };
 
   const onChooseSkill = (skill: string) => {
-    setSkillValue(skill);
+    setSkill(skill);
   };
 
   const filteredSkill = useMemo(() => {
-    if (!skillValue) return listSkill;
-    const suggestionSkillList = listSkill.filter((skill: string) =>
-      skill.toLowerCase().includes(skillValue.toLowerCase())
+    if (!skill) return skillList;
+    const suggestionSkillList = skillList.filter((skill: string) =>
+      skill.toLowerCase().includes(skill.toLowerCase())
     );
     return suggestionSkillList;
-  }, [listSkill, skillValue]);
+  }, [skillList, skill]);
 
   return (
     <>
@@ -64,14 +47,13 @@ export default function InputSkill({
               setIsFocusing(false);
             }, 100);
           }}
-          {...register("skill")}
           id="skill"
           onChange={onChangeSkill}
-          value={skillValue}
+          value={skill}
           placeholder="Nhập kỹ năng"
           className="text-primary-black w-full  px-4 rounded-lg border border-silver-grey h-12"
           name="skill"
-          autocomplete="off"
+          autoComplete="off"
         />
         {isFocusing ? (
           <div className="absolute top-[110%] w-full bg-white max-h-[140px] overflow-y-auto py-2 border border-silver-grey rounded-lg text-primary-black shadow-md cursor-pointer">
@@ -87,17 +69,12 @@ export default function InputSkill({
               ))
             ) : (
               <div className="py-1 px-3 bg-white-red">
-                {`Thêm kỹ năng "${skillValue}"`}
+                {`Thêm kỹ năng "${skill}"`}
               </div>
             )}
           </div>
         ) : null}
       </div>
-      {errors?.skill ? (
-        <span className=" absolute text-primary-red text-sm left-0 top-[105%]">
-          {String(errors?.skill?.message)}
-        </span>
-      ) : null}
     </>
   );
 }
