@@ -3,6 +3,7 @@ import { getAllSkill } from "@/redux/actions";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { selectIsOpeningSkillsForm } from "@/redux/reducers/candidateSlice";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 export default function InputSkill({ skill, setSkill }: any) {
   const isOpeningSkillsForm = useAppSelector(selectIsOpeningSkillsForm);
@@ -31,8 +32,8 @@ export default function InputSkill({ skill, setSkill }: any) {
 
   const filteredSkill = useMemo(() => {
     if (!skill) return skillList;
-    const suggestionSkillList = skillList.filter((skill: string) =>
-      skill.toLowerCase().includes(skill.toLowerCase())
+    const suggestionSkillList = skillList.filter((item: string) =>
+      item.toLowerCase().includes(skill.toLowerCase())
     );
     return suggestionSkillList;
   }, [skillList, skill]);
@@ -57,6 +58,11 @@ export default function InputSkill({ skill, setSkill }: any) {
         />
         {isFocusing ? (
           <div className="absolute top-[110%] w-full bg-white max-h-[140px] overflow-y-auto py-2 border border-silver-grey rounded-lg text-primary-black shadow-md cursor-pointer">
+            {skillList.length == 0 && (
+              <div className="w-full h-full flex items-center justify-center py-8">
+                <ClipLoader color="#ed1b2f" size={30} />
+              </div>
+            )}
             {filteredSkill.length > 0 ? (
               filteredSkill.map((skill: string, index: number) => (
                 <div
