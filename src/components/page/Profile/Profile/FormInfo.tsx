@@ -67,6 +67,7 @@ export default function FormInfo() {
       if (res.meta.requestStatus === "fulfilled") {
         notifySuccess(res.payload?.message);
         dispatch(getProfile({}));
+        onClose();
       }
     }
   };

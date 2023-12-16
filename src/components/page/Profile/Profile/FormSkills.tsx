@@ -44,6 +44,7 @@ export default function FormSkills() {
     if (res.meta.requestStatus === "fulfilled") {
       notifySuccess(res.payload?.message);
       dispatch(getProfile({}));
+      onClose();
     }
   };
 
