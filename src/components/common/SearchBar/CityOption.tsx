@@ -11,11 +11,11 @@ import {
 } from "@/redux/reducers/searchSlice";
 
 export const cityData = new Map([
-  // ["ALL", "Tất cả thành phố"],
+  ["ALL", "Tất cả thành phố"],
   ["HCM", "Ho Chi Minh"],
   ["HN", "Hanoi"],
   ["DN", "Da Nang"],
-  ["ALL", "Các thành phố khác"],
+  // ["ALL", "Các thành phố khác"],
 ]);
 
 const CityOption = () => {
