@@ -11,10 +11,14 @@ import ImageWrapper from "../../../common/ImageWrapper";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useEffect, useState } from "react";
-import { recruiterGetPostedJob } from "@/redux/actions/recruiter.action";
+import {
+  recruiterDeleteJob,
+  recruiterGetPostedJob,
+} from "@/redux/actions/recruiter.action";
 import FormPostedJob from "./FormPostedJob";
 import { selectPostData } from "@/redux/reducers/postedJobSlice";
 import { useSelector } from "react-redux";
+import ModalConfirmDelete from "./ModalConfirmDelete";
 
 const jobData = {
   postedDate: 1,
@@ -62,10 +66,8 @@ const PostedJobDetail = () => {
   const searchParams = useSearchParams();
   const jobId = searchParams.get("id");
   const postData = useSelector(selectPostData);
-  console.log(
-    "Log ~ file: PostedJobDetail.tsx:79 ~ PostedJobDetail ~ postData:",
-    postData
-  );
+  const [isOpenningModalDelete, setIsOpenningModal] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (jobId) {
@@ -82,17 +84,20 @@ const PostedJobDetail = () => {
     setIsOpeningUpdateForm(false);
   };
 
+  const onOpenModalDelete = () => {
+    setIsOpenningModal(true);
+  };
+
   return (
     <>
       <article className="flex w-full">
         <div className="flex flex-col gap-3 py-6 bg-white rounded-lg w-full h-fit text-primary-black">
           <div className="px-6 relative">
-            <button
-              onClick={onOpenUpdateForm}
-              className="absolute right-6 top-2"
-            >
-              <Image src={Edit} width={32} height={32} alt="edit" />
-            </button>
+            <div className="absolute right-6 top-2 flex w-fit gap-5">
+              <button onClick={onOpenUpdateForm} className="">
+                <Image src={Edit} width={32} height={32} alt="edit" />
+              </button>
+            </div>
             <div className="flex flex-col w-full  border-b border-silver-grey pb-6">
               <div className="flex flex-col md:flex-row items-center justify-center gap-3">
                 <div className="flex items-center justify-center px-2 bg-white w-fit aspect-square rounded-lg border border-silver-grey">
@@ -122,7 +127,7 @@ const PostedJobDetail = () => {
             </div>
           </div>
 
-          <div className="h-full pb-40 ">
+          <div className="h-full ">
             <div className="px-6">
               <div className="flex flex-col w-full py-6 border-b gap-2 border-dashed border-silver-grey">
                 <div className="flex items-center text-sm text-rich-grey">
@@ -232,6 +237,14 @@ const PostedJobDetail = () => {
               </div>
             </div>
           </div>
+          <div className="flex justify-center w-full py-10 ">
+            <button
+              className="text-primary-red bg-white text-base py-2 px-4 max-w-[220px] w-full rounded-lg hover:bg-primary-red hover:text-white transition-all border border-primary-red"
+              onClick={onOpenModalDelete}
+            >
+              Xóa bài đăng
+            </button>
+          </div>
         </div>
       </article>
       <FormPostedJob
@@ -240,6 +253,12 @@ const PostedJobDetail = () => {
         isOpening={isOpeningUpdateForm}
         onClose={onCloseUpdateForm}
       />
+      {isOpenningModalDelete ? (
+        <ModalConfirmDelete
+          jobId={jobId}
+          setIsOpenningModal={setIsOpenningModal}
+        />
+      ) : null}
     </>
   );
 };

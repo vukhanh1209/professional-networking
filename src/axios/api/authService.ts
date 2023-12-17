@@ -5,9 +5,6 @@ import {
 
 
 export const authService = {
-  // getSignMessage: () => {
-  //   return axiosClient.get(`${AUTH_GET_SIGN_MESSAGE_ENDPOINT}`);
-  // },
   register: (params:any) => {
     return axiosClient.post(`${PREFIX}${AUTH_SERVICE}${REGISTER}`, params);
   },
@@ -23,7 +20,4 @@ export const authService = {
   regenerateOTP: (params:any) => {
     return axiosClient.put(`${PREFIX}${AUTH_SERVICE}${REGENERATE_OTP}?email=${params}`);
   },
-  // loginGoogle: (params:any) => {
-  //   return axiosClient.post(`${AUTH_SIGN_IN_GOOGLE_ENDPOINT}`, params);
-  // },
 };

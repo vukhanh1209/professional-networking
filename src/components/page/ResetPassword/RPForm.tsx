@@ -9,6 +9,7 @@ import { resetPassword } from "@/redux/actions/user.action";
 import { useAppDispatch } from "@/redux/hook";
 import { handleServiceResponse } from "@/utils/handleServiceResponse";
 import { usePathname, useRouter } from "next/navigation";
+import { recruiterResetPassword } from "@/redux/actions/recruiter.action";
 
 const schema = yup.object().shape({
   password: yup
@@ -28,7 +29,7 @@ const schema = yup.object().shape({
     ),
 });
 
-const RPForm = () => {
+const RPForm = ({ params }: any) => {
   const {
     register,
     handleSubmit,
@@ -42,7 +43,7 @@ const RPForm = () => {
   const onSubmit = async (data: any) => {
     if (data) {
       if (data.password === data.confirmPassword) {
-        const email = pathName.split("/")[3];
+        const email = params?.email;
 
         const requestBody = {
           email,
@@ -50,12 +51,23 @@ const RPForm = () => {
           newPassword: data.password,
           confirmPassword: data.confirmPassword,
         };
-        const res = await dispatch(resetPassword(requestBody));
-        handleServiceResponse(res);
-        if (res.meta.requestStatus === "fulfilled") {
-          setTimeout(() => {
-            router.push("/");
-          }, 500);
+
+        if (pathName.includes("for-recruiter")) {
+          const res = await dispatch(recruiterResetPassword(requestBody));
+          handleServiceResponse(res);
+          if (res.meta.requestStatus === "fulfilled") {
+            setTimeout(() => {
+              router.push("/for-recruiter/sign-in");
+            }, 500);
+          }
+        } else {
+          const res = await dispatch(resetPassword(requestBody));
+          handleServiceResponse(res);
+          if (res.meta.requestStatus === "fulfilled") {
+            setTimeout(() => {
+              router.push("/sign-in");
+            }, 500);
+          }
         }
       } else {
         notifyErrors("Mật khẩu xác nhận không khớp");

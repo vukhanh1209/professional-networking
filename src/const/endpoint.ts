@@ -78,5 +78,8 @@ export const DELETE_JOB = `${PREFIX}${RECRUITER}/delete-job`
 export const GET_ALL_APPLICATION = `${PREFIX}${RECRUITER}/get-application-form`
 export const GET_APPLICATION = `${PREFIX}${RECRUITER}/getApplicationById`
 export const UPDATE_APPLICATION = `${PREFIX}${RECRUITER}/updateApplication`
+export const FORGOT_PASSWORD_RECRUITER = `${PREFIX}${RECRUITER}/forgot-password`
+export const RESET_PASSWORD_RECRUITER = `${PREFIX}${RECRUITER}/reset-password`
+
 
 

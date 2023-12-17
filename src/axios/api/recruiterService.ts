@@ -1,11 +1,12 @@
 import axiosClient from "../axiosClient";
 import {
   DELETE_JOB,
+  FORGOT_PASSWORD_RECRUITER,
   GET_ALL_APPLICATION,
   GET_APPLICATION,
   GET_JOB_BY_ID,
   LIST_ALL_JOB,
-  LOG_IN, POST_JOB, REGISTER_RECRUITER, UPDATE_APPLICATION, UPDATE_JOB, 
+  LOG_IN, POST_JOB, REGISTER_RECRUITER, RESET_PASSWORD_RECRUITER, UPDATE_APPLICATION, UPDATE_JOB, 
 } from "@/const/endpoint";
 
 
@@ -41,6 +42,12 @@ export const recruiterService = {
   },
   updateApplication: (request: any) => {
     return axiosClient.post(`${UPDATE_APPLICATION}/${request.applicationId}`, request.requestBody)
+  },
+  forgotPassword: (requestBody: any) => {
+    return axiosClient.post(FORGOT_PASSWORD_RECRUITER, requestBody)
+  },
+  resetPassword: (requestBody: any) => {
+    return axiosClient.post(RESET_PASSWORD_RECRUITER, requestBody)
   }
 
 };

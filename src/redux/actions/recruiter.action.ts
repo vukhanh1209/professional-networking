@@ -164,3 +164,30 @@ export const recruiterUpdateApplication = createAsyncThunk(
   }
 );
 
+export const recruiterForgotPassword = createAsyncThunk(
+  "recruiter/recruiterForgotPassword",
+  async (request: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.forgotPassword(request);
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+
+export const recruiterResetPassword = createAsyncThunk(
+  "recruiter/recruiterResetPassword",
+  async (request: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.resetPassword(request);
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
