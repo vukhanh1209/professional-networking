@@ -11,6 +11,7 @@ import {
   selectFilterCount,
   selectIsOpenFilterModal,
   selectJobTypeFilter,
+  selectSalaryFilter,
 } from "@/redux/reducers/searchSlice";
 import CloseIcon from "@/images/close.svg";
 import Image from "next/image";
@@ -19,11 +20,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { cityData } from "@/components/common/SearchBar/CityOption";
 import InputRange from "react-input-range";
 import { useState } from "react";
+import FilterSalary from "./FilterSalary";
 
 export default function ModalFilter() {
   const jobTypeFilter = useAppSelector(selectJobTypeFilter);
   const candidateLevelFilter = useAppSelector(selectCandidateLevelFilter);
   const companyTypeFilter = useAppSelector(selectCompanyTypeFilter);
+  const salaryFilter = useAppSelector(selectSalaryFilter);
   const isOpenFilterModal = useAppSelector(selectIsOpenFilterModal);
   const filterCount = useAppSelector(selectFilterCount);
   const searchParam = useSearchParams();
@@ -46,18 +49,19 @@ export default function ModalFilter() {
       location = location === "ALL" ? "" : locationQuery;
     }
 
-    const searchParams = {
+    let searchParams = {
       keyword,
       location,
       companyType: companyTypeFilter,
       jobType: jobTypeFilter,
       candidateLevel: candidateLevelFilter,
+      salaryMin: salaryFilter.minSalary,
+      salaryMax: salaryFilter.maxSalary,
     };
+
     dispatch(searchByKeyword(searchParams));
     onCloseModal();
   };
-
-  const [salary, setSalary] = useState<any>();
 
   return (
     <>
@@ -80,13 +84,14 @@ export default function ModalFilter() {
 
             <div className="flex flex-col gap-8 p-8">
               <FilterCandidateLevel />
-              <InputRange
+              {/* <InputRange
                 maxValue={10000}
                 minValue={500}
                 step={500}
                 value={salary}
                 onChange={(value) => setSalary({ value })}
-              />
+              /> */}
+              <FilterSalary />
               <FilterCompanyType />
               <FilterJobType />
             </div>

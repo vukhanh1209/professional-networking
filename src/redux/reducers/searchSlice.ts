@@ -11,12 +11,18 @@ export type searchFilterType = {
     candidatLevel?: string
 }
 
+type SalaryFilter = {
+    minSalary: number,
+    maxSalary: number,
+}
+
 const initialState = {
     searchFilter: {} as searchFilterType,
     isOpenFilterModal: false,
     candidateLevelFilter: [] as string[],
     companyTypeFilter: [] as string[],
     jobTypeFilter: [] as string[],
+    salaryFilter: {} as SalaryFilter,
     filterCount: 0
 }
 
@@ -75,6 +81,23 @@ const searchSlice = createSlice({
                 state.filterCount += 1;
             }
         },
+        setSalaryFilter: (state, action) => {
+            const payload = action.payload
+            if(payload?.minSalary) {
+                state.salaryFilter = {
+                    ...state.salaryFilter,
+                    minSalary: payload.minSalary
+                }
+            }
+            if(payload?.maxSalary) {
+                state.salaryFilter = {
+                    ...state.salaryFilter,
+                    maxSalary: payload.maxSalary
+                }
+            }
+            if(payload?.minSalary || payload?.maxSalary) state.filterCount += 1;
+
+        },
         deleteFilter: (state) => {
             state.candidateLevelFilter = [];
             state.companyTypeFilter = [];
@@ -87,7 +110,7 @@ const searchSlice = createSlice({
   })
 export default searchSlice.reducer;
 
-export const {setSearchFilter, openFilterModal, closeFilterModal, setCandidateLevelFilter, setCompanyTypeFilter, setJobTypeFilter, deleteFilter} = searchSlice.actions
+export const {setSearchFilter, openFilterModal, closeFilterModal, setCandidateLevelFilter, setCompanyTypeFilter, setJobTypeFilter, deleteFilter, setSalaryFilter } = searchSlice.actions
 
 export const selectSearchFilter = (state : RootState) => state.search.searchFilter
 export const selectIsOpenFilterModal = (state : RootState) => state.search.isOpenFilterModal
@@ -95,4 +118,6 @@ export const selectJobTypeFilter = (state : RootState) => state.search.jobTypeFi
 export const selectCompanyTypeFilter = (state : RootState) => state.search.companyTypeFilter
 export const selectCandidateLevelFilter = (state : RootState) => state.search.candidateLevelFilter
 export const selectFilterCount = (state : RootState) => state.search.filterCount;
+export const selectSalaryFilter = (state : RootState) => state.search.salaryFilter;
+
 

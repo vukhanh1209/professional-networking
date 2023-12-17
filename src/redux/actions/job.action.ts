@@ -77,6 +77,12 @@ export const searchByKeyword = createAsyncThunk(
           queryString += childQueryString;
         }
       }
+      if(params.salaryMin) {
+        queryString +=  `&salaryMin=${params.salaryMin}`;
+      }
+      if(params.salaryMax) {
+        queryString +=  `&salaryMax=${params.salaryMax}`;
+      }
       const response = await jobService.searchByKeyword(queryString);
       
       return response;

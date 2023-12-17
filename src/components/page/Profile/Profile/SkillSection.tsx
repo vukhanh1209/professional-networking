@@ -9,6 +9,10 @@ import Edit from "@/images/profile/edit.svg";
 export default function SkillsSection() {
   const dispatch = useAppDispatch();
   const skills = useAppSelector(selectSkills);
+  console.log(
+    "Log ~ file: SkillSection.tsx:12 ~ SkillsSection ~ skills:",
+    skills
+  );
 
   const onOpenSkillsForm = () => {
     dispatch(openSkillsForm());
