@@ -6,7 +6,10 @@ import * as yup from "yup";
 import { authSignIn } from "@/redux/actions/auth.action";
 import { useAppDispatch } from "@/redux/hook";
 import { useRouter } from "next/navigation";
-import { recruiterLogIn } from "@/redux/actions/recruiter.action";
+import {
+  recruiterGetProfile,
+  recruiterLogIn,
+} from "@/redux/actions/recruiter.action";
 import { LocalStorage } from "@/utils/LocalStorage";
 
 const schema = yup.object().shape({
@@ -36,6 +39,7 @@ const SignInForm = () => {
       const res = await dispatch(recruiterLogIn(data));
       if (res.meta.requestStatus === "fulfilled") {
         LocalStorage.setToken(res.payload?.accessToken);
+        dispatch(recruiterGetProfile({}));
         setTimeout(() => {
           router.push("/customer");
         }, 500);

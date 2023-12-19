@@ -183,7 +183,7 @@ const JobDetailCard = ({ data }: any) => {
               <span className="text-sm text-rich-grey font-medium mr-2">
                 Kỹ năng:{" "}
               </span>
-              {data?.skills.map((skill: string, index: number) => (
+              {data?.skills?.map((skill: string, index: number) => (
                 <div
                   key={index}
                   className="py-1 px-[10px] text-xs rounded-full bg-white text-rich-grey border border-silver-grey"

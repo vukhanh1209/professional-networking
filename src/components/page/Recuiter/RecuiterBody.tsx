@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Introduction from "./Information";
+import Information from "./Information";
 import { usePathname } from "next/navigation";
 import Overview from "./Overview";
 import KeySkills from "./KeySkills";
@@ -37,7 +37,7 @@ export default function RecruiterBody({ data }: any) {
             </span>
           </Link>
         </nav>
-        <Introduction />
+        <Information />
         <Overview />
         <KeySkills />
         <Benefits />

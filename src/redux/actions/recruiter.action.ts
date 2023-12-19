@@ -191,3 +191,32 @@ export const recruiterResetPassword = createAsyncThunk(
     }
   }
 );
+
+export const recruiterUpdateProfile = createAsyncThunk(
+  "recruiter/recruiterUpdateProfile",
+  async (request: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.updateCompanyProfile(request);
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+
+export const recruiterGetProfile = createAsyncThunk(
+  "recruiter/recruiterGetProfile",
+  async (request: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.getCompanyProfile();
+      console.log("Log ~ file: recruiter.action.ts:214 ~ response:", response)
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);

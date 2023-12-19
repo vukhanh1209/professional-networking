@@ -58,23 +58,23 @@ export default function CompanyInfoCard({data} : any) {
             <div className="flex flex-col w-full divide-y divide-silver-grey divide-dashed ">
                 <div className="flex justify-between py-2">
                     <h5 className="text-base text-dark-grey">Mô hình công ty</h5>
-                    <span className="text-base text-primary-black">{companyProfile.type}</span>
+                    <span className="text-base text-primary-black">{companyProfile?.type}</span>
                 </div>
                 <div className="flex justify-between py-2">
                     <h5 className="text-base text-dark-grey">Quy mô công ty</h5>
-                    <span className="text-base text-primary-black">{companyProfile.size}</span>
+                    <span className="text-base text-primary-black">{companyProfile?.size}</span>
                 </div>
                 <div className="flex justify-between py-2">
                     <h5 className="text-base text-dark-grey">Quốc gia</h5>
-                    <span className="text-base text-primary-black">{companyProfile.country}</span>
+                    <span className="text-base text-primary-black">{companyProfile?.country}</span>
                 </div>
                 <div className="flex justify-between py-2">
                     <h5 className="text-base text-dark-grey">Thời gian làm việc</h5>
-                    <span className="text-base text-primary-black">{companyProfile.working_day}</span>
+                    <span className="text-base text-primary-black">{companyProfile?.working_day}</span>
                 </div>
                 <div className="flex justify-between py-2">
                     <h5 className="text-base text-dark-grey">Làm việc ngoài giờ</h5>
-                    <span className="text-base text-primary-black">{companyProfile.ot_policy}</span>
+                    <span className="text-base text-primary-black">{companyProfile?.ot_policy}</span>
                 </div>
             </div>
         </section>

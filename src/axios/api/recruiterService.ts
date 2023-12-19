@@ -4,9 +4,10 @@ import {
   FORGOT_PASSWORD_RECRUITER,
   GET_ALL_APPLICATION,
   GET_APPLICATION,
+  GET_COMPANY,
   GET_JOB_BY_ID,
   LIST_ALL_JOB,
-  LOG_IN, POST_JOB, REGISTER_RECRUITER, RESET_PASSWORD_RECRUITER, UPDATE_APPLICATION, UPDATE_JOB, 
+  LOG_IN, POST_JOB, REGISTER_RECRUITER, RESET_PASSWORD_RECRUITER, UPDATE_APPLICATION, UPDATE_COMPANY, UPDATE_JOB, 
 } from "@/const/endpoint";
 
 
@@ -40,6 +41,9 @@ export const recruiterService = {
   getApplicationById: (applicationId: string) => {
     return axiosClient.get(`${GET_APPLICATION}/${applicationId}`)
   },
+  getCompanyProfile: () => {
+    return axiosClient.get(GET_COMPANY)
+  },
   updateApplication: (request: any) => {
     return axiosClient.post(`${UPDATE_APPLICATION}/${request.applicationId}`, request.requestBody)
   },
@@ -48,6 +52,9 @@ export const recruiterService = {
   },
   resetPassword: (requestBody: any) => {
     return axiosClient.post(RESET_PASSWORD_RECRUITER, requestBody)
+  },
+  updateCompanyProfile: (requestBody: any) => {
+    return axiosClient.post(UPDATE_COMPANY, requestBody)
   }
 
 };

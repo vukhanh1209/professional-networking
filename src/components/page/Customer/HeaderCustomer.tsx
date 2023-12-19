@@ -5,20 +5,24 @@ import Logo from "@/images/header/logo-2.svg";
 import Hamburger from "@/images/hamburger.svg";
 
 import { useEffect, useState } from "react";
-import { LocalStorage } from "@/utils/LocalStorage";
-import { usePathname } from "next/navigation";
-import { useAppDispatch } from "@/redux/hook";
-import { onDisplaySidebar } from "@/redux/reducers/recruiterSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import {
+  onDisplaySidebar,
+  selectRecruiterProfile,
+} from "@/redux/reducers/recruiterSlice";
+import { recruiterGetProfile } from "@/redux/actions/recruiter.action";
 
 const HeaderCustomer = () => {
-  const [profile, setProfile] = useState<any>();
-  const pathName = usePathname();
   const dispatch = useAppDispatch();
+  const profile = useAppSelector(selectRecruiterProfile);
+  console.log(
+    "Log ~ file: HeaderCustomer.tsx:20 ~ HeaderCustomer ~ profile:",
+    profile
+  );
 
   useEffect(() => {
-    const profileInStorage = LocalStorage.getProfile();
-    setProfile(profileInStorage);
-  }, [pathName]);
+    dispatch(recruiterGetProfile({}));
+  }, []);
 
   const onClickMenuIcon = () => {
     dispatch(onDisplaySidebar());
@@ -42,16 +46,18 @@ const HeaderCustomer = () => {
       </div>
       <div className="flex gap-6">
         <div className="flex items-center gap-3">
-          <Image
-            src={""}
-            width={32}
-            height={32}
-            alt="avatar"
-            className="rounded-full border border-white"
-          />
+          {profile?.companyLogo && (
+            <Image
+              src={""}
+              width={32}
+              height={32}
+              alt="avatar"
+              className="rounded-full border border-white"
+            />
+          )}
           <div className="flex gap-2 items-center">
             <span className="first-letter:uppercase font-medium text-base text-white hidden lg:inline">
-              {"WALA ICT Vietnam"}
+              {profile?.companyName}
             </span>
             {/* <div className="rotate-90 group-hover:-rotate-90 transition-all duration-300">
                         <ImageWrapper src={ArrowLeft} width={16} height={16} alt="arrow"/>
