@@ -66,7 +66,6 @@ export default function FormEditProfile({
 
       const requestBody = {
         ...data,
-        companyLogo: "",
         companyKeySkill,
       };
       const updateResponse = await dispatch(

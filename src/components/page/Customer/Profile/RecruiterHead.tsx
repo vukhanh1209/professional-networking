@@ -39,13 +39,19 @@ const RecruiterHead = ({ data }: any) => {
         </button>
         <div className="flex flex-col w-full items-center lg:flex-row lg:items-start gap-6">
           <div className="flex items-center border border-silver-grey w-[200px] lg:w-[120px] aspect-square rounded-lg p-[2px]">
-            <Image
-              src={recruiterProfile?.companyLogo || ""}
-              alt="logo"
-              width={200}
-              height={200}
-              className="w-[200px] lg:w-[120px] lg:h-[120px]"
-            />
+            {recruiterProfile?.companyLogo ? (
+              <Image
+                src={recruiterProfile?.companyLogo || ""}
+                alt="logo"
+                width={200}
+                height={200}
+                className="w-[200px] lg:w-[120px] lg:h-[120px]"
+              />
+            ) : (
+              <div className="border border-silver-grey w-[200px] lg:w-[120px] aspect-square text-xl font-semibold text-white bg-rich-grey rounded-lg p-[2px]">
+                {recruiterProfile?.companyName[0] || ""}
+              </div>
+            )}
           </div>
           <div className="flex flex-col ">
             <h2 className="text-2xl lg:text-3xl font-bold pb-2 text-center lg:text-left text-primary-black">
