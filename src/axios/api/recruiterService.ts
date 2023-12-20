@@ -18,8 +18,8 @@ export const recruiterService = {
   register : (params : any) => {
     return axiosClient.post(REGISTER_RECRUITER, params)
   },
-  getPostedJobs: () => {
-    return axiosClient.get(LIST_ALL_JOB)
+  getPostedJobs: (page : number) => {
+    return axiosClient.get(`${LIST_ALL_JOB}?page=${page}&size=20`)
   },
   getPostedJobById: (jobId : string) => {
     return axiosClient.get(`${GET_JOB_BY_ID}/${jobId}`)

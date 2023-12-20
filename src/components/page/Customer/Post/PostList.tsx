@@ -9,31 +9,60 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
 
+type PostedJobs = {
+  content: any[];
+  numberOfElements: number;
+  totalElements: number;
+  totalPages: number;
+  number: number;
+};
+
+const initialData: PostedJobs = {
+  content: [],
+  numberOfElements: 0,
+  totalElements: 0,
+  totalPages: 0,
+  number: 0,
+};
+
 export default function PostList() {
-  const [postedJobs, setPostedJobs] = useState<any[]>();
+  const [postedJobs, setPostedJobs] = useState<PostedJobs>(initialData);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const jobResponse = dispatch(recruiterGetPostedJobs({}));
+    const jobResponse = dispatch(recruiterGetPostedJobs(0));
     jobResponse.then((response) => {
       if (response.meta.requestStatus === "fulfilled") {
         setPostedJobs(response.payload);
-      } else setPostedJobs([]);
+      }
     });
   }, []);
+
+  const onChangePage = (value: number) => {
+    const jobResponse = dispatch(recruiterGetPostedJobs(value - 1));
+    jobResponse.then((response) => {
+      if (response.meta.requestStatus === "fulfilled") {
+        setPostedJobs(response.payload);
+      }
+    });
+  };
 
   return (
     <section className="w-full py-6">
       {postedJobs ? (
-        postedJobs?.length > 0 ? (
+        postedJobs?.content?.length > 0 ? (
           <>
             <h5 className="text-2xl md:text-3xl font-bold text-left text-primary-black mb-8">
-              Bạn đang có {postedJobs?.length} bài tuyển dụng
+              Bạn đang có {postedJobs?.totalElements} bài tuyển dụng
             </h5>
-            {postedJobs.map((post: any, index: number) => (
+            {postedJobs?.content?.map((post: any, index: number) => (
               <PostCard key={index} data={post} />
             ))}
-            <Pagination total={10} currentPage={1} onChange={() => {}} />
+            <Pagination
+              total={postedJobs?.totalPages}
+              currentPage={postedJobs?.number + 1}
+              onChange={onChangePage}
+            />
           </>
         ) : (
           <div className="w-full h-full flex flex-col items-center gap-4 justify-center">

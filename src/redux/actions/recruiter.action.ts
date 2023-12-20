@@ -42,9 +42,9 @@ export const recruiterLogIn = createAsyncThunk(
 
 export const recruiterGetPostedJobs = createAsyncThunk(
   "recruiter/recruiterGetPostedJobs",
-  async (params: any, { dispatch, getState, rejectWithValue }) => {
+  async (page: number, { dispatch, getState, rejectWithValue }) => {
     try {
-      const response : any = await recruiterService.getPostedJobs();
+      const response : any = await recruiterService.getPostedJobs(page);
       return response;
     }
     catch (err : any) {
