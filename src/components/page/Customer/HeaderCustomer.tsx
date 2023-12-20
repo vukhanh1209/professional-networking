@@ -15,10 +15,6 @@ import { recruiterGetProfile } from "@/redux/actions/recruiter.action";
 const HeaderCustomer = () => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector(selectRecruiterProfile);
-  console.log(
-    "Log ~ file: HeaderCustomer.tsx:20 ~ HeaderCustomer ~ profile:",
-    profile
-  );
 
   useEffect(() => {
     dispatch(recruiterGetProfile({}));
@@ -48,7 +44,7 @@ const HeaderCustomer = () => {
         <div className="flex items-center gap-3">
           {profile?.companyLogo && (
             <Image
-              src={""}
+              src={profile?.companyLogo}
               width={32}
               height={32}
               alt="avatar"
