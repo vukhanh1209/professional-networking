@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import NAB from "@/images/NAB.png";
 import LocationPin from "@/images/location-pin.svg";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
@@ -41,15 +41,15 @@ const RecruiterHead = ({ data }: any) => {
           <div className="flex items-center border border-silver-grey w-[200px] lg:w-[120px] aspect-square rounded-lg p-[2px]">
             {recruiterProfile?.companyLogo ? (
               <Image
-                src={recruiterProfile?.companyLogo || ""}
+                src={recruiterProfile?.companyLogo}
                 alt="logo"
                 width={200}
                 height={200}
                 className="w-[200px] lg:w-[120px] lg:h-[120px]"
               />
             ) : (
-              <div className="border border-silver-grey w-[200px] lg:w-[120px] aspect-square text-xl font-semibold text-white bg-rich-grey rounded-lg p-[2px]">
-                {recruiterProfile?.companyName[0] || ""}
+              <div className="flex items-center justify-center border border-silver-grey w-[200px] lg:w-[120px] aspect-square text-xl font-semibold text-white bg-rich-grey rounded-lg p-[2px]">
+                <span>{recruiterProfile?.companyName[0] || ""}</span>
               </div>
             )}
           </div>
