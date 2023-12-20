@@ -38,13 +38,13 @@ export default function RecruiterOverview() {
         Giới thiệu công ty
       </h1>
       <div className="w-full py-4 leading-7 text-primary-black">
-        {renderContent(recruiterProfile?.description || overview.content)}
+        {renderContent(recruiterProfile?.description || "")}
       </div>
       <div className="flex flex-col lg:flex-row lg:items-center gap-6 pt-4">
         {recruiterProfile?.website && (
           <Link
             target="_blank"
-            href={recruiterProfile?.website}
+            href={recruiterProfile?.website || "/"}
             className="flex gap-2 items-center text-hyperlink text-base"
           >
             <Image src={Globe} width={20} height={20} alt="website" />

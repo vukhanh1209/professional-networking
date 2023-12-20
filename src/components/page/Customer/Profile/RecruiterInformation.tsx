@@ -24,7 +24,7 @@ export default function RecruiterInformation() {
             Mô hình công ty
           </h5>
           <span className="text-base text-primary-black">
-            {recruiterProfile?.companyType || "Product"}
+            {recruiterProfile?.companyType || ""}
           </span>
         </div>
         <div className="flex justify-between lg:flex-col col-span-full lg:col-span-1 py-2 lg:py-0 lg:pr-4">
@@ -32,13 +32,15 @@ export default function RecruiterInformation() {
             Quy mô công ty
           </h5>
           <span className="text-base text-primary-black">
-            {recruiterProfile?.companySize || "100 - 200"}
+            {`${recruiterProfile?.minCompanySize || ""} - ${
+              recruiterProfile?.maxCompanySize || ""
+            }`}
           </span>
         </div>
         <div className="flex justify-between lg:flex-col col-span-full lg:col-span-1 py-2 lg:py-0 lg:pr-4">
           <h5 className="text-base lg:text-sm text-dark-grey">Quốc gia</h5>
           <span className="text-base text-primary-black">
-            {recruiterProfile?.country || "USA"}
+            {recruiterProfile?.country || ""}
           </span>
         </div>
         <div className="flex justify-between lg:flex-col col-span-full lg:col-span-1 py-2 lg:py-0 lg:pr-4">
@@ -46,7 +48,9 @@ export default function RecruiterInformation() {
             Thời gian làm việc
           </h5>
           <span className="text-base text-primary-black">
-            {companyProfile.working_day}
+            {`${recruiterProfile?.workingFrom || ""} - ${
+              recruiterProfile?.workingTo || ""
+            }`}
           </span>
         </div>
         <div className="flex justify-between lg:flex-col col-span-full lg:col-span-1 py-2 lg:py-0 lg:pr-4">
@@ -54,7 +58,7 @@ export default function RecruiterInformation() {
             Làm việc ngoài giờ
           </h5>
           <span className="text-base text-primary-black">
-            {companyProfile.ot_policy}
+            {recruiterProfile?.overtimePolicy || ""}
           </span>
         </div>
       </div>

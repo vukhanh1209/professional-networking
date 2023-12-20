@@ -35,7 +35,7 @@ export default function RecruiterKeySkills() {
         Chuyên môn của chúng tôi
       </h1>
       <div className="flex flex-col gap-4 pt-4 w-full">
-        {renderKeySkills(data.skills)}
+        {renderKeySkills(recruiterProfile?.companyKeySkill)}
         {renderSkillContent(data.content)}
       </div>
     </div>
@@ -45,13 +45,13 @@ export default function RecruiterKeySkills() {
 const renderKeySkills = (skillList: any) => {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      {skillList.map((skill: string, index: number) => (
+      {skillList.map((skill: any, index: number) => (
         <Link
           key={index}
           href="/"
           className="flex items-center py-1 px-[10px] h-full text-xs rounded-full bg-white text-rich-grey border border-silver-grey hover:border-rich-grey"
         >
-          {skill}
+          {skill?.title}
         </Link>
       ))}
     </div>

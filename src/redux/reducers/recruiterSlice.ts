@@ -4,7 +4,7 @@ import { ApplicationResponse } from "@/types/recruiter.type";
 import { recruiterApplicationById, recruiterGetProfile } from "../actions/recruiter.action";
 
 
-type Profile = {
+export type RecruiterProfile = {
     companyId: number;
     companyName : string;
     companyLogo: string;
@@ -15,8 +15,12 @@ type Profile = {
     phoneNumber : string;
     industry : string;
     createdDate : string;
+    minCompanySize: number;    
+    maxCompanySize: number;
+    overtimePolicy: string;
     countJobOpenings: number;
-    companySize: number;
+    workingFrom: string;
+    workingTo: string;
     country: string;
     foundedDate: string;
     companyKeySkill: any[];
@@ -34,7 +38,11 @@ const initProfile = {
     industry : '',
     createdDate : '',
     countJobOpenings: 0,
-    companySize: 0,
+    minCompanySize: 0,    
+    maxCompanySize: 0,
+    overtimePolicy: '',
+    workingFrom: '',
+    workingTo: '',
     country: '',
     foundedDate: '',
     companyKeySkill: []
@@ -43,11 +51,11 @@ const initProfile = {
 const initialState = {
     isOpeningSidebar: false,
     applicationData: {} as ApplicationResponse,
-    profile: initProfile as Profile
+    profile: initProfile as RecruiterProfile
 }
 
 const recruiterSlice = createSlice({
-    name: 'candidate',
+    name: 'recruiter',
     initialState: initialState,
     reducers: {
         onDisplaySidebar: (state) => {

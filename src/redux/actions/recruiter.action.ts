@@ -197,6 +197,9 @@ export const recruiterUpdateProfile = createAsyncThunk(
   async (request: any, { dispatch, getState, rejectWithValue }) => {
     try {
       const response : any = await recruiterService.updateCompanyProfile(request);
+      if(response.status === 200) {
+        notifySuccess("Cập nhật hồ sơ công ty thành công")
+      }
       return response;
     }
     catch (err : any) {

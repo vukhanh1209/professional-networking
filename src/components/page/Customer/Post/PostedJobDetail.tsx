@@ -93,11 +93,12 @@ const PostedJobDetail = () => {
       <article className="flex w-full">
         <div className="flex flex-col gap-3 py-6 bg-white rounded-lg w-full h-fit text-primary-black">
           <div className="px-6 relative">
-            <div className="absolute right-6 top-2 flex w-fit gap-5">
-              <button onClick={onOpenUpdateForm} className="">
-                <Image src={Edit} width={32} height={32} alt="edit" />
-              </button>
-            </div>
+            <button
+              onClick={onOpenUpdateForm}
+              className="absolute right-6 top-2 w-fit"
+            >
+              <Image src={Edit} width={32} height={32} alt="edit" />
+            </button>
             <div className="flex flex-col w-full  border-b border-silver-grey pb-6">
               <div className="flex flex-col md:flex-row items-center justify-center gap-3">
                 <div className="flex items-center justify-center px-2 bg-white w-fit aspect-square rounded-lg border border-silver-grey">
