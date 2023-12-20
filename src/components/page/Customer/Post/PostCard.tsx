@@ -104,9 +104,9 @@ const PostCard = ({ data }: PostCardProps) => {
             <span className="pl-2">{data?.address}</span>
           </div>
 
-          {fakeData?.skills?.length > 0 && (
+          {data?.skills?.length > 0 && (
             <div className="flex flex-wrap w-full items-center gap-2 mt-3 mb-2">
-              {fakeData?.skills.map((skill: string, index: number) => (
+              {data?.skills.map((skill: string, index: number) => (
                 <div
                   key={index}
                   className="py-1 px-[10px] text-xs rounded-full bg-white text-rich-grey border border-silver-grey"

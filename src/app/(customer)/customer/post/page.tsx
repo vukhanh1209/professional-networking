@@ -29,7 +29,9 @@ export default function FormPostedJob() {
 
   const onSave = async (data: any) => {
     if (data) {
-      let skills = data.skills.split(",").map((skill: string) => skill.trim());
+      let skills = data?.skills
+        ?.split(",")
+        .map((skill: string) => skill.trim());
       skills = skills.filter((skill: string) => skill !== "");
       const requestBody = {
         ...data,
