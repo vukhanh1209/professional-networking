@@ -67,7 +67,7 @@ export default function ModalFilter() {
     <>
       {isOpenFilterModal ? (
         <div className="fixed top-0 left-0 right-0 flex items-center justify-center w-full h-screen bg-blur-form z-[100] px-5 py-8 overflow-auto">
-          <section className="h-fit w-full md:max-w-[50%] bg-white rounded-lg mt-10">
+          <section className="h-fit w-full pb-5 md:max-w-[50%] bg-white rounded-lg mt-10 overflow-hidden">
             <div className="flex justify-between items-center border-b border-silver-grey py-4 px-8 ">
               <h1 className="font-bold text-xl text-primary-black ">Bộ lọc</h1>
 
@@ -82,35 +82,39 @@ export default function ModalFilter() {
               </button>
             </div>
 
-            <div className="flex flex-col gap-8 p-8">
-              <FilterCandidateLevel />
-              {/* <InputRange
+            <div className="max-h-[400px] md:max-h-[500px] overflow-auto">
+              <div className="flex flex-col gap-8 p-8">
+                <FilterCandidateLevel />
+                {/* <InputRange
                 maxValue={10000}
                 minValue={500}
                 step={500}
                 value={salary}
                 onChange={(value) => setSalary({ value })}
               /> */}
-              <FilterSalary />
-              <FilterCompanyType />
-              <FilterJobType />
-            </div>
+                <FilterSalary />
+                <FilterCompanyType />
+                <FilterJobType />
+              </div>
 
-            <div className="flex justify-between gap-2 py-4 px-8 border-t border-t-silver-grey">
-              <button
-                type="button"
-                onClick={onDeleteAllFilter}
-                className="text-hyperlink text-base py-2"
-              >
-                Xóa bộ lọc &nbsp;
-                {filterCount > 0 ? <span>({filterCount})</span> : null}
-              </button>
-              <button
-                onClick={onApplyFilter}
-                className="text-white bg-primary-red text-base py-3 px-6 rounded-lg hover:bg-dark-red max-w-[180px] w-full"
-              >
-                Áp dụng
-              </button>
+              <div className="flex items-center justify-between gap-2 py-4 px-8 border-t border-t-silver-grey">
+                <button
+                  type="button"
+                  onClick={onDeleteAllFilter}
+                  className="text-hyperlink text-base py-2 flex items-center"
+                >
+                  <span>Xóa bộ lọc &nbsp;</span>
+                  <span>
+                    {filterCount > 0 ? <span>({filterCount})</span> : null}
+                  </span>
+                </button>
+                <button
+                  onClick={onApplyFilter}
+                  className="text-white bg-primary-red text-base py-3 px-4 md:px-6 rounded-lg hover:bg-dark-red max-w-[120px] md:max-w-[180px] w-full"
+                >
+                  Áp dụng
+                </button>
+              </div>
             </div>
           </section>
         </div>

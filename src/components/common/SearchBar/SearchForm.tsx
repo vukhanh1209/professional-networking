@@ -42,7 +42,7 @@ const SearchForm = () => {
     <div className=" relative w-full h-fit ">
       <form
         onSubmit={handleSubmit(onSearchJob)}
-        className="flex flex-col md:flex-row gap-3"
+        className="flex flex-col lg:flex-row gap-3"
       >
         <CityOption />
         <div className={`flex md:gap-3 w-full h-14 rounded-lg `}>

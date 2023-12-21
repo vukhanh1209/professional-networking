@@ -42,8 +42,8 @@ const CityOption = () => {
     }, 200);
   };
   return (
-    <div className="group relative">
-      <div className="h-full bg-white flex items-center md:justify-between gap-x-2 py-[6px] px-4 rounded-lg border border-dropdown-border group-hover:border-[#FF533A] min-w-[280px]">
+    <div className="group relative  ">
+      <div className="h-full bg-white min-h-[56px] flex items-center md:justify-between gap-x-2 py-[6px] px-4 rounded-lg border border-dropdown-border group-hover:border-[#FF533A] min-w-[280px]">
         <div className="flex item-center shrink-0">
           <Image
             src={LocationPin}

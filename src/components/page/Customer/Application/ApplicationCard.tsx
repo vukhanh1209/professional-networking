@@ -21,24 +21,27 @@ export default function ApplicationCard({
       <span className="text-dark-grey text-sm">
         Ứng tuyển ngày {data.submittedAt}
       </span>
-      <Link
-        onClick={(e) => e.stopPropagation()}
-        href={`/customer/posted-job?id=${data.jobId}`}
-        className="font-semibold text-xl mt-2 mb-1 hover:text-hyperlink"
-      >
-        {data.jobTitle}
-      </Link>
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
+        <Link
+          onClick={(e) => e.stopPropagation()}
+          href={`/customer/posted-job?id=${data.jobId}`}
+          className="font-semibold text-xl mt-2 mb-1 hover:text-hyperlink"
+        >
+          {data.jobTitle}
+        </Link>
+
+        <button
+          className={`${
+            data.status === "APPROVED" &&
+            "border-available-green text-available-green"
+          } ${
+            data.status === "DELIVERED" && "border-hyperlink text-hyperlink"
+          }  px-2 py-1 rounded-lg border text-sm w-fit md:mt-2`}
+        >
+          {data.status}
+        </button>
+      </div>
       <span className="">{data.candidateName}</span>
-      <button
-        className={`${
-          data.status === "APPROVED" &&
-          "border-available-green text-available-green"
-        } ${
-          data.status === "DELIVERED" && "border-hyperlink text-hyperlink"
-        }  absolute px-2 py-1 rounded-lg right-6 border  text-sm`}
-      >
-        {data.status}
-      </button>
     </div>
   );
 }

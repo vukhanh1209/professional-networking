@@ -74,7 +74,7 @@ export default function FormSkills() {
           onSave={onSave}
           handleSubmit={handleSubmit}
         >
-          <div className="flex flex-col w-full py-6 px-8 gap-6 h-[300px]">
+          <div className="flex flex-col w-full py-6 px-8 gap-6 h-[300px] overflow-auto">
             <div className="relative flex flex-col md:flex-row gap-x-2 gap-y-3">
               <InputSkill setSkill={setSkill} skill={skill} />
 

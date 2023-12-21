@@ -77,7 +77,7 @@ const JobCard = ({
       onDoubleClick={onClickJobCard}
       className={`${isSelected && "job-card--selected"} ${
         isSuperHot && "job-card--super-hot"
-      } bg-white relative mb-4 rounded-lg w-full h-fit cursor-pointer shadow-md`}
+      } bg-white relative mb-4 rounded-lg w-full h-full cursor-pointer shadow-md`}
     >
       <div
         className={`flex flex-col ${padding} w-full divide-y divide-dashed divide-silver-grey`}

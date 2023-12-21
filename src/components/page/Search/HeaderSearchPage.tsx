@@ -27,7 +27,7 @@ const HeaderSearchPage = () => {
 
   return (
     <div className="flex flex-col lg:flex-row justify-between lg:items-center w-full gap-y-8">
-      <h1 className="text-3xl font-bold text-left">
+      <h1 className="text-2xl md:text-3xl font-bold text-left">
         {/* {totalJob} việc làm <span className="text-primary-red">{keyword}</span> */}
         {isSearching ? (
           <span className="animate-pulse">Đang tìm kiếm...</span>
@@ -36,14 +36,14 @@ const HeaderSearchPage = () => {
         )}
       </h1>
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-3 gap-y-5">
-        <button className="flex items-center justify-center gap-2 border border-primary-red rounded-lg py-2 px-5 hover:bg-white-red transition-all duration-100 ">
+        {/* <button className="flex items-center justify-center gap-2 border border-primary-red rounded-lg py-2 px-5 hover:bg-white-red transition-all duration-100 ">
           <div className="flex items-center shrink-0">
             <Image src={BellIcon} alt="notification" className="w-5 h-5" />
           </div>
           <span className="text-base font-medium text-primary-red">
             Nhận thông báo
           </span>
-        </button>
+        </button> */}
 
         <button
           onClick={onOpenFilterModal}

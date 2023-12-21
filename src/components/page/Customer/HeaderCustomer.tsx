@@ -48,7 +48,7 @@ const HeaderCustomer = () => {
               width={32}
               height={32}
               alt="avatar"
-              className="rounded-full border border-white"
+              className="rounded-full h-8 w-8 aspect-square border border-white"
             />
           )}
           <div className="flex gap-2 items-center">

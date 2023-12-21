@@ -23,11 +23,11 @@ export default function InfoSection() {
   };
 
   return (
-    <div className="relative flex flex-col md:flex-row  px-6 pt-6 pb-8 rounded-lg bg-white">
+    <div className="relative flex flex-col items-center md:flex-row  px-6 pt-6 pb-8 rounded-lg bg-white">
       <button className="absolute right-6 top-6" onClick={onOpenInfoForm}>
         <Image loading="lazy" src={Edit} width={20} height={20} alt="edit" />
       </button>
-      <div className="flex items-center justify-center h-full w-[120px] md:h-full aspect-square shrink-0 rounded-full border border-rich-grey bg-dark-grey">
+      <div className="flex mb-5 md:mb-0 items-center justify-center h-full w-[120px] md:h-full aspect-square shrink-0 rounded-full border border-rich-grey bg-dark-grey">
         <p className="leading-[100%] text-6xl font-semibold  text-white">
           {profile?.fullName ? profile?.fullName[0] : ""}
         </p>

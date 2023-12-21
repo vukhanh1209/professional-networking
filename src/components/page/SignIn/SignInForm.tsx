@@ -46,7 +46,7 @@ const SignInForm = () => {
 
   return (
     <form
-      className="flex flex-col items-start gap-8"
+      className="flex flex-col items-start gap-8 mt-5 md:mt-0"
       onSubmit={handleSubmit(onLoginSubmit)}
     >
       <div className="flex flex-col w-full">

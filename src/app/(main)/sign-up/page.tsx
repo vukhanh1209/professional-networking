@@ -18,11 +18,11 @@ export default function SignUp() {
                     </div> */}
         </div>
         <div className="flex flex-wrap justify-between ">
-          <section className="flex flex-col max-w-[536px] ">
+          <section className="flex flex-col w-full md:max-w-[536px] ">
             <h1 className="text-primary-black text-3xl font-bold">
               Đăng ký tài khoản
             </h1>
-            <div className="py-4">
+            {/* <div className="py-4">
               <input
                 type="checkbox"
                 name="term"
@@ -59,12 +59,12 @@ export default function SignUp() {
               <p className="pl-2 text-base font-semibold text-[#ed1b2f]">
                 Đăng ký bằng Google
               </p>
-            </button>
-            <div className="flex items-center py-4">
+            </button> */}
+            {/* <div className="flex items-center py-4">
               <div className="w-full h-[1px] bg-[#dedede]"></div>
               <p className="text-[#121212] text-sm px-2">hoặc</p>
               <div className="w-full h-[1px] bg-[#dedede]"></div>
-            </div>
+            </div> */}
             <SignUpForm />
             <div className="text-center text-[#121212] mb-4 lg:mb-0">
               Bạn đã có tài khoản?

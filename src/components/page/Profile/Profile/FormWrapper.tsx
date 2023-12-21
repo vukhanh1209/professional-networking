@@ -20,7 +20,7 @@ export default function FormWrapper({
     <div className="fixed top-0 left-0 irght-0 flex w-full items-center justify-center h-screen bg-blur-form z-[100] px-10">
       <form
         onSubmit={handleSubmit(onSave)}
-        className="h-fit w-full md:max-w-[50%] bg-white rounded-lg"
+        className="h-fit w-full md:max-w-[50%] bg-white rounded-lg overflow-hidden"
       >
         <div className="flex justify-between py-4 pr-4 pl-8 border-b-2 border-silver-grey">
           <h2 className="font-bold text-xl text-primary-black ">{title}</h2>
@@ -29,7 +29,7 @@ export default function FormWrapper({
           </button>
         </div>
         {children}
-        <div className="flex justify-end gap-2 py-3 px-5 border-t border-t-silver-grey">
+        <div className="flex justify-between md:justify-end gap-2 py-3 px-5 border-t border-t-silver-grey">
           <button
             type="button"
             onClick={onClose}
