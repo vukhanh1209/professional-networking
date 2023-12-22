@@ -178,12 +178,18 @@ const PostedJobDetail = () => {
 
               <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
                 <h2 className="text-xl font-bold mb-4">Mô tả công việc</h2>
-                {renderList(postData?.description)}
+                <div
+                  className="rendered-content__wrapper"
+                  dangerouslySetInnerHTML={{ __html: postData?.description }}
+                ></div>
               </div>
 
               <div className="py-6 border-b gap-2 border-dashed border-silver-grey">
                 <h2 className="text-xl font-bold mb-4">Yêu cầu công việc</h2>
-                {renderList(postData?.requirements)}
+                <div
+                  className="rendered-content__wrapper"
+                  dangerouslySetInnerHTML={{ __html: postData?.requirements }}
+                ></div>
               </div>
 
               <div className="py-6 border-b gap-2 border-silver-grey">

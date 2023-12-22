@@ -6,7 +6,7 @@ import RecruiterOverview from "@/components/page/Customer/Profile/RecruiterOverv
 
 export default function RecruiterProfile() {
   return (
-    <main className="flex flex-col gap-5 w-full min-h-screen bg-white px-5 lg:px-[1.875rem] py-5 pb-10">
+    <main className="flex flex-col gap-5 w-full min-h-screen bg-white px-5 lg:px-[1.875rem] py-5 pb-10 max-w-[1200px]">
       <RecruiterHead />
       <RecruiterInformation />
       <RecruiterOverview />

@@ -8,6 +8,8 @@ import {
   recruiterUpdateJob,
 } from "@/redux/actions/recruiter.action";
 import { JOB_TYPE, LOCATION } from "@/const/job";
+import EdtiorWrapper from "@/components/common/EditorWrapper";
+import { useState } from "react";
 
 const schema = yup.object().shape({
   jobTitle: yup.string().required("Vui lòng nhập tiêu đề công việc"),
@@ -15,8 +17,8 @@ const schema = yup.object().shape({
   maxSalary: yup.number().required("Vui lòng nhập mức lương tối đa"),
   location: yup.string().required("Vui lòng nhập nơi làm việc"),
   jobType: yup.string().required("Vui lòng nhập loại công việc"),
-  description: yup.string().required("Vui lòng nhập mô tả công việc"),
-  requirements: yup.string().required("Vui lòng nhập yêu cầu công việc"),
+  // description: yup.string().required("Vui lòng nhập mô tả công việc"),
+  // requirements: yup.string().required("Vui lòng nhập yêu cầu công việc"),
   skills: yup.string().required("Vui lòng nhập kỹ năng yêu cầu cho công việc"),
 });
 
@@ -32,23 +34,40 @@ export default function FormPostedJob({
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  const [description, setDescription] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [requirements, setRequirements] = useState("");
+  const [requirementsError, setRequirementsError] = useState("");
 
   const dispatch = useAppDispatch();
 
   const onSave = async (data: any) => {
-    if (data) {
-      let skills = data.skills.split(",").map((skill: string) => skill.trim());
-      skills = skills.filter((skill: string) => skill !== "");
+    if (!description) {
+      setDescriptionError("Vui lòng nhập mô tả công việc");
+    }
+    if (!requirements) {
+      setRequirementsError("Vui lòng nhập yêu cầu công việc");
+    }
+    if (data && description && description) {
+      setDescriptionError("");
+      setRequirementsError("");
+      let skills = data?.skills
+        ?.split(",")
+        .map((skill: string) => skill.trim());
+      skills = skills?.filter((skill: string) => skill !== "");
       const request = {
         id: jobId,
         body: {
           ...data,
           skills,
+          description,
+          requirements,
         },
       };
       const updateResponse = await dispatch(recruiterUpdateJob(request));
       if (updateResponse.meta.requestStatus === "fulfilled") {
         dispatch(recruiterGetPostedJob(jobId));
+        onClose();
       }
     }
   };
@@ -206,20 +225,11 @@ export default function FormPostedJob({
                 Mô tả công việc
                 <span className="ml-1 text-primary-red">*</span>
               </label>
-              <textarea
-                {...register("description")}
+              <EdtiorWrapper
+                onChange={(value: string) => setDescription(value)}
+                error={descriptionError}
                 defaultValue={postData?.description}
-                placeholder="Nhập mô tả cụ thể cho công việc của bạn..."
-                id="description"
-                rows={6}
-                className="w-full p-4 rounded-lg border border-silver-grey overflow-auto"
-                name="description"
               />
-              {errors?.description && (
-                <span className="absolute text-primary-red text-sm left-0 top-[105%]">
-                  {String(errors?.description?.message)}
-                </span>
-              )}
             </div>
 
             <div className="relative flex flex-col gap-2">
@@ -227,20 +237,11 @@ export default function FormPostedJob({
                 Yêu cầu công việc
                 <span className="ml-1 text-primary-red">*</span>
               </label>
-              <textarea
-                {...register("requirements")}
+              <EdtiorWrapper
+                onChange={(value: string) => setRequirements(value)}
+                error={requirementsError}
                 defaultValue={postData?.requirements}
-                placeholder="Nhập yêu cầu cụ thể cho công việc của bạn..."
-                id="requirements"
-                rows={6}
-                className="w-full p-4 rounded-lg border border-silver-grey overflow-auto"
-                name="requirements"
               />
-              {errors?.requirements && (
-                <span className="absolute text-primary-red text-sm left-0 top-[105%]">
-                  {String(errors?.requirements?.message)}
-                </span>
-              )}
             </div>
           </div>
         </FormWrapper>

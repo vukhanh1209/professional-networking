@@ -201,12 +201,20 @@ const JobDetailCard = ({ data }: any) => {
 
           <div className="py-6 gap-2 ">
             <h2 className="text-xl font-bold mb-4">Mô tả công việc</h2>
-            {renderList(data?.description)}
+            {/* {renderList(data?.description)} */}
+            <div
+              className="rendered-content__wrapper"
+              dangerouslySetInnerHTML={{ __html: data?.description }}
+            ></div>
           </div>
 
           <div className="py-6 gap-2 ">
             <h2 className="text-xl font-bold mb-4">Yêu cầu công việc</h2>
-            {renderList(data?.requirements)}
+            {/* {renderList(data?.requirements)} */}
+            <div
+              className="rendered-content__wrapper"
+              dangerouslySetInnerHTML={{ __html: data?.requirements }}
+            ></div>
           </div>
 
           <div className="py-6 gap-2 ">

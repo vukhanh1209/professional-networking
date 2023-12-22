@@ -119,3 +119,30 @@
         background-color: #c82222;
     }
 }
+
+.quill {
+    max-width: 100%;
+    .ql-container {
+        height: 200px;
+        width: 100%;
+    }
+}
+
+.recruiter__editor-wrapper {
+    @media screen and (min-width: 720px) {
+        max-width: calc(100vw - 368px);
+    }
+}
+
+.rendered-content__wrapper {
+    ul {
+        list-style-type: disc;
+        list-style-position: inside;
+        li {
+            line-height: 1.8;
+        }
+    }
+    li::marker {
+        color: #ed1b2f;
+    }
+}

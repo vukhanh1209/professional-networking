@@ -15,7 +15,9 @@ export default function CustomerLayout({
         <Sidebar />
         <SidebarMobile />
 
-        <div className="md:ml-[350px] w-full">{children}</div>
+        <div className="md:ml-[350px] w-full flex justify-center">
+          {children}
+        </div>
       </div>
       <Footer />
     </>
