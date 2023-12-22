@@ -214,7 +214,6 @@ export const recruiterGetProfile = createAsyncThunk(
   async (request: any, { dispatch, getState, rejectWithValue }) => {
     try {
       const response : any = await recruiterService.getCompanyProfile();
-      console.log("Log ~ file: recruiter.action.ts:214 ~ response:", response)
       return response;
     }
     catch (err : any) {

@@ -54,7 +54,6 @@ axiosClient.interceptors.response.use(
   },
   (error) => {
     const originalRequest = error.config;
-    console.log("Log ~ file: axiosClient.ts:60 ~ error.response?.status:", error.response)
     if (error.response?.status === 401 || error.code === 'ERR_NETWORK') {
       clearAuthToken()
       notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại")
@@ -139,8 +138,6 @@ const handleResponse = (res: AxiosResponse) => {
 const handleError = (error: AxiosError) => {
   // const { data } = error?.response;
   const data =  error?.response?.data
-  console.log("Log ~ file: axiosClient.ts:144 ~ handleError ~ error:", error)
-  console.error(error);
 
   return data;
 };

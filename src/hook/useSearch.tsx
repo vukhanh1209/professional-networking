@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import {useRouter} from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const useSearch = () => {
   const router = useRouter();
@@ -16,8 +16,8 @@ const useSearch = () => {
   } = useForm({
     defaultValues: {
       keyword: "",
-      location: ""
-    }
+      location: "",
+    },
   });
 
   const onBlurInput = useCallback(() => {
@@ -39,17 +39,20 @@ const useSearch = () => {
     setValue("");
   }, []);
 
-  const onSubmit = useCallback((data : any) => {
-    console.log("Log ~ file: useSearch.tsx:43 ~ onSubmit ~ data:", data)
-    // const valueLowerCase = value.toLowerCase();
-    const keyword = data?.keyword;
-    const keywordQuery = `key=${keyword}`
-    const location = data?.location;
-    const locationQuery = `location=${location}`
+  const onSubmit = useCallback(
+    (data: any) => {
+      // const valueLowerCase = value.toLowerCase();
+      const keyword = data?.keyword;
+      const keywordQuery = `key=${keyword}`;
+      const location = data?.location;
+      const locationQuery = `location=${location}`;
 
-    if(keyword || location) router.push(`/search?${keywordQuery}&${locationQuery}`);
-    else router.push("/search")
-  }, [value]);
+      if (keyword || location)
+        router.push(`/search?${keywordQuery}&${locationQuery}`);
+      else router.push("/search");
+    },
+    [value]
+  );
 
   return useMemo(() => {
     return {

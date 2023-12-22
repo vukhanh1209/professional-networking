@@ -8,6 +8,7 @@ import { JOB_TYPE, LOCATION } from "@/const/job";
 import EdtiorWrapper from "@/components/common/EditorWrapper";
 import { useMemo, useState } from "react";
 import { notifyErrors } from "@/utils/notification";
+import { useRouter } from "next/navigation";
 
 const schema = yup.object().shape({
   jobTitle: yup.string().required("Vui lòng nhập tiêu đề công việc"),
@@ -27,6 +28,7 @@ export default function FormPostedJob() {
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  const router = useRouter();
 
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
@@ -57,7 +59,9 @@ export default function FormPostedJob() {
         requirements,
       };
       const postJobResponse = await dispatch(recruiterPostJob(requestBody));
-      if (postJobResponse.meta.requestStatus === "fulfilled") reset();
+      if (postJobResponse.meta.requestStatus === "fulfilled") {
+        router.push(`/customer/posted-job`);
+      }
     }
   };
 

@@ -58,10 +58,7 @@ export default function FormSkills() {
 
   const removeSkill = (index: number) => {
     let newSkills = [...currentSkills];
-
     newSkills.splice(index, 1);
-    console.log(newSkills);
-
     setCurrentSkills(newSkills);
   };
 

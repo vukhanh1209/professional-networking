@@ -22,10 +22,6 @@ import { useEffect } from "react";
 
 export default function SearchPageBody() {
   const seachJobsData = useAppSelector(selectSearchJobsData);
-  console.log(
-    "Log ~ file: SearchPageBody.tsx:25 ~ SearchPageBody ~ seachJobsData:",
-    seachJobsData
-  );
   const isSearching = useAppSelector(selectSearchingStatus);
 
   const dispatch = useAppDispatch();
@@ -57,7 +53,6 @@ export default function SearchPageBody() {
   };
 
   useEffect(() => {
-    console.log("SEARCH");
     onChangePage(1);
   }, [searchParams]);
   return (
