@@ -48,7 +48,7 @@ export const recruiterGetPostedJobs = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message || err?.errorCode)
+      // notifyErrors(err?.message || err?.errorCode)
       return rejectWithValue(err?.message || err?.errorCode);
     }
   }
@@ -62,7 +62,7 @@ export const recruiterGetPostedJob = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message || err?.errorCode)
+      // notifyErrors(err?.message || err?.errorCode)
       return rejectWithValue(err?.message || err?.errorCode);
     }
   }
@@ -127,7 +127,7 @@ export const recruiterAllApplication = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message || err?.errorCode)
+      // notifyErrors(err?.message || err?.errorCode)
       return rejectWithValue(err?.message || err?.errorCode);
     }
   }
@@ -141,7 +141,7 @@ export const recruiterApplicationById = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message || err?.errorCode)
+      // notifyErrors(err?.message || err?.errorCode)
       return rejectWithValue(err?.message || err?.errorCode);
     }
   }
@@ -217,7 +217,7 @@ export const recruiterGetProfile = createAsyncThunk(
       return response;
     }
     catch (err : any) {
-      notifyErrors(err?.message || err?.errorCode)
+      // notifyErrors(err?.message || err?.errorCode)
       return rejectWithValue(err?.message || err?.errorCode);
     }
   }

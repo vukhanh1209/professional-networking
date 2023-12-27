@@ -8,8 +8,9 @@ import ArrowLeft from "@/images/arrow-left.svg";
 import { jobGetDataById } from "@/redux/actions";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/hook";
+import isAuth from "@/components/common/isAuth";
 
-export default function Application() {
+function Application() {
   const router = useRouter();
 
   const handleClickBack = () => {
@@ -64,3 +65,5 @@ export default function Application() {
     </div>
   );
 }
+
+export default isAuth(Application);

@@ -53,10 +53,10 @@ axiosClient.interceptors.response.use(
     return handleResponse(response);
   },
   (error) => {
-    const originalRequest = error.config;
+    // const originalRequest = error.config;
     if (error.response?.status === 401 || error.code === 'ERR_NETWORK') {
       clearAuthToken()
-      notifyWarning("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại")
+      return
      
       // if (isRefreshing) {
       //   return new Promise(function (resolve, reject) {

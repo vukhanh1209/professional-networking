@@ -11,7 +11,7 @@ export const jobGetDataById = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message || err?.errorCode)
+      // notifyErrors(err?.message || err?.errorCode)
       return rejectWithValue(err?.message || err?.errorCode);
     }
   }
@@ -26,7 +26,7 @@ export const markAsViewd = createAsyncThunk(
       return response;
     }
     catch(err : any) {
-      notifyErrors(err?.message || err?.errorCode)
+      // notifyErrors(err?.message || err?.errorCode)
       return rejectWithValue(err?.message || err?.errorCode);
     }
   }

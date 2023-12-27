@@ -7,8 +7,8 @@ import { recruiterPostJob } from "@/redux/actions/recruiter.action";
 import { JOB_TYPE, LOCATION } from "@/const/job";
 import EdtiorWrapper from "@/components/common/EditorWrapper";
 import { useMemo, useState } from "react";
-import { notifyErrors } from "@/utils/notification";
 import { useRouter } from "next/navigation";
+import isAuth from "@/components/common/isAuth";
 
 const schema = yup.object().shape({
   jobTitle: yup.string().required("Vui lòng nhập tiêu đề công việc"),
@@ -21,7 +21,7 @@ const schema = yup.object().shape({
   skills: yup.string().required("Vui lòng nhập kỹ năng yêu cầu cho công việc"),
 });
 
-export default function FormPostedJob() {
+function FormPostedJob() {
   const {
     register,
     handleSubmit,
@@ -243,3 +243,5 @@ export default function FormPostedJob() {
     </div>
   );
 }
+
+export default isAuth(FormPostedJob);
