@@ -43,6 +43,8 @@ export default function ModalFilter() {
   const onApplyFilter = () => {
     const keyword = searchParam.get("key") || "";
     let location = searchParam.get("location") || "";
+    const params = new URLSearchParams(searchParam);
+    params.delete("page");
 
     if (location) {
       const locationQuery = cityData.get(location) || "";

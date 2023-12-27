@@ -53,7 +53,8 @@ export default function SearchPageBody() {
   };
 
   useEffect(() => {
-    onChangePage(1);
+    const currentPage = Number(searchParams.get("page"));
+    onChangePage(currentPage > 0 ? currentPage : 1);
   }, [searchParams]);
   return (
     <div className="flex flex-col gap-4 w-full">

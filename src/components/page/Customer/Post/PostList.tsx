@@ -8,6 +8,7 @@ import { recruiterGetPostedJobs } from "@/redux/actions/recruiter.action";
 import ClipLoader from "react-spinners/ClipLoader";
 import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 type PostedJobs = {
   content: any[];
@@ -27,10 +28,15 @@ const initialData: PostedJobs = {
 
 export default function PostList() {
   const [postedJobs, setPostedJobs] = useState<PostedJobs>(initialData);
+  const searchParams = useSearchParams();
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const jobResponse = dispatch(recruiterGetPostedJobs(0));
+    const currentPage = Number(searchParams.get("page"));
+
+    const jobResponse = dispatch(
+      recruiterGetPostedJobs(currentPage > 0 ? currentPage - 1 : 0)
+    );
     jobResponse.then((response) => {
       if (response.meta.requestStatus === "fulfilled") {
         setPostedJobs(response.payload);

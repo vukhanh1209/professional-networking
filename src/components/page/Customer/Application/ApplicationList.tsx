@@ -8,6 +8,7 @@ import Empty from "@/images/my-job/empty.svg";
 import Image from "next/image";
 import ApplicationCard from "./ApplicationCard";
 import { AppicationType, ApplicationStatus } from "@/types/recruiter.type";
+import { useSearchParams } from "next/navigation";
 
 type ApplicationsData = {
   content: any[];
@@ -24,13 +25,15 @@ export default function ApplicationList() {
   const [applicationsData, setApplicationsData] = useState<ApplicationsData>();
   const [applicationType, setApplicationType] =
     useState<AppicationType>("DELIVERED");
+    const searchParams = useSearchParams()
   const applicationList = applicationsData?.content;
 
   const dispatch = useAppDispatch();
   useEffect(() => {
+    const currentPage = Number(searchParams.get("page"));
     const jobResponse = dispatch(
       recruiterAllApplication({
-        page: 0,
+        page: currentPage > 0 ? currentPage - 1 : 0,
         size: 10,
         type: "DELIVERED",
       })

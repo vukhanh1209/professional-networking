@@ -32,7 +32,7 @@ export default function InputSkill({ skill, setSkill }: any) {
 
   const filteredSkill = useMemo(() => {
     if (!skill) return skillList;
-    const suggestionSkillList = skillList.filter((item: string) =>
+    const suggestionSkillList = skillList?.filter((item: string) =>
       item.toLowerCase().includes(skill.toLowerCase())
     );
     return suggestionSkillList;
@@ -58,13 +58,13 @@ export default function InputSkill({ skill, setSkill }: any) {
         />
         {isFocusing ? (
           <div className="absolute top-[110%] w-full bg-white max-h-[140px] overflow-y-auto py-2 border border-silver-grey rounded-lg text-primary-black shadow-md cursor-pointer">
-            {skillList.length == 0 && (
+            {skillList?.length == 0 && (
               <div className="w-full h-full flex items-center justify-center py-8">
                 <ClipLoader color="#ed1b2f" size={30} />
               </div>
             )}
-            {filteredSkill.length > 0 ? (
-              filteredSkill.map((skill: string, index: number) => (
+            {filteredSkill?.length > 0 ? (
+              filteredSkill?.map((skill: string, index: number) => (
                 <div
                   onClick={() => onChooseSkill(skill)}
                   key={index}

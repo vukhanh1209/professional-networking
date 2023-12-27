@@ -1,6 +1,7 @@
 "use client";
 // import * as React from "react";
 import { Pagination as PaginationNextUI } from "@nextui-org/react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 type Pagination = {
@@ -15,7 +16,14 @@ export default function Pagination({
   onChange,
 }: Pagination) {
   const [page, setPage] = useState(currentPage);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+
   const handleChange = (value: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", value.toString());
+    router.push(pathName + "?" + params);
     setPage(value);
     onChange(value);
   };
