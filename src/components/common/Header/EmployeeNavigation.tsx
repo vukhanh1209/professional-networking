@@ -4,6 +4,7 @@ import Avatar from "@/images/header/avatar.png";
 import User from "@/images/header/profile.svg";
 import Logout from "@/images/header/logout.svg";
 import Briefcase from "@/images/header/briefcase.svg";
+import Password from "@/images/header/password.svg";
 import { LocalStorage } from "@/utils/LocalStorage";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -30,6 +31,11 @@ const EmployeeNavigation = ({ profile, setProfile }: any) => {
       title: "Việc làm của tôi",
       icon: Briefcase,
       link: "/my-jobs",
+    },
+    {
+      title: "Đổi mật khẩu",
+      icon: Password,
+      link: "/change-password",
     },
   ];
   return (

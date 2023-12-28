@@ -1,5 +1,6 @@
 import axiosClient from "../axiosClient";
 import {
+  CHANGE_PASSWORD_RECRUITER,
   DELETE_JOB,
   FORGOT_PASSWORD_RECRUITER,
   GET_ALL_APPLICATION,
@@ -55,7 +56,11 @@ export const recruiterService = {
   },
   updateCompanyProfile: (requestBody: any) => {
     return axiosClient.post(UPDATE_COMPANY, requestBody)
+  },
+  changePassword: (requestBody: any) => {
+    return axiosClient.post(CHANGE_PASSWORD_RECRUITER, requestBody)
   }
+
 
 };
 

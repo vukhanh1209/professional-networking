@@ -2,6 +2,8 @@ import ApplicationIcon from "@/images/customer/application.svg";
 import PostIcon from "@/images/customer/post.svg";
 import ProfileIcon from "@/images/customer/profile.svg";
 import MangeIcon from "@/images/customer/manage.svg"
+import PasswordIcon from "@/images/customer/password.svg"
+
 
 export const SIDEBAR_TAB = [
     {
@@ -24,6 +26,11 @@ export const SIDEBAR_TAB = [
     //   href: "/customer",
     //   icon: SearchIcon,
     // },
+    {
+      title: "Đổi mật khẩu",
+      href: "/customer/change-password",
+      icon: PasswordIcon,
+    },
     {
       title: "Hồ sơ công ty",
       href: "/customer/profile",

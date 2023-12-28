@@ -222,3 +222,20 @@ export const recruiterGetProfile = createAsyncThunk(
     }
   }
 );
+
+export const recruiterChangePassword = createAsyncThunk(
+  "recruiter/recruiterChangePassword",
+  async (requestBody: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await recruiterService.changePassword(requestBody);
+      if(response.status === "OK") {
+        notifySuccess(response.message)
+      } 
+      return response;
+    }
+    catch (err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);

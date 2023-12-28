@@ -16,6 +16,23 @@ export const forgotPassword = createAsyncThunk(
   }
 );
 
+export const changePassword = createAsyncThunk(
+  "user/changePassword",
+  async (requestBody: any, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response : any = await userService.changePassword(requestBody);
+      if(response.status === "OK") {
+        notifySuccess(response.message)
+      } 
+      return response;
+    }
+    catch(err : any) {
+      notifyErrors(err?.message || err?.errorCode)
+      return rejectWithValue(err?.message || err?.errorCode);
+    }
+  }
+);
+
 export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async (params: any, { dispatch, getState, rejectWithValue }) => {
