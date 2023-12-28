@@ -30,7 +30,12 @@ export default function EdtiorWrapper({
 
   return (
     <>
-      <ReactQuill theme="snow" value={value} onChange={setValue} />
+      <ReactQuill
+        theme="snow"
+        value={value}
+        onChange={setValue}
+        className="text-sm"
+      />
       {!value && error && (
         <span className="absolute text-primary-red text-sm left-0 top-[105%]">
           {error}
